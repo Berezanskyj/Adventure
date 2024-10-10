@@ -1,0 +1,19 @@
+{
+    "name": "berez/adventure",
+    "description": "Loja online em php",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Rafael"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4":{
+            "core\\" : "core/"
+        },
+        "files":[
+            "config.php"
+        ]
+    }
+}

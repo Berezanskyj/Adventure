@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
+
+
+main{
+    margin-top: 5rem;
+}
+
+
+.banner {
+    color: white;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.text {
+    max-width: 40%;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Lexend Zetta", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+
+h2{
+    font-size: 48px;
+    font-weight: 700;
+    font-family: "Lexend Zetta", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+
+strong{
+    color: #FFD700;
+}
+
+p {
+    font-family: "Lexend Zetta", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+.form-section {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: black;
+    padding: 20px 28px 20px 20px;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff
+}
+
+.form-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.radio {
+    background-color: #262A2D; /* Cinza inicial */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    font-family: "Lexend Zetta", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Esconde os radio buttons originais */
+.radio input[type="radio"] {
+    display: none;
+}
+
+/* Estilo quando o label associado ao radio button é clicado */
+.radio.checked {
+    background-color: #9b9999; /* Cor quando selecionado */
+    color: white;
+}
+
+/* Estilo para hover */
+.radio:hover {
+    background-color: #9b9999; /* Cinza mais escuro ao passar o mouse */
+}
+
+input, textarea {
+    width: 97%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 500;
+    font-optical-sizing: auto;
+}
+
+textarea {
+    resize: none;
+}
+
+button[type="submit"] {
+    background-color: #1E2022;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    transition: border-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover{
+    border-color: white; /* Borda branca ao passar o mouse */
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+/* Ajustes para telas menores */
+@media screen and (max-width: 1203px) {
+    .banner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .text {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-block: 150px;
+        max-width: 100%;
+        margin: 0 20px;
+    }
+
+    .form-section {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+        margin: 20px 0;
+        max-width: 90%;
+    } 
+
+    footer {
+        display: block;
+    }
+}
+
+/* Ajustes para telas menores que 768px */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        margin-top: 30px;
+        padding: 0 15px;
+    }
+
+    .text {
+        margin-block: 50px;
+        max-width: 100%;
+    }
+
+    .form-section {
+        padding: 20px;
+        margin: 0 10px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .radio {
+        padding: 8px;
+        margin: 0 5px;
+        font-size: 14px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Ajustes para telas menores que 480px */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .text {
+        margin-block: 30px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .form-section {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .radio {
+        padding: 8px;
+        margin: 0 3px;
+        font-size: 12px;
+    }
+
+    input, textarea {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        font-size: 12px;
+    }
+}
