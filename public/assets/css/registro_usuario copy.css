@@ -1,0 +1,193 @@
+.body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    color: white;
+    height: 700px;
+    width: 500px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(0,0,0,.2);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 5px rgba(0,0,0,.2),
+    0 0 15px rgba(0,0,0,.2),
+    0 0 30px rgba(0,0,0,.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.container .form-box h2{
+    text-align: center;
+    font-size: 40px;
+    /* letter-spacing: 1px; */
+    font-family: "Lexend Zetta", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.form-box{
+    display: flex;
+}
+
+.form-box .UserInformationForm{
+    position: absolute;
+    transform: translateX(0px);
+    transition: .5s ease;
+}
+.form-box .UserInformationForm.active{
+    transform: translateX(-450px);
+}
+
+.form-box .UserAddressForm{
+    transform: translateX(450px);
+    /* transition: .5s ease; */
+}
+
+.form-box .UserAddressForm.active{
+    transform: translateX(0px);
+}
+
+.form-box .input-box{
+    margin: 35px 0;
+    width: 330px;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    position: relative;
+}
+
+
+.form-box .input-box input{
+    color: white;
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 40px;
+    padding: 0 35px 0 5px;
+}
+
+
+.form-box .input-box label{
+    letter-spacing: .5px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .5s ease;
+    font-family: "Lexend Zetta", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 10pt;
+}
+
+.input-box i{
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.form-box .input-box-cep {
+    margin: 35px 0;
+    width: 330px;
+    position: relative;
+}
+
+
+/* Container que mantém o input e o botão lado a lado */
+.cep-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Estilização para o campo de CEP ocupando 50% */
+.cep-container input#cep {
+    color: rgb(255, 255, 255);
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 50%; /* O input ocupa 50% */
+    height: 40px;
+    padding: 0 10px;
+    border-bottom: 2px solid white; /* Borda apenas para o input */
+}
+
+/* Botão de busca ocupando os outros 50% */
+.btn-cep {
+    width: 23%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid transparent;
+    outline: none;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cep:hover {
+    border: 2px solid #fff;
+    background-color: #576975;
+}
+
+.cep-container label {
+    font-weight: 400;
+    letter-spacing: .5px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+.cep-container input:focus ~ label,
+.cep-container input:valid ~ label {
+    top: -5px; /* Faz o label subir */
+
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label{
+    top: -5px;
+}
+
+.input-box input#complemento:focus ~ label{
+    top: -5px; /* Faz o label subir */
+}
+
+.input-box input#apelido:focus ~ label{
+    top: -5px; /* Faz o label subir */
+}
+
+.btnUserInformation, .btnUserAddress {
+    font-family: "Lexend Zetta", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    height: 45px;
+    width: 100%;
+    border-radius: 50px;
+    color: white;
+    background-color: #576975;
+    border: 2px solid white;
+    outline: none;
+    font-size:  16px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: .5s ease;
+}
+
+.btnUserInformation:hover, .btnUserAddress:hover {
+    background-color: #353f46;
+}

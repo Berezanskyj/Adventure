@@ -119,7 +119,7 @@ class Main{
         Store::Layout([
             'layout/html_header',
             'layout/header',
-            'loja',
+            'registro_usuario',
             'layout/footer',
             'layout/html_footer',
         ]);

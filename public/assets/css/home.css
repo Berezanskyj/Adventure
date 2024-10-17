@@ -120,9 +120,10 @@ input, textarea {
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 500;
+    font-family: "Lexend Zetta", serif;
     font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
 }
 
 textarea {
