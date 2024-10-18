@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/registro_usuario copy.css">
+<link rel="stylesheet" href="assets/css/registro_usuario.css">
 
 <div class="body">
     <div class="container">
@@ -21,12 +21,17 @@
                     <i class='bx bx-mail-send'></i>
                 </div>
                 <div class="input-box">
-                    <input type="tel" name="telefone" id="telefone" autocomplete="new-password" required>
+                    <input type="tel" name="telefone" id="telefone" autocomplete="new-password" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="11" maxlength="11">
                     <label for="">Telefone</label>
                     <i class='bx bx-phone'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="senha" id="senha" autocomplete="off" required>
+                    <input type="text" name="cpf" id="cpf" autocomplete="new-password" required maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <label for="">CPF</label>
+                    <i class='bx bx-credit-card-front'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="senha" id="senha" autocomplete="off" required >
                     <label for="">Senha</label>
                     <i class='bx bx-lock'></i>
                 </div>
@@ -35,10 +40,16 @@
                     <label for="">Confirme sua Senha</label>
                     <i class='bx bx-lock-alt'></i>
                 </div>
-                <button type="submit" class="btnUserInformation">Registrar</button>
+                <button type="submit" class="btnUserInformation"><i class='bx bx-right-arrow-alt'></i></button>
+                <?php if(isset($_SESSION['erro'])):?>
+                <div class="error-msg">
+                    <?= $_SESSION['erro']?>
+                    <?php unset($_SESSION['erro'])?>
+                </div>
+                <?php endif; ?>
             </form>
 
-            <form method="post" class="UserAddressForm" action="?a=criar_cliente">
+            <!-- <form method="post" class="UserAddressForm" action="?a=criar_cliente">
                 <h2>Endereço</h2>
                 <div class="input-box-cep">
                     <div class="cep-container">
@@ -78,7 +89,7 @@
                     <i class='bx bx-id-card'></i>
                 </div>
                 <button type="submit" class="btnUserAddress">Registrar Endereço</button>
-            </form>
+            </form> -->
         </div>
     </div>
 </div>

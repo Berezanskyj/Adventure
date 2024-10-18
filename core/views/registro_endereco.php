@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="assets/css/registro_endereco.css">
+<link rel="stylesheet" href="assets/css/registro_endereco copy.css">
 
 <div class="body">
     <div class="container">
         <div class="form-box">
-            <form method="post" class="UserInformationForm" id="UserInformationForm" autocomplete="new-password" action="?a=criar_cliente" >
+            <form class="UserInformationForm" id="UserInformationForm">
                 <h2>Registrar</h2>
                 <div class="input-box">
                     <input type="text" name="nome" id="nome" autocomplete="new-password" required>
@@ -38,11 +38,11 @@
                 <button type="submit" class="btnUserInformation">Registrar</button>
             </form>
 
-            <form method="post" class="UserAddressForm" action="?a=criar_cliente">
+            <form method="post" class="UserAddressForm" action="?a=criar_endereco">
                 <h2>Endereço</h2>
                 <div class="input-box-cep">
                     <div class="cep-container">
-                        <input type="number" name="cep" id="cep" autocomplete="new-password" required maxlength="8">
+                        <input type="text" name="cep" id="cep" autocomplete="new-password" required maxlength="8" minlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         <label for="cep">Cep</label>
                         <button type="button" id="pesquisaCEP" class="btn-cep" onclick="consultaEndereco()"><i class='bx bx-search-alt'></i></button>
                     </div>
@@ -77,7 +77,7 @@
                     <label for="">Apelido</label>
                     <i class='bx bx-id-card'></i>
                 </div>
-                <button type="submit" class="btnUserAddress">Registrar Endereço</button>
+                <button type="submit" class="btnUserAddress">Registrar</button>
             </form>
         </div>
     </div>

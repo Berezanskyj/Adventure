@@ -182,5 +182,16 @@ class Database{
         $this->desconectar();
     }
 
+    public function lastInsertId() {
+        $this->conectar();
+
+        if ($this->conexao) {
+            return $this->conexao->lastInsertId();
+        }
+        throw new Exception('Conexão não está ativa.');
+
+        $this->desconectar();
+    }
+
 };
 

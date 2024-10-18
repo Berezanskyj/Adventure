@@ -19,11 +19,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 .container .form-box h2{
     text-align: center;
     font-size: 40px;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
+    font-family: "Lexend Zetta", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .form-box{
@@ -31,42 +36,27 @@
 }
 
 .form-box .UserInformationForm{
-    position: absolute;
-    /* transform: translateX(-450px); */
-    /* transition: .5s ease; */
-}
-
-.form-box .UserInformationForm{
-    /* position: absolute;
-    transform: translateX(-450px); */
-    /* transition: .5s ease; */
+    /* position: absolute; */
+    transform: translateX(0px);
+    transition: .5s ease;
 }
 .form-box .UserInformationForm.active{
     transform: translateX(-450px);
 }
 
-.form-box .UserAddressForm{
+/* .form-box .UserAddressForm{
     transform: translateX(450px);
     transition: .5s ease;
-}
-
-.form-box .UserAddressForm {
-    transform: translateX(450px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
+} */
 
 .form-box .UserAddressForm.active{
     transform: translateX(0px);
 }
 
-.form-box .UserAddressForm.active {
-    transform: translateX(0); /* Move para a posição original */
-}
-
 .form-box .input-box{
     margin: 35px 0;
     width: 330px;
-    border-bottom: 2px solid rgb(255, 0, 0);
+    border-bottom: 2px solid rgb(255, 255, 255);
     position: relative;
 }
 
@@ -83,13 +73,17 @@
 
 
 .form-box .input-box label{
-    font-weight: 400;
     letter-spacing: .5px;
     position: absolute;
     left: 5px;
     top: 50%;
     transform: translateY(-50%);
     transition: .5s ease;
+    font-family: "Lexend Zetta", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 10pt;
 }
 
 .input-box i{
@@ -141,7 +135,6 @@
     transition: background-color 0.3s ease;
 }
 
-
 .btn-cep:hover {
     border: 2px solid #fff;
     background-color: #576975;
@@ -169,15 +162,47 @@
     top: -5px;
 }
 
+.input-box input#complemento:focus ~ label{
+    top: -5px; /* Faz o label subir */
+}
+
+.input-box input#apelido:focus ~ label{
+    top: -5px; /* Faz o label subir */
+}
+
 .btnUserInformation, .btnUserAddress {
+    font-family: "Lexend Zetta", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     height: 45px;
     width: 100%;
     border-radius: 50px;
     color: white;
-    background-color: antiquewhite;
+    background-color: #576975;
     border: 2px solid white;
     outline: none;
     font-size:  16px;
     cursor: pointer;
     letter-spacing: 1px;
+    transition: .5s ease;
+}
+
+.btnUserInformation:hover, .btnUserAddress:hover {
+    background-color: #353f46;
+}
+
+
+.error-msg {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: #964648;
+    background: #F2DEDF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
 }
