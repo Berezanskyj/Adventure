@@ -31,3 +31,6 @@
             </div>
         </section>
     </main>
+
+
+<script src="assets/js/script.js"></script>

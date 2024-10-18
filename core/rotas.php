@@ -10,6 +10,8 @@ $rotas = [
     'logout' => 'main@index',
     'login' => 'main@login',
     'registrar_usuario' => 'main@registrar_usuario',
+    'criar_cliente' => 'main@criar_cliente',
+    'registro_endereco' => 'main@registro_endereco',
 ];
 
 //* Define a ação padrão como 'inicio'

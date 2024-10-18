@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/registro_usuario copy.css">
+<link rel="stylesheet" href="assets/css/registro_endereco.css">
 
 <div class="body">
     <div class="container">
@@ -42,7 +42,7 @@
                 <h2>Endereço</h2>
                 <div class="input-box-cep">
                     <div class="cep-container">
-                        <input type="number" name="cep" id="cep" autocomplete="new-password" required>
+                        <input type="number" name="cep" id="cep" autocomplete="new-password" required maxlength="8">
                         <label for="cep">Cep</label>
                         <button type="button" id="pesquisaCEP" class="btn-cep" onclick="consultaEndereco()"><i class='bx bx-search-alt'></i></button>
                     </div>
@@ -82,3 +82,19 @@
         </div>
     </div>
 </div>
+
+
+<script src="assets/js/registro_endereco.js"></script>
+<script>
+
+    const UserInformationForm = document.querySelector('.UserInformationForm');
+    const UserAddressForm = document.querySelector('.UserAddressForm');
+    const btnUserAddress = document.querySelector('.btnUserAddress');
+    const btnUserInformation = document.querySelector('.btnUserInformation');
+
+    window.onload = function(){
+        UserAddressForm.classList.add('active');
+        UserInformationForm.classList.add('active');
+    }
+    
+</script>

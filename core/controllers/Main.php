@@ -142,4 +142,18 @@ class Main{
             'layout/html_footer',
         ], $dados);
     }
+
+
+    public function criar_cliente(){
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'registro_endereco',
+            'layout/footer',
+            'layout/html_footer',
+        ]);
+        
     }
+    }
+
+
