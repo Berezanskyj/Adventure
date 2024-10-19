@@ -7,14 +7,15 @@ $rotas = [
     'sobre' => 'main@sobre',
     'carrinho' => 'main@carrinho',
     'user_account' => 'main@user_account',
-    'logout' => 'main@index',
+    'logout' => 'main@logout',
     'login' => 'main@login',
     'registrar_usuario' => 'main@registrar_usuario',
     'criar_cliente' => 'main@criar_cliente',
     'registro_endereco' => 'main@registro_endereco',
     'criar_endereco' => 'main@criar_endereco',
     'formulario-duvidas' => 'main@formDuvidas',
-    'confirmar_email' => 'main@confirmar_email'
+    'confirmar_email' => 'main@confirmar_email',
+    'login_submit' => 'main@login_submit',
 ];
 
 //* Define a ação padrão como 'inicio'

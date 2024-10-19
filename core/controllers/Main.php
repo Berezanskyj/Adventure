@@ -94,24 +94,7 @@ class Main{
         ]);
     }
 
-    public function logout(){
-
-
-
-        //verifica se ja existe algum usuario logado
-        if(Store::clienteLogado()){
-            $this->index();
-            return;
-        }
-
-        Store::Layout([
-            'layout/html_header',
-            'layout/header',
-            'inicio',
-            'layout/footer',
-            'layout/html_footer',
-        ]);
-    }
+    
 
     public function login(){
 
@@ -126,10 +109,67 @@ class Main{
         Store::Layout([
             'layout/html_header',
             'layout/header',
-            'loja',
+            'login_form',
             'layout/footer',
             'layout/html_footer',
         ]);
+    }
+
+    public function login_submit(){
+        if(Store::clienteLogado()){
+            $this->index();
+            return;
+        }
+
+        if($_SERVER['REQUEST_METHOD'] != 'POST'){
+            $this->index();
+            return;
+        }
+
+        if(!isset($_POST['email']) || 
+        !isset($_POST['senha']) || 
+        !filter_var(trim($_POST['email']),FILTER_VALIDATE_EMAIL)){
+            $_SESSION['erro'] = 'Login Invalido';
+            $this->login();
+            return;
+        }
+
+
+        $usuario = trim(strtolower($_POST['email']));
+        $senha = trim($_POST['senha']);
+
+        $cliente = new Clientes();
+
+        $resultado = $cliente->validar_login($usuario, $senha);
+
+        if(is_bool($resultado)){
+
+            //login invalido
+            $_SESSION['erro'] = 'Login inválido';
+            $this->login();
+            return;
+        } else {
+
+            //login valido
+            $_SESSION['cliente'] = $resultado->id;
+            $_SESSION['usuario'] = $resultado->email;
+            $_SESSION['nome'] = $resultado->nome;
+            $_SESSION['sobrenome'] = $resultado->sobrenome;
+
+            $this->login();
+        }
+
+
+    }
+
+
+    public function logout(){
+        unset($_SESSION['cliente']);
+        unset($_SESSION['usuario']);
+        unset($_SESSION['nome']);
+        unset($_SESSION['sobrenome']);
+        $this->index();
+        
     }
 
     

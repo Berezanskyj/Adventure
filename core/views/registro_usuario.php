@@ -42,10 +42,21 @@
                 </div>
                 <button type="submit" class="btnUserInformation"><i class='bx bx-right-arrow-alt'></i></button>
                 <?php if(isset($_SESSION['erro'])):?>
-                <div class="error-msg">
-                    <?= $_SESSION['erro']?>
+                    <script>
+                        Swal.fire({
+                        title: "<?= $_SESSION['erro']?>",
+                        icon: "error",
+                        confirmButtonText: "OK",
+                        customClass: {
+                            title: 'swal2-title',  // Aplicando a fonte ao título
+                            content: 'swal2-content' // Aplicando a fonte ao conteúdo
+                        }}).then((result) =>{
+                            if(result.isConfirmed) {
+                                window.location.href = '?a=registrar_usuario';
+                            }
+                        });
+                    </script>
                     <?php unset($_SESSION['erro'])?>
-                </div>
                 <?php endif; ?>
             </form>
 
