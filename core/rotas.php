@@ -13,6 +13,7 @@ $rotas = [
     'criar_cliente' => 'main@criar_cliente',
     'registro_endereco' => 'main@registro_endereco',
     'criar_endereco' => 'main@criar_endereco',
+    'formulario-duvidas' => 'main@formDuvidas',
 ];
 
 //* Define a ação padrão como 'inicio'

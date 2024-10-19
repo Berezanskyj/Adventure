@@ -3,14 +3,14 @@
 namespace core\controllers;
 
 use core\classes\Database;
+use core\classes\EnviarEmail;
 use core\classes\Store;
+use core\models\Clientes;
 
 class Main{
     
 
     public function index(){
-        
-
 
         Store::Layout([
             'layout/html_header',
@@ -19,6 +19,30 @@ class Main{
             'layout/footer',
             'layout/html_footer',
         ]);
+    }
+
+    public function formDuvidas(){
+        if($_SERVER['REQUEST_METHOD'] != 'POST'){
+            $this->index();
+            return;
+        } else{
+            $email = new EnviarEmail();
+
+            $tipo_produto = $_POST['tipo-produto'];
+            $nome_cliente = $_POST['nome_cliente'];
+            $email_cliente = $_POST['email_cliente'];
+            $duvida = $_POST['duvida'];
+
+            $email->EmailFormularioDuvidas($tipo_produto, $nome_cliente, $email_cliente, $duvida);
+            $email->EmailResposta($tipo_produto, $nome_cliente, $email_cliente);
+
+            echo('<script>
+            window.location.href = "?a=inicio";
+            alert("E-mail enviado com sucesso!");
+        </script>');
+        }
+
+
     }
 
 
@@ -166,62 +190,38 @@ class Main{
 
 
         //*verifica no db se existe cliente com o mesmo email
-        $sql = new Database();
-        $paramEmail = [
-            ":email" => strtolower(trim($_POST['email'])),
-        ];
+        $cliente = new Clientes();
 
-        $resEmail = $sql->select("SELECT email FROM usuario WHERE email = :email", $paramEmail);
-
-        $paramCpf = [
-            ":cpf" => $_POST['cpf'],
-        ];
-
-
-        $resCpf = $sql->select("SELECT cpf FROM usuario WHERE cpf = :cpf", $paramCpf);
-
-
-        //*se o cliente ja tem cadastro...
-        if(count($resEmail) != 0){
+        if($cliente->verificarEmailRegistrado($_POST['email'])){
             $_SESSION['erro'] = "Já existe uma conta associada a este e-mail.";
             $this->registrar_usuario();
             return;
         }
 
-        //*se o cpf ja existe...
-        if(count($resCpf) != 0){
+        if($cliente->verificarCpfRegistrado($_POST['cpf'])){
             $_SESSION['erro'] = "Este CPF já está cadastrado.";
             $this->registrar_usuario();
             return;
         }
 
+        $token = $cliente->registrarCliente();
 
-        
-        //*criacao o novo cliente
-        $token = Store::criarToken();
+        //*envio do email para o cliente
+        $nome_usuario = $_POST['nome'];
+        $email_cliente = strtolower(trim($_POST['email']));
+        $nome_usuario = $_POST['nome'];
+        $envioEmail = new EnviarEmail();
+        $resultado = $envioEmail->EmailConfirmacaoCliente($email_cliente, $nome_usuario, $token);
 
-        $param = [
-            ':nome' => trim($_POST['nome']),
-            ':sobrenome' => trim($_POST['sobrenome']),
-            ':email' => strtolower(trim($_POST['email'])),
-            ':cpf' => $_POST['cpf'],
-            ':senha' => password_hash(trim($_POST['senha']), PASSWORD_DEFAULT, ['cost' => 10]),
-            ':telefone' => $_POST['telefone'],
-            ':nivel_usuario' => 2,
-            ':token' => $token,
-            ':ativo' => 0 // ou 1 dependendo do que deseja para o usuário novo
-        ];
-        
-        $sql->insert("INSERT INTO usuario (nome, sobrenome, email, cpf, senha, telefone, nivel_usuario, token, ativo)
-        VALUES (:nome, :sobrenome, :email, :cpf, :senha, :telefone, :nivel_usuario, :token, :ativo)", $param);
+        if($resultado){
+            echo 'Email Enviado';
+        } else {
+            echo 'erro';
+        }
 
-        $lastUserId = $sql->lastInsertId();
-
-        //criar o link token para enviar por email
-        $linkToken = "http://localhost:8080/adventure/public/?a=confirmar_token&token=$token";
-
-        header("Location: ?a=registro_endereco&id_usuario=$lastUserId");
+        header("Location: ?a=registro_endereco");
         exit;
+
     }
 
 
@@ -241,26 +241,10 @@ class Main{
 
     public function criar_endereco(){
 
-        $sql = new Database();
+        $endereco = new Clientes();
 
-        $result = $sql->select("SELECT id FROM usuario ORDER BY id DESC LIMIT 1;");
-        $lastUserId = $result[0]->id;
-        echo "O último ID inserido é: " . $lastUserId;
 
-        $param = [
-            ':cep' => trim($_POST['cep']),
-            ':cidade' => trim($_POST['cidade']),
-            ':bairro' => strtolower(trim($_POST['bairro'])),
-            ':rua' => $_POST['rua'],
-            ':numero' => trim($_POST['numero']),
-            ':complemento' => $_POST['complemento'],
-            ':apelido' => $_POST['apelido'],
-            ':id_usuario' => $lastUserId
-        ];
-        
-        $sql->insert("INSERT INTO enderecos (cep, cidade, bairro, rua, numero, complemento, apelido, id_usuario)
-        VALUES (:cep, :cidade, :bairro, :rua, :numero, :complemento, :apelido, :id_usuario)", $param);
-    
+        $endereco->registrarEndereco();
 
         die("OK");
     }

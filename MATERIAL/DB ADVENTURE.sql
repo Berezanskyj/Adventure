@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS enderecos (
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (id_usuario) REFERENCES usuario (id)
+  ON DELETE CASCADE
 );
 
 -- Criação da tabela categorias
@@ -119,6 +120,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (id_usuario) REFERENCES usuario (id)
+  ON DELETE CASCADE
 );
 
 -- Criação da tabela itens_pedidos com chaves estrangeiras para pedidos e produtos
