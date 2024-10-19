@@ -9,5 +9,6 @@
     <link rel="stylesheet" href="assets/css/header-footer.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <script src="assets/js/sweetalert2.js"></script>
 </head>
 <body>

@@ -224,8 +224,67 @@ class Main{
 
     }
 
+    public function confirmar_email(){
+
+        if(Store::clienteLogado()){
+            $this->index();
+            return;
+        }
+
+        //verificar se existe um token
+        if(!isset($_GET['token'])){
+            if(Store::clienteLogado()){
+                $this->index();
+                return;
+            }
+        }
+
+        $token = $_GET['token'];
+
+        //verifica se o token é valido
+        if(strlen($token) != 12){
+            if(Store::clienteLogado()){
+                $this->index();
+                return;
+            }
+        }
+
+        $cliente = new Clientes();
+        $resultado = $cliente->validar_email($token);
+
+        if($resultado){
+            Store::Layout([
+                'layout/html_header',
+                'layout/header',
+                'criar_cliente_sucesso',
+                'layout/footer',
+                'layout/html_footer',
+            ]);
+
+        } else {
+            Store::Layout([
+
+                'layout/html_header',
+                'layout/header',
+                'criar_cliente_erro',
+                'layout/footer',
+                'layout/html_footer',
+            ]);
+
+        }
+
+
+
+
+    }
+
 
     public function registro_endereco(){
+        if(Store::clienteLogado()){
+            $this->index();
+            return;
+        }
+
         Store::Layout([
             'layout/html_header',
             'layout/header',

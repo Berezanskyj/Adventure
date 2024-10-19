@@ -14,6 +14,7 @@ $rotas = [
     'registro_endereco' => 'main@registro_endereco',
     'criar_endereco' => 'main@criar_endereco',
     'formulario-duvidas' => 'main@formDuvidas',
+    'confirmar_email' => 'main@confirmar_email'
 ];
 
 //* Define a ação padrão como 'inicio'

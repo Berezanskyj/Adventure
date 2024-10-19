@@ -79,6 +79,13 @@ class Clientes{
         $result = $sql->select("SELECT id FROM usuario ORDER BY id DESC LIMIT 1;");
         $lastUserId = $result[0]->id;
 
+
+        $param = [
+            ':id' => $lastUserId
+        ];
+
+        $token = $sql->select("SELECT token FROM usuario WHERE id = :id", $param);
+
         $param = [
             ':cep' => trim($_POST['cep']),
             ':cidade' => trim($_POST['cidade']),
@@ -92,6 +99,37 @@ class Clientes{
         
         $sql->insert("INSERT INTO enderecos (cep, cidade, bairro, rua, numero, complemento, apelido, id_usuario)
         VALUES (:cep, :cidade, :bairro, :rua, :numero, :complemento, :apelido, :id_usuario)", $param);
+
+        return $token;
+    }
+
+    public function validar_email($token){
+
+
+
+        //validar o email do novo cliente
+        $sql = new Database();
+        $param = [
+            ':token' => $token
+        ];
+
+        $res = $sql->select("SELECT * FROM usuario WHERE token = :token", $param);
+
+        if(count($res) != 1){
+            return false;
+        }
+
+        $id_cliente = $res[0]->id; 
+
+        //atualizar os dados do cliente
+        $param = [
+            ':id' => $id_cliente
+        ];
+
+        $sql->update("UPDATE usuario SET token = NULL, ativo = 1, data_atualizacao = NOW() WHERE id = :id", $param);
+
+        return true;
+
     }
 
     

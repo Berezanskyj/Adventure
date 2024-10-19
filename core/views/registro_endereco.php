@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/registro_endereco copy.css">
+<link rel="stylesheet" href="assets/css/registro_endereco copy 2.css">
 
 <div class="body">
     <div class="container">
@@ -77,7 +77,7 @@
                     <label for="">Apelido</label>
                     <i class='bx bx-id-card'></i>
                 </div>
-                <button type="submit" class="btnUserAddress">Registrar</button>
+                <button type="submit" class="btnUserAddress" onclick="animacao()">Registrar</button>
             </form>
         </div>
     </div>
@@ -91,6 +91,25 @@
     const UserAddressForm = document.querySelector('.UserAddressForm');
     const btnUserAddress = document.querySelector('.btnUserAddress');
     const btnUserInformation = document.querySelector('.btnUserInformation');
+
+    function animacao(){
+        event.preventDefault(); // Impede o envio imediato do formulário
+
+        Swal.fire({
+        title: "Um e-mail foi enviado!",
+        text: "Por favor verifique para que consiga realizar o login.",
+        icon: "info",
+        confirmButtonText: "OK",
+        customClass: {
+            title: 'swal2-title',  // Aplicando a fonte ao título
+            content: 'swal2-content' // Aplicando a fonte ao conteúdo
+        }}).then((result) =>{
+            if(result.isConfirmed) {
+                UserAddressForm.submit();
+            }
+        });
+        
+    }
 
     window.onload = function(){
         UserAddressForm.classList.add('active');
