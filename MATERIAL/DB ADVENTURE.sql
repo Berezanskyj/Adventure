@@ -1,6 +1,10 @@
 -- Criação do banco de dados
-CREATE DATABASE IF NOT EXISTS adventure;
+CREATE DATABASE IF NOT EXISTS adventure CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE adventure;
+
+-- Definir o conjunto de caracteres e collation para o banco de dados
+SET NAMES 'utf8mb4';
+SET CHARACTER SET 'utf8mb4';
 
 -- Criação da tabela nivel_usuario
 CREATE TABLE IF NOT EXISTS nivel_usuario (
@@ -8,7 +12,7 @@ CREATE TABLE IF NOT EXISTS nivel_usuario (
   nivel_usuario VARCHAR(50) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela usuario com chave estrangeira para nivel_usuario
 CREATE TABLE IF NOT EXISTS usuario (
@@ -25,7 +29,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (nivel_usuario) REFERENCES nivel_usuario (id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela enderecos com chave estrangeira para usuario
 CREATE TABLE IF NOT EXISTS enderecos (
@@ -42,7 +46,7 @@ CREATE TABLE IF NOT EXISTS enderecos (
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (id_usuario) REFERENCES usuario (id)
   ON DELETE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela categorias
 CREATE TABLE IF NOT EXISTS produto_categoria (
@@ -50,8 +54,7 @@ CREATE TABLE IF NOT EXISTS produto_categoria (
   nome_categoria VARCHAR(50) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela produto_tamanho
 CREATE TABLE IF NOT EXISTS produto_tamanho (
@@ -59,7 +62,7 @@ CREATE TABLE IF NOT EXISTS produto_tamanho (
   tamanho VARCHAR(10) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela produto_cores
 CREATE TABLE IF NOT EXISTS produto_cores (
@@ -67,7 +70,7 @@ CREATE TABLE IF NOT EXISTS produto_cores (
   cor VARCHAR(50) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela produtos com chave estrangeira para categorias
 CREATE TABLE IF NOT EXISTS produtos (
@@ -85,8 +88,7 @@ CREATE TABLE IF NOT EXISTS produtos (
   FOREIGN KEY (categoria_id) REFERENCES produto_categoria (id),
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id),
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id)
-);
-
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela estoque com chaves estrangeiras para produtos, cores e tamanhos
 CREATE TABLE IF NOT EXISTS estoque (
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS estoque (
   FOREIGN KEY (produto_id) REFERENCES produtos (id),
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id),
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela personalizacao com chave estrangeira para produtos
 CREATE TABLE IF NOT EXISTS personalizacao (
@@ -109,7 +111,7 @@ CREATE TABLE IF NOT EXISTS personalizacao (
   valor_adicional DECIMAL(10,2) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela pedidos com chave estrangeira para usuario
 CREATE TABLE IF NOT EXISTS pedidos (
@@ -122,7 +124,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (id_usuario) REFERENCES usuario (id)
   ON DELETE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela itens_pedidos com chaves estrangeiras para pedidos e produtos
 CREATE TABLE IF NOT EXISTS itens_pedidos (
@@ -139,7 +141,7 @@ CREATE TABLE IF NOT EXISTS itens_pedidos (
   FOREIGN KEY (produto_id) REFERENCES produtos (id),
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id),
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho(id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela metodo_pagamento
 CREATE TABLE IF NOT EXISTS metodo_pagamento (
@@ -147,7 +149,7 @@ CREATE TABLE IF NOT EXISTS metodo_pagamento (
   metodo VARCHAR(20) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela status_pagamento
 CREATE TABLE IF NOT EXISTS status_pagamento (
@@ -155,7 +157,7 @@ CREATE TABLE IF NOT EXISTS status_pagamento (
   nome_status VARCHAR(20) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela pagamento com chaves estrangeiras para pedidos, metodo_pagamento e status_pagamento
 CREATE TABLE IF NOT EXISTS pagamento (
@@ -169,7 +171,7 @@ CREATE TABLE IF NOT EXISTS pagamento (
   FOREIGN KEY (pedido_id) REFERENCES pedidos (id),
   FOREIGN KEY (metodo_pagamento_id) REFERENCES metodo_pagamento (id),
   FOREIGN KEY (status_pagamento_id) REFERENCES status_pagamento (id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Criação da tabela movimentacoes_estoque
 CREATE TABLE IF NOT EXISTS movimentacoes_estoque (
@@ -185,7 +187,7 @@ CREATE TABLE IF NOT EXISTS movimentacoes_estoque (
   FOREIGN KEY (produto_id) REFERENCES produtos (id) ON DELETE CASCADE,
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE,
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Trigger para atualização de estoque após inserção de movimentação
 DELIMITER //
@@ -319,11 +321,30 @@ INSERT INTO produto_cores (cor) VALUES
 ('Azul');
 
 -- Inserir produto
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) VALUES 
-('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 29.99, 1, 1, 1, 'imagem1.jpg', 1);
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
+VALUES 
+('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 49.99, 1, 1, 1, 'camiseta-jean-2.png', 1);
 
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) VALUES 
-('Camiseta Rosa', 'Camiseta de algodão Rosa.', 29.99, 1, 1, 1, 'imagem1.jpg', 1);
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
+VALUES 
+('Camiseta Azul', 'Camiseta de algodão azul.', 49.99, 1, 2, 2, 'camiseta-jeans-1.png', 1);
+
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
+VALUES 
+('Camiseta Preta', 'Camiseta de algodão preta.', 54.99, 1, 1, 3, 'moletom-1.png', 1);
+
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
+VALUES 
+('Camiseta Branca', 'Camiseta de algodão branca.', 44.99, 1, 3, 4, 'moletom-2.png', 1);
+
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
+VALUES 
+('Camiseta Cinza', 'Camiseta de algodão cinza.', 49.99, 1, 2, 5, 'camiseta-1.png', 1);
+
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
+VALUES 
+('Camiseta Rosa', 'Camiseta de algodão rosa.', 49.99, 1, 1, 6, 'camiseta-2.png', 1);
+
 
 -- Inserir personalização
 INSERT INTO personalizacao (tipo_personalizacao, valor_adicional) VALUES 
@@ -335,7 +356,7 @@ INSERT INTO pedidos (id_usuario, data_pedido, status_pedido, total_pedido) VALUE
 
 -- Inserir item de pedido
 INSERT INTO itens_pedidos (pedido_id, produto_id, cor_id, tamanho_id, quantidade, preco_unitario) 
-VALUES (2, 1, 1, 1, 45, 99.99);
+VALUES (1, 1, 1, 1, 1, 29.99);
 
 -- Inserir método de pagamento
 INSERT INTO metodo_pagamento (metodo) VALUES 
@@ -353,6 +374,4 @@ INSERT INTO pagamento (pedido_id, metodo_pagamento_id, status_pagamento_id, data
 
 -- Inserir movimentação de estoque
 INSERT INTO movimentacoes_estoque (produto_id, cor_id, tamanho_id, tipo_movimentacao, quantidade) VALUES 
-(1, 1, 1, 'entrada', 50);
-
-
+(1, 1, 1, 'entrada', 50) ;

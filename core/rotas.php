@@ -16,6 +16,7 @@ $rotas = [
     'formulario-duvidas' => 'main@formDuvidas',
     'confirmar_email' => 'main@confirmar_email',
     'login_submit' => 'main@login_submit',
+    'filtrar_produtos' => 'main@filtrar_produtos',
 ];
 
 //* Define a ação padrão como 'inicio'

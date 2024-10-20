@@ -1,0 +1,165 @@
+/* Estrutura principal da página */
+.page-container {
+    min-height: 100vh; /* Garante que a página ocupe toda a altura da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o conteúdo para o topo e footer para o final */
+}
+
+/* Header Fixo no Topo */
+.header {
+    text-align: center;
+    background-color: #1e2022;
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Container Principal */
+.container {
+    padding: 20px 5%;
+    display: flex;
+    flex: 1; /* Garante que o conteúdo ocupe o espaço disponível */
+    gap: 20px; /* Espaçamento entre sidebar e produtos */
+    justify-content: space-between;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 25%; /* Sidebar com 25% da largura */
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.sidebar h4{
+    position: sticky; /* Torna a sidebar fixa ao rolar a página */
+    top: 80px; /* Define a distância do topo para evitar sobreposição com o header */
+    z-index: 1;
+}
+.sidebar form{
+    position: sticky; /* Torna a sidebar fixa ao rolar a página */
+    top: 109px; /* Define a distância do topo para evitar sobreposição com o header */
+    z-index: 5;
+}
+
+/* Filtros */
+.sidebar h4 {
+    margin-bottom: 15px;
+}
+
+.filter-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.sidebar .btn {
+    background-color: #52616b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.sidebar .btn:hover {
+    background-color: #1e2022;
+}
+
+/* Produtos */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: flex-start;
+    width: 75%; /* Produtos ocupam 75% da largura */
+}
+
+/* Cartão de Produto */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(25% - 20px); /* Quatro produtos por linha */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.product-card h5 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-card h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-card .btn {
+    background-color: #52616b;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.product-card .btn:hover {
+    background-color: #1e2022;
+}
+
+/* Footer */
+.footer {
+    background-color: #1e2022;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Ajustes de Responsividade */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar,
+    .products {
+        width: 100%;
+    }
+
+    .product-card {
+        width: 90%;
+    }
+}

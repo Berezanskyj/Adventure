@@ -7,6 +7,7 @@ use core\classes\EnviarEmail;
 use core\classes\Store;
 use core\models\Clientes;
 use core\models\Produtos;
+use PDO;
 
 class Main{
     
@@ -54,17 +55,62 @@ class Main{
         $produtos = new Produtos();
 
         $listarProdutos = $produtos->listarProdutos();
+        $listarCategoria = $produtos->listarCategoria();
+        $listarTamanho = $produtos->listarTamanho();
+        $listarCor = $produtos->listarCor();
 
-        Store::printData($listarProdutos);
-        // Store::printData($produtos);
-
-        die();
         Store::Layout([
             'layout/html_header',
             'layout/header',
             'loja',
             'layout/footer',
             'layout/html_footer',
+        ], ['produtos' => $listarProdutos,
+            'categorias' => $listarCategoria,
+            'tamanhos' => $listarTamanho,
+            'cores' => $listarCor]);
+    }
+
+    public function filtrar_produtos() {
+        $produtos = new Produtos();
+        
+        $categoria = $_POST['id_categoria'] ?? null; // Usa null se não existir
+        $tamanho = $_POST['id_tamanho'] ?? null; // Faz o mesmo para tamanho
+        $cor = $_POST['id_cor'] ?? null; // E para cor
+
+        $Nomecategoria =
+        $Nometamanho =
+        $Nomecor =
+
+    
+        // if (empty($categoria)) {
+        //     // Se categoria está vazia (ou seja, "Todas" foi selecionado)
+        //     $categoria = "Todas"; // Aqui você pode fazer o que quiser
+        //     $tamanho = "Todas"; // Aqui você pode fazer o que quiser
+        //     $cor = "Todas"; // Aqui você pode fazer o que quiser
+        // }
+        
+        $filtro = $produtos->filtrarProduto($categoria, $tamanho, $cor);
+        
+        // echo '<pre>';
+        // print_r('Cat: ' . $categoria . '<br>');
+        // print_r('Tam: ' . $tamanho . '<br>');
+        // print_r('Cor: ' . $cor . '<br>');
+        // print_r($filtro);
+        // die();
+    
+    
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'filtrar_produtos',
+            'layout/footer',
+            'layout/html_footer',
+        ], [
+            'categorias' => $categoria,
+            'tamanhos' => $tamanho,
+            'cores' => $cor,
+            'filtros' => $filtro
         ]);
     }
 
