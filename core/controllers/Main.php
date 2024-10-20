@@ -6,6 +6,7 @@ use core\classes\Database;
 use core\classes\EnviarEmail;
 use core\classes\Store;
 use core\models\Clientes;
+use core\models\Produtos;
 
 class Main{
     
@@ -50,18 +51,21 @@ class Main{
 
         //apresenta a pagina da loja
 
-        $dados = [
-            'titulo' => APP_NAME,
-            
-        ];
+        $produtos = new Produtos();
 
+        $listarProdutos = $produtos->listarProdutos();
+
+        Store::printData($listarProdutos);
+        // Store::printData($produtos);
+
+        die();
         Store::Layout([
             'layout/html_header',
             'layout/header',
             'loja',
             'layout/footer',
             'layout/html_footer',
-        ], $dados);
+        ]);
     }
 
     public function sobre(){
@@ -253,11 +257,6 @@ class Main{
         $envioEmail = new EnviarEmail();
         $resultado = $envioEmail->EmailConfirmacaoCliente($email_cliente, $nome_usuario, $token);
 
-        if($resultado){
-            echo 'Email Enviado';
-        } else {
-            echo 'erro';
-        }
 
         header("Location: ?a=registro_endereco");
         exit;

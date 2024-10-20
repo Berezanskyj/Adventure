@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS produtos (
   tamanho_id INT NOT NULL,
   cor_id INT NOT NULL,
   imagem_produto VARCHAR(255),
+  visivel TINYINT,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (categoria_id) REFERENCES produto_categoria (id),
@@ -318,11 +319,11 @@ INSERT INTO produto_cores (cor) VALUES
 ('Azul');
 
 -- Inserir produto
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto) VALUES 
-('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 29.99, 1, 1, 1, 'imagem1.jpg');
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) VALUES 
+('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 29.99, 1, 1, 1, 'imagem1.jpg', 1);
 
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto) VALUES 
-('Camiseta Rosa', 'Camiseta de algodão Rosa.', 29.99, 1, 1, 1, 'imagem1.jpg');
+INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) VALUES 
+('Camiseta Rosa', 'Camiseta de algodão Rosa.', 29.99, 1, 1, 1, 'imagem1.jpg', 1);
 
 -- Inserir personalização
 INSERT INTO personalizacao (tipo_personalizacao, valor_adicional) VALUES 
