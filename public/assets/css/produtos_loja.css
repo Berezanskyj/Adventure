@@ -8,6 +8,9 @@
 
 /* Header Fixo no Topo */
 .header {
+    display: flex;
+    justify-content: center; /* Centraliza o h3 no centro horizontalmente */
+    align-items: center; /* Alinha os itens verticalmente */
     text-align: center;
     background-color: #1e2022;
     color: white;
@@ -17,6 +20,43 @@
     z-index: 10;
 }
 
+.header h3 {
+    margin: 0;
+}
+
+.cart-container {
+    position: absolute;
+    right: 54px; /* Define o espaçamento da direita */
+}
+
+.cart-container a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.cart-container i {
+    font-size: 35px; /* Ajusta o tamanho do ícone conforme necessário */
+    cursor: pointer;
+}
+
+.cart-count {
+    position: absolute;
+    top: -12px;
+    right: -24px;
+    background-color: rgb(248, 248, 248);
+    color: white;
+    border-radius: 50%;
+    padding: 1px 8px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-container span{
+    color: #000;
+}
 /* Container Principal */
 .container {
     padding: 20px 5%;
@@ -129,6 +169,7 @@
     background-color: #52616b;
     color: white;
     padding: 10px 15px;
+    border: none;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
@@ -136,6 +177,23 @@
 
 .product-card .btn:hover {
     background-color: #1e2022;
+}
+
+.btn-sem-estoque{
+    color: #964648;
+    background: #F2DEDF;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-sem-estoque:hover{
+    background-color: #c28184;
+    color: #682224;
 }
 
 /* Footer */
@@ -148,6 +206,21 @@
 }
 
 /* Ajustes de Responsividade */
+@media (max-width: 1194px) {
+    .product-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: calc(39% - 7px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        text-align: center;
+    }
+
+}
+
+
+
 @media (max-width: 768px) {
     .content {
         flex-direction: column;

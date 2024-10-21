@@ -74,5 +74,19 @@ class Produtos {
         $resultado = $sql->select($query, $params);
         return $resultado;
     }
+
+    public function listarEstoque($id_produto, $id_cor, $id_tamanho) {
+        $sql = new Database();
+    
+        $param = [
+            ':produto_id' => $id_produto,  // Changed key to match SQL query
+            ':cor_id' => $id_cor,          // Changed key to match SQL query
+            ':tamanho_id' => $id_tamanho,  // Changed key to match SQL query
+        ];
+    
+        $resultado = $sql->select("SELECT quantidade_disponivel FROM estoque WHERE produto_id = :produto_id AND cor_id = :cor_id AND tamanho_id = :tamanho_id", $param);
+    
+        return $resultado;
+    }
     
 }

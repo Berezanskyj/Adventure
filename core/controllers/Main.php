@@ -48,27 +48,44 @@ class Main{
     }
 
 
-    public function loja(){
-
-        //apresenta a pagina da loja
-
+    public function loja() {
+        // Apresenta a página da loja
         $produtos = new Produtos();
-
+    
+        // Listar produtos e verificar se é um array
         $listarProdutos = $produtos->listarProdutos();
+    
+        // Listar categorias, tamanhos e cores
         $listarCategoria = $produtos->listarCategoria();
         $listarTamanho = $produtos->listarTamanho();
         $listarCor = $produtos->listarCor();
-
+    
+        // Preparar um array para armazenar os estoques
+        $estoques = [];
+    
+        // Se listarProdutos for um array e tiver elementos
+        if (is_array($listarProdutos) && count($listarProdutos) > 0) {
+            foreach ($listarProdutos as $produto) {
+                // Obter estoque para cada produto
+                $estoque = $produtos->listarEstoque($produto->id, $produto->cor_id, $produto->tamanho_id);
+                $estoques[$produto->id] = $estoque; // Armazenar o estoque no array usando o id do produto
+            }
+        }
+    
+        // Passar os dados para a view
         Store::Layout([
             'layout/html_header',
             'layout/header',
             'loja',
             'layout/footer',
             'layout/html_footer',
-        ], ['produtos' => $listarProdutos,
+        ], [
+            'produtos' => $listarProdutos,
             'categorias' => $listarCategoria,
             'tamanhos' => $listarTamanho,
-            'cores' => $listarCor]);
+            'cores' => $listarCor,
+            'estoques' => $estoques
+        ]);
     }
 
     public function filtrar_produtos() {
@@ -110,7 +127,7 @@ class Main{
             'categorias' => $categoria,
             'tamanhos' => $tamanho,
             'cores' => $cor,
-            'filtros' => $filtro
+            'filtros' => $filtro,
         ]);
     }
 
@@ -223,23 +240,7 @@ class Main{
     }
 
     
-    public function carrinho(){
-        
-        //apresenta a pagina do carrinho
-        
-        $dados = [
-            'titulo' => APP_NAME,
-            
-        ];
-        
-        Store::Layout([
-            'layout/html_header',
-            'layout/header',
-            'carrinho',
-            'layout/footer',
-            'layout/html_footer',
-        ], $dados);
-    }
+    
     
     public function registrar_usuario(){
 
