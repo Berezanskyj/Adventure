@@ -88,5 +88,29 @@ class Produtos {
     
         return $resultado;
     }
+
+    public function consultaEstoqueGeral($id_produto){
+
+
+        $sql = new Database();
+
+        $param = [
+            ":produto_id" =>$id_produto
+        ];
+
+        $res = $sql->select("SELECT * FROM estoque WHERE produto_id = :produto_id AND quantidade_disponivel > 0", $param);
+
+        return count($res) != 0 ? true : false;
+
+
+    }
+
+    public function buscarProdutosIds($ids){
+
+
+        $sql = new Database();
+
+        return $sql->select("SELECT * from produtos WHERE id IN ($ids)");
+    }
     
 }

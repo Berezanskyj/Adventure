@@ -1,3 +1,4 @@
+
 <footer>
     <div class="logo-footer">
         <img src="assets/images/header-logo.png" alt="Adventure Logo">

@@ -1,89 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+*{
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.swal2-popup {
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
 /* Estrutura principal da página */
 .page-container {
-    min-height: 100vh; /* Garante que a página ocupe toda a altura da tela */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empurra o conteúdo para o topo e footer para o final */
+    justify-content: space-between;
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
-/* Header Fixo no Topo */
-.header {
-    display: flex;
-    justify-content: center; /* Centraliza o h3 no centro horizontalmente */
-    align-items: center; /* Alinha os itens verticalmente */
-    text-align: center;
-    background-color: #1e2022;
-    color: white;
-    padding: 20px 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.header h3 {
-    margin: 0;
-}
-
-.cart-container {
-    position: absolute;
-    right: 54px; /* Define o espaçamento da direita */
-}
-
-.cart-container a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.cart-container i {
-    font-size: 35px; /* Ajusta o tamanho do ícone conforme necessário */
-    cursor: pointer;
-}
-
-.cart-count {
-    position: absolute;
-    top: -12px;
-    right: -24px;
-    background-color: rgb(248, 248, 248);
-    color: white;
-    border-radius: 50%;
-    padding: 1px 8px;
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cart-container span{
-    color: #000;
-}
 /* Container Principal */
 .container {
     padding: 20px 5%;
     display: flex;
-    flex: 1; /* Garante que o conteúdo ocupe o espaço disponível */
-    gap: 20px; /* Espaçamento entre sidebar e produtos */
+    flex: 1;
+    gap: 20px;
     justify-content: space-between;
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 25%; /* Sidebar com 25% da largura */
+    width: 25%;
     background-color: #f4f4f4;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .sidebar h4{
-    position: sticky; /* Torna a sidebar fixa ao rolar a página */
-    top: 80px; /* Define a distância do topo para evitar sobreposição com o header */
+    position: absolute; /* Torna a sidebar fixa ao rolar a página */
     z-index: 1;
 }
+
 .sidebar form{
     position: sticky; /* Torna a sidebar fixa ao rolar a página */
-    top: 109px; /* Define a distância do topo para evitar sobreposição com o header */
+    top: 19px; /* Define a distância do topo para evitar sobreposição com o header */
     z-index: 5;
 }
 
@@ -100,6 +75,12 @@
 
 .filter-group label {
     margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-group label#nome_categoria {
+    margin-bottom: 5px;
+    margin-top: 38px;
     font-weight: bold;
 }
 
@@ -120,10 +101,43 @@
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+
 }
 
 .sidebar .btn:hover {
-    background-color: #1e2022;
+    background-color: #414c56;
+}
+
+.cart-container {
+    margin-top: 35px;
+    position: sticky;
+}
+
+.cart-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #52616b;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 93%;
+    margin-top: 15px;
+}
+
+.cart-link:hover {
+    background-color: #414c56;
+}
+
+.cart-link i {
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.cart-link span {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /* Produtos */
@@ -132,15 +146,14 @@
     flex-wrap: wrap;
     gap: 40px;
     justify-content: flex-start;
-    width: 75%; /* Produtos ocupam 75% da largura */
+    width: 75%;
 }
 
-/* Cartão de Produto */
 .product-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: calc(25% - 20px); /* Quatro produtos por linha */
+    width: calc(25% - 20px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
     text-align: center;
@@ -196,30 +209,12 @@
     color: #682224;
 }
 
-/* Footer */
-.footer {
-    background-color: #1e2022;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-}
-
-/* Ajustes de Responsividade */
+/* Responsividade */
 @media (max-width: 1194px) {
     .product-card {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
         width: calc(39% - 7px);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        padding: 15px;
-        text-align: center;
     }
-
 }
-
-
 
 @media (max-width: 768px) {
     .content {

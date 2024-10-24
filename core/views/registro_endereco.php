@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/registro_endereco copy 2.css">
+<link rel="stylesheet" href="assets/css/registro_endereco.css">
 
 <div class="body">
     <div class="container">

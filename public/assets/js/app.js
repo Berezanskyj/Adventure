@@ -8,7 +8,7 @@ function adicionar_carrinho(id_produto){
         .then(function(response){
 
             var total_produtos = response.data;
-            document.getElementById('carrinho').innerText = total_produtos;
+            document.getElementById('carrinho').innerText = "Itens: " + total_produtos;
 
             console.log(response.data);
 
@@ -16,19 +16,6 @@ function adicionar_carrinho(id_produto){
         })
 }
 
-function limpar_carrinho(){
-
-    //limpar carrinho
-    axios.defaults.withCredentials = true;
-    axios.get('?a=limpar_carrinho')
-        .then(function(response){
-
-            document.getElementById('carrinho').innerText = 0;
-
-
-
-        })
-}
 
 function alerta_estoque(){
     Swal.fire({

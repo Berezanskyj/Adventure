@@ -1,0 +1,389 @@
+*{
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Container principal */
+.container {
+    max-width: 1000px;
+    margin: 50px; /* Margem superior e inferior */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    
+}
+
+
+.min-height {
+    min-height: 80vh; /* Define uma altura mínima suficiente para preencher a maior parte da tela */
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 28px; /* Aumenta a legibilidade */
+}
+
+/* Tabela do carrinho */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Ajusta alinhamento centralizado para o cabeçalho e as células */
+.cart-table th, .cart-table td {
+    text-align: center; /* Centraliza o texto em todas as colunas */
+    vertical-align: middle; /* Garante que o texto esteja no meio da célula verticalmente */
+    padding: 15px;
+}
+
+/* Cabeçalho da tabela */
+.cart-table thead {
+    background-color: #52616b;
+    color: #fff;
+}
+
+/* Define larguras fixas para garantir que as colunas estejam alinhadas */
+.cart-table th:nth-child(1), .cart-table td:nth-child(1) {
+    width: 20%; /* Coluna da imagem */
+}
+
+.cart-table th:nth-child(2), .cart-table td:nth-child(2) {
+    width: 30%; /* Coluna do produto */
+}
+
+.cart-table th:nth-child(3), .cart-table td:nth-child(3) {
+    width: 15%; /* Coluna de quantidade */
+}
+
+.cart-table th:nth-child(4), .cart-table td:nth-child(4) {
+    width: 15%; /* Coluna de preço unitário */
+}
+
+.cart-table th:nth-child(5), .cart-table td:nth-child(5) {
+    width: 15%; /* Coluna de subtotal */
+}
+
+.cart-table th:nth-child(6), .cart-table td:nth-child(6) {
+    width: 5%; /* Coluna de ação */
+}
+
+.cart-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: space-between; /* Alinha os itens nas extremidades */
+    align-items: center;
+    padding-top: 20px;
+}
+
+
+/* Botão de remover */
+.cart-table .btn-remover {
+    text-decoration: none;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Suaviza a transição de cor */
+}
+
+.cart-table .btn-remover:hover {
+    background-color: #b65050;
+}
+
+/* Resumo do carrinho */
+.cart-summary {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.cart-summary h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.summary-details {
+    margin-bottom: 20px;
+}
+
+.summary-details p {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.summary-details span {
+    font-weight: bold;
+}
+
+/* Botão de finalizar compra */
+.btn-finalizar {
+    
+    background-color: #52616b;
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Aumentando o padding para maior conforto */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-left: 20px; /* Adiciona espaço entre os dois botões */
+}
+
+.btn-limpar a {
+    text-decoration: none;
+}
+
+.btn-limpar {
+    text-decoration: none;
+    background-color: #52616b;
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Aumentando o padding para maior conforto */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-left: 20px; /* Adiciona espaço entre os dois botões */
+}
+
+.btn-limpar:hover {
+    background-color: #1e2022;
+}
+
+.btn-finalizar:hover {
+    background-color: #1e2022;
+}
+
+*{
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Container principal */
+.container {
+    max-width: 1000px;
+    margin: 20px auto; /* Margem superior e inferior */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 28px; /* Aumenta a legibilidade */
+}
+
+/* Tabela do carrinho */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Ajusta alinhamento centralizado para o cabeçalho e as células */
+.cart-table th, .cart-table td {
+    text-align: center; /* Centraliza o texto em todas as colunas */
+    vertical-align: middle; /* Garante que o texto esteja no meio da célula verticalmente */
+    padding: 15px;
+}
+
+/* Cabeçalho da tabela */
+.cart-table thead {
+    background-color: #52616b;
+    color: #fff;
+}
+
+/* Define larguras fixas para garantir que as colunas estejam alinhadas */
+.cart-table th:nth-child(1), .cart-table td:nth-child(1) {
+    width: 20%; /* Coluna da imagem */
+}
+
+.cart-table th:nth-child(2), .cart-table td:nth-child(2) {
+    width: 30%; /* Coluna do produto */
+}
+
+.cart-table th:nth-child(3), .cart-table td:nth-child(3) {
+    width: 15%; /* Coluna de quantidade */
+}
+
+.cart-table th:nth-child(4), .cart-table td:nth-child(4) {
+    width: 15%; /* Coluna de preço unitário */
+}
+
+.cart-table th:nth-child(5), .cart-table td:nth-child(5) {
+    width: 15%; /* Coluna de subtotal */
+}
+
+.cart-table th:nth-child(6), .cart-table td:nth-child(6) {
+    width: 11%; /* Coluna de ação */
+}
+
+.cart-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Botão de remover */
+.cart-table .btn-remover {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Suaviza a transição de cor */
+}
+
+.cart-table .btn-remover:hover {
+    background-color: #b65050;
+}
+
+/* Resumo do carrinho */
+.cart-summary {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.cart-summary h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.summary-details {
+    margin-bottom: 20px;
+}
+
+.summary-details p {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.summary-details span {
+    font-weight: bold;
+}
+
+/* Botão de finalizar compra */
+.btn-finalizar {
+    background-color: #52616b;
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Aumentando o padding para maior conforto */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-finalizar:hover {
+    background-color: #1e2022;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Menos padding em telas menores */
+    }
+
+    h1 {
+        font-size: 24px; /* Tamanho do título ajustado */
+    }
+
+    .cart-table .btn-remover {
+        width: auto; /* Permite que o botão use apenas o espaço necessário */
+        padding: 8px 12px; /* Ajuste do padding para manter o tamanho apropriado */
+        white-space: nowrap; /* Impede que o texto "quebre" em várias linhas */
+        text-align: center; /* Centraliza o texto do botão */
+        display: inline-block; /* Garante que o botão mantenha seu tamanho natural */
+    }
+
+    .cart-table thead {
+        display: none; /* Oculta o cabeçalho em telas pequenas */
+    }
+
+    .cart-table tr {
+        width: 100%; /* Garante que o card ocupe toda a largura disponível */
+        max-width: 555px; /* Limita a largura máxima dos cards */
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        display: flex;
+    }
+
+    .cart-table td {
+        display: flex;
+        flex-direction: row; /* Garante que os elementos permaneçam lado a lado */
+        justify-content: space-between; /* Adiciona espaçamento entre o conteúdo e o botão */
+        align-items: center; /* Centraliza verticalmente o conteúdo */
+    }
+
+    .cart-table td img {
+        max-width: 80px; /* Limita o tamanho da imagem */
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .summary-details p {
+        font-size: 16px; /* Ajuste de tamanho da fonte para detalhes */
+    }
+
+    .btn-finalizar {
+        width: 100%; /* Botão em largura total para melhor toque em dispositivos móveis */
+        margin-top: 10px;
+    }
+
+    
+}
+
+/* Melhor ajuste para telas menores */
+@media (max-width: 480px) {
+
+    .cart-table tr {
+        width: 100%; /* Garante que o card ocupe toda a largura disponível */
+        max-width: 555px; /* Limita a largura máxima dos cards */
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        display: flex;
+    }
+    .cart-table td {
+        flex-direction: column; /* Alinha os elementos um abaixo do outro */
+        text-align: left; /* Realinha o texto */
+    }
+
+    .cart-table td img {
+        max-width: 100%; /* Imagem ocupa a largura total */
+        height: auto;
+    }
+
+    .cart-summary {
+        text-align: center; /* Centraliza o resumo em telas pequenas */
+    }
+
+    .btn-finalizar {
+        font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+        padding: 10px 20px; /* Reduz o padding do botão */
+    }
+}
+

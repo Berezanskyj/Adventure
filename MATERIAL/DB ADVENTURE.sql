@@ -1,5 +1,5 @@
 -- Criação do banco de dados
-CREATE DATABASE IF NOT EXISTS adventure CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS adventure CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE adventure;
 
 -- Definir o conjunto de caracteres e collation para o banco de dados
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS nivel_usuario (
   nivel_usuario VARCHAR(50) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela usuario com chave estrangeira para nivel_usuario
 CREATE TABLE IF NOT EXISTS usuario (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (nivel_usuario) REFERENCES nivel_usuario (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela enderecos com chave estrangeira para usuario
 CREATE TABLE IF NOT EXISTS enderecos (
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS enderecos (
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (id_usuario) REFERENCES usuario (id)
   ON DELETE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela categorias
 CREATE TABLE IF NOT EXISTS produto_categoria (
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS produto_categoria (
   nome_categoria VARCHAR(50) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela produto_tamanho
 CREATE TABLE IF NOT EXISTS produto_tamanho (
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS produto_tamanho (
   tamanho VARCHAR(10) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela produto_cores
 CREATE TABLE IF NOT EXISTS produto_cores (
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS produto_cores (
   cor VARCHAR(50) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela produtos com chave estrangeira para categorias
 CREATE TABLE IF NOT EXISTS produtos (
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS produtos (
   FOREIGN KEY (categoria_id) REFERENCES produto_categoria (id),
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id),
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela estoque com chaves estrangeiras para produtos, cores e tamanhos
 CREATE TABLE IF NOT EXISTS estoque (
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS estoque (
   FOREIGN KEY (produto_id) REFERENCES produtos (id),
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id),
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela personalizacao com chave estrangeira para produtos
 CREATE TABLE IF NOT EXISTS personalizacao (
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS personalizacao (
   valor_adicional DECIMAL(10,2) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela pedidos com chave estrangeira para usuario
 CREATE TABLE IF NOT EXISTS pedidos (
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (id_usuario) REFERENCES usuario (id)
   ON DELETE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela itens_pedidos com chaves estrangeiras para pedidos e produtos
 CREATE TABLE IF NOT EXISTS itens_pedidos (
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS itens_pedidos (
   FOREIGN KEY (produto_id) REFERENCES produtos (id),
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id),
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho(id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela metodo_pagamento
 CREATE TABLE IF NOT EXISTS metodo_pagamento (
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS metodo_pagamento (
   metodo VARCHAR(20) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela status_pagamento
 CREATE TABLE IF NOT EXISTS status_pagamento (
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS status_pagamento (
   nome_status VARCHAR(20) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela pagamento com chaves estrangeiras para pedidos, metodo_pagamento e status_pagamento
 CREATE TABLE IF NOT EXISTS pagamento (
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS pagamento (
   FOREIGN KEY (pedido_id) REFERENCES pedidos (id),
   FOREIGN KEY (metodo_pagamento_id) REFERENCES metodo_pagamento (id),
   FOREIGN KEY (status_pagamento_id) REFERENCES status_pagamento (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela movimentacoes_estoque
 CREATE TABLE IF NOT EXISTS movimentacoes_estoque (
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS movimentacoes_estoque (
   FOREIGN KEY (produto_id) REFERENCES produtos (id) ON DELETE CASCADE,
   FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE,
   FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Trigger para atualização de estoque após inserção de movimentação
 DELIMITER //

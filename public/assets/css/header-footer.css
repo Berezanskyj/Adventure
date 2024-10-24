@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
 
+
+
 * {
     padding: 0;
     margin: 0;
@@ -12,6 +14,10 @@ body {
     background-color: rgba(0, 0, 0, 0.7); 
     background-blend-mode: darken;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 nav{
@@ -112,6 +118,7 @@ header {
     z-index: 1; /* Certifica que está acima de outros elementos */
     width: max-content; /* Ajusta a largura com base no conteúdo */
     text-align: center; /* Centraliza o texto dos links */
+    overflow: hidden;
 }
 
 .dropdown:hover .dropdown-menu {

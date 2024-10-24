@@ -8,6 +8,7 @@ $rotas = [
     'adicionar_carrinho' => 'carrinho@adicionar_carrinho',
     'limpar_carrinho' => 'carrinho@limpar_carrinho',
     'carrinho' => 'carrinho@carrinho',
+    'remover_produto_carrinho' => 'carrinho@remover_produto_carrinho',
     'user_account' => 'main@user_account',
     'logout' => 'main@logout',
     'login' => 'main@login',
