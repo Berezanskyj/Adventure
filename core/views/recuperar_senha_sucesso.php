@@ -1,10 +1,7 @@
 <style>
 
-.swal2-popup {
-    font-family: "Lexend Deca", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+.swal2-title, .swal2-content {
+            font-family: 'Roboto', sans-serif; /* Aplicando a fonte Roboto */
 }
 
 </style>

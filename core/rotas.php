@@ -2,14 +2,20 @@
 
 //? Coleção de rotas
 $rotas = [
+
     'inicio' => 'main@index',  //* Define a rota 'inicio' para o método 'index' do controlador 'main'
     'loja' => 'main@loja',     //* Define a rota 'loja' para o método 'loja' do controlador 'main'
     'sobre' => 'main@sobre',
+
+
     'adicionar_carrinho' => 'carrinho@adicionar_carrinho',
     'limpar_carrinho' => 'carrinho@limpar_carrinho',
     'carrinho' => 'carrinho@carrinho',
     'remover_produto_carrinho' => 'carrinho@remover_produto_carrinho',
+
+    
     'user_account' => 'main@user_account',
+
     'logout' => 'main@logout',
     'login' => 'main@login',
     'registrar_usuario' => 'main@registrar_usuario',
@@ -20,6 +26,9 @@ $rotas = [
     'confirmar_email' => 'main@confirmar_email',
     'login_submit' => 'main@login_submit',
     'filtrar_produtos' => 'main@filtrar_produtos',
+    'recuperar_senha' => 'main@recuperar_senha',
+    'verificar_email' => 'main@verificar_email',
+    'recuperar_senha_submit' => 'main@recuperar_senha_submit',
 ];
 
 //* Define a ação padrão como 'inicio'

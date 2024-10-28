@@ -6,6 +6,7 @@ use core\classes\Store;
 
 
 class Clientes{
+
     public function verificarEmailRegistrado($email){
 
         $sql = new Database();
@@ -44,6 +45,25 @@ class Clientes{
 
     }
 
+    public function verificarClienteRegistrado($email){
+        $sql = new Database();
+
+        $param = [
+            ":email" => $email
+        ];
+
+
+        $res = $sql->select("SELECT * FROM usuario WHERE email = :email", $param);
+
+        if(count($res) != 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     
     public function registrarCliente(){
         $sql = new Database();
@@ -72,6 +92,7 @@ class Clientes{
 
         return $token;
     }
+
 
     public function registrarEndereco(){
         $sql = new Database();
@@ -162,6 +183,64 @@ class Clientes{
         }
 
 
+    }
+
+    public function gera_senha_temp($email){
+
+        $sql = new Database();
+
+        $senha_temp = Store::criarToken();
+
+        $param = [
+            ":email" => $email
+        ];
+
+        $res = $sql->select("SELECT * FROM usuario WHERE email = :email", $param);
+
+        if(count($res) != 0){
+
+            $param2 = [
+                ":email" => $email,
+                ":senha" => $senha_temp
+            ];
+    
+            $sql->update("UPDATE usuario SET senha = :senha WHERE email = :email", $param2);
+    
+            return $senha_temp;
+        } else {
+            return $senha_temp == 'Cliente nao encontrado na base';
+        }
+
+
+
+
+        
+    }
+
+    public function recuperar_senha($email, $senha) {
+        $sql = new Database();
+    
+        $param = [
+            ':email' => $email
+        ];
+    
+        // Consulta o usuário pelo e-mail
+        $cliente = $sql->select("SELECT * FROM usuario WHERE email = :email", $param);
+    
+        // Verifica se o usuário foi encontrado
+        if (count($cliente) != 0) {
+            $param2 = [
+                ":email" => $email,
+                ":senha" => password_hash(trim($senha), PASSWORD_DEFAULT, ['cost' => 10]) // Removida a vírgula extra aqui
+            ];
+    
+            // Atualiza a senha do usuário
+            $alteraSenha = $sql->update("UPDATE usuario SET senha = :senha WHERE email = :email", $param2);
+    
+            return $alteraSenha;  // Retorna o resultado da operação de atualização
+        } else {
+            return false;  // Retorna false se o usuário não foi encontrado
+        }
     }
 
     

@@ -393,6 +393,82 @@ class Main{
 
         die("OK");
     }
+
+    public function recuperar_senha(){
+
+
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'recuperar_senha',
+            'layout/footer',
+            'layout/html_footer',
+        ]);
+    }
+
+
+    public function verificar_email(){
+
+        $cliente = new Clientes();
+        $email = $_POST['email'];
+
+        
+        
+
+        $registro = $cliente->verificarClienteRegistrado($email);
+
+        if($registro){
+            Store::redirect('recuperar_senha_submit');
+            $_SESSION['email-recupera'] = $email;
+        } else {
+            $_SESSION['erro'] = "Usuario não encontrado";
+            $this->recuperar_senha();
+            return;
+        }
+
+        // Store::Layout([
+        //     'layout/html_header',
+        //     'layout/header',
+        //     'recuperar_senha',
+        //     'layout/footer',
+        //     'layout/html_footer',
+        // ]);
+    }
+
+    public function recuperar_senha_submit(){
+        $cliente = new Clientes();
+        $email = $_SESSION['email-recupera'];
+        $enviarEmail = new EnviarEmail();
+        
+        // Verifique se a senha foi enviada e não está vazia
+        if (!empty($_POST['senha'])) {
+            $senha = $_POST['senha'];
+        
+            // Chama a função recuperar_senha apenas se a senha foi fornecida
+            $res = $cliente->recuperar_senha($email, $senha);
+
+            $enviarEmail->EmailRecuperarSenha($email);
+        
+            // Debugging: Imprime dados para verificar o fluxo
+            Store::Layout([
+                'layout/html_header',
+                'layout/header',
+                'recuperar_senha_sucesso',
+                'layout/footer',
+                'layout/html_footer',
+            ]);
+        } else {
+            // Se não houver senha no POST, apenas carrega a página
+            Store::Layout([
+                'layout/html_header',
+                'layout/header',
+                'recuperar_senha_submit',
+                'layout/footer',
+                'layout/html_footer',
+            ]);
+        }
+        
+    }
 }
 
 

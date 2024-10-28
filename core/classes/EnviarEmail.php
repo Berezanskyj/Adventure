@@ -138,6 +138,51 @@ class EnviarEmail{
 
 
     }
+
+    public function EmailRecuperarSenha($email_cliente){
+
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = EMAIL_HOST;                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = EMAIL_FROM;                     //SMTP username
+            $mail->Password   = EMAIL_PASS;                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+            $mail->Port       = EMAIL_PORT; 
+            $mail->CharSet    = 'UTF-8';                                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom(EMAIL_FROM, APP_NAME);
+            $mail->addAddress($email_cliente);     //Add a recipient
+
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = APP_NAME . ' - Recuperação de senha';
+            $html = '<p>Olá!</p>
+            <p>Informamos que a senha da sua conta foi alterada com sucesso. Abaixo estão os detalhes:</p>
+            <p><strong>E-mail da conta:</strong> ' . $email_cliente . '</p>
+            <p>Se você realizou essa alteração, nenhuma ação adicional é necessária.</p>
+            <p><strong>Importante:</strong> Se você não solicitou a troca de senha, por favor, entre em contato imediatamente com nosso suporte para garantir a segurança da sua conta.</p>
+            <p>Agradecemos por utilizar nossos serviços.</p>
+            <i><small>' . APP_NAME . '</small></i>';
+
+            $mail->Body    = $html;
+    
+
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+
+
+    }
 }
 
 

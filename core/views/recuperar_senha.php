@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="assets/css/login_form.css">
+<link rel="stylesheet" href="assets/css/recuperar_senha.css">
 
 <div class="body">
     <div class="container">
         <div class="form-box">
-            <form method="post" class="UserInformationForm" id="UserInformationForm" autocomplete="new-password" action="?a=login_submit" >
+            <form class="UserInformationForm" id="UserInformationForm">
                 <div class="titulo">
 
                     <h2>Entrar</h2>
@@ -19,14 +19,27 @@
                     <i class='bx bx-show' id="ver-senha" onclick="ver_senha()"></i>
                 </div>
                 <div class="esquece-senha">
-                    <span><a href="?a=recuperar_senha">Esqueci minha senha</a></span>                
+                    <span><a href="?a=recuperar_senha">Esqueci minha senha</a></span>
                 </div>
                 <button type="submit" class="btnUserInformation">Entrar</button>
+            </form>
 
+            <form method="post" class="UserAddressForm" action="?a=verificar_email">
+                <div class="titulo">
+
+                    <h2>Recuperar</h2>
+                </div>
+                <div class="input-box">
+                    <input type="email" name="email" id="email" autocomplete="new-password" required>
+                    <label for="">Email</label>
+                    <i class='bx bx-user'></i>
+                </div>
+                <button type="submit" class="btnUserInformation">Recuperar</button>
                 <?php if(isset($_SESSION['erro'])):?>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                     <script>
                         Swal.fire({
-                        title: "Login Invalido",
+                        title: "<?= $_SESSION['erro']?>",
                         icon: "error",
                         confirmButtonText: "OK",
                         customClass: {
@@ -34,22 +47,24 @@
                             content: 'swal2-content' // Aplicando a fonte ao conteúdo
                         }}).then((result) =>{
                             if(result.isConfirmed) {
-                                window.location.href = '?a=login';
+                                window.location.href = '?a=recuperar_senha';
                             }
                         });
                     </script>
                     <?php unset($_SESSION['erro'])?>
                 <?php endif; ?>
-
             </form>
         </div>
     </div>
 </div>
 
 
+
 <script>
-    senha = document.getElementById('senha');
-    icone = document.getElementById('ver-senha');
+    const UserInformationForm = document.querySelector('.UserInformationForm');
+    const UserAddressForm = document.querySelector('.UserAddressForm');
+    const btnUserAddress = document.querySelector('.btnUserAddress');
+    const btnUserInformation = document.querySelector('.btnUserInformation');
 
     function ver_senha(){
         if (senha.type === 'password') {
@@ -62,5 +77,13 @@
             icone.classList.add('bxs-show');  // Adiciona o ícone de "mostrar"
         }
     }
+    
 
+
+    
+
+    window.onload = function() {
+        UserInformationForm.classList.add('active');
+        UserAddressForm.classList.add('active');
+    }
 </script>
