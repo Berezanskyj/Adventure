@@ -16,28 +16,35 @@ use core\classes\Store;
                         <li class="nav-item"><a href="?a=sobre" class="nav-link"> Sobre</a></li>
                     </ul>
                 </div>
-                <div class="login-button">
-                    <?php if(Store::clienteLogado()):?>
-                    <div class="dropdown">
-                        <img src="assets/images/user-solid.svg" alt="">
+                <?php if(Store::clienteLogado()):?>
+                    <div class="login-container">
 
-                        <div class="dropdown-menu">
-                            <li><a href="?a=user-account">Conta</a></li>
-                            <li><a href="?a=logout">Sair</a></li>
+                        <div class="nome-usuario">
+                            <p>Olá <?=$_SESSION['nome']?></p>
+    
+                        </div>
+                    <div class="login-button">
+                        <div class="dropdown">
+                            <img src="assets/images/user-solid.svg" alt="">
+    
+                            <div class="dropdown-menu">
+                                <li><a href="?a=user-account">Conta</a></li>
+                                <li><a href="?a=logout">Sair</a></li>
+                            </div>
+                        </div>
+                    <?php else:?>
+    
+                        <div class="dropdown">
+                            <img src="assets/images/user-solid.svg" alt="">
+    
+                            <div class="dropdown-menu">
+                                <li><a href="?a=login">Entrar</a></li>
+                                <li><a href="?a=registrar_usuario">Registrar</a></li>
+                            </div>
                         </div>
                     </div>
-                <?php else:?>
-
-                    <div class="dropdown">
-                        <img src="assets/images/user-solid.svg" alt="">
-
-                        <div class="dropdown-menu">
-                            <li><a href="?a=login">Entrar</a></li>
-                            <li><a href="?a=registrar_usuario">Registrar</a></li>
-                        </div>
+                    <?php endif;?>
                     </div>
-                </div>
-                <?php endif;?>
 
                 <div class="mobile-menu-icon">
                     <button onclick="menuShow()"><img class="icon" src="assets/images/menu_white_36dp.svg" alt=""></button>

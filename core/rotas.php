@@ -12,7 +12,10 @@ $rotas = [
     'limpar_carrinho' => 'carrinho@limpar_carrinho',
     'carrinho' => 'carrinho@carrinho',
     'remover_produto_carrinho' => 'carrinho@remover_produto_carrinho',
-
+    'finalizar_compra' => 'carrinho@finalizar_compra',
+    'finalizar_compra_resumo' => 'carrinho@finalizar_compra_resumo',
+    'endereco_alternativo' => 'carrinho@endereco_alternativo',
+    'metodo_pagamento' => 'carrinho@metodo_pagamento',
     
     'user_account' => 'main@user_account',
 

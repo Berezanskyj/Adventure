@@ -74,7 +74,7 @@ if ($total_rows > 0) {
             <div class="cart-actions">
 
                 <a class="btn-limpar" onclick="limparCarrinho()">Limpar Carrinho</a>
-                <button class="btn-finalizar">Finalizar Compra</button>
+                <a class="btn-finalizar" href="?a=finalizar_compra">Finalizar Compra</a>
             </div>
         </div>
     <?php else: ?>

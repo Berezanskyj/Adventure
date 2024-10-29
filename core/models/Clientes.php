@@ -93,7 +93,6 @@ class Clientes{
         return $token;
     }
 
-
     public function registrarEndereco(){
         $sql = new Database();
 
@@ -123,6 +122,25 @@ class Clientes{
 
         return $token;
     }
+
+    public function buscarEndereco($id) {
+        $sql = new Database();
+    
+        $param = [
+            ":id_usuario" => $id
+        ];
+    
+        $res = $sql->select("SELECT * FROM enderecos WHERE id_usuario = :id_usuario", $param);
+    
+        if (count($res) != 0) {
+            return $res; // Retorna um array com os dados do endereço
+        } else {
+            return false; // Retorna false se nenhum endereço for encontrado
+        }
+    }
+
+
+
 
     public function validar_email($token){
 
@@ -184,6 +202,9 @@ class Clientes{
 
 
     }
+
+
+
 
     public function gera_senha_temp($email){
 

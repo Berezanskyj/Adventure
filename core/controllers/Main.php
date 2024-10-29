@@ -223,7 +223,12 @@ class Main{
             $_SESSION['nome'] = $resultado->nome;
             $_SESSION['sobrenome'] = $resultado->sobrenome;
 
-            $this->login();
+            if(isset($_SESSION['tmp_carrinho'])){
+                unset($_SESSION['tmp_carrinho']);
+                Store::redirect('finalizar_compra_resumo');
+            } else {
+                Store::redirect();
+            }
         }
 
 
@@ -390,6 +395,8 @@ class Main{
 
 
         $endereco->registrarEndereco();
+
+        
 
         die("OK");
     }
