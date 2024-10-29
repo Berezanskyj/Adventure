@@ -263,8 +263,14 @@ class Carrinho
 
 
     public function metodo_pagamento(){
-
-        Store::printData($_SESSION);
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'metodo_pagamento',
+            'layout/footer',
+            'layout/html_footer',
+        ]);
+        // Store::printData($_SESSION);
     }
 
     
