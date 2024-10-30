@@ -1,11 +1,13 @@
 function menuShow() {
-    let menuMobile = document.querySelector('.mobile-menu');
+    const menuMobile = document.querySelector('.mobile-menu');
+    const icon = document.querySelector('.icon');
+    
     if (menuMobile.classList.contains('open')) {
         menuMobile.classList.remove('open');
-        document.querySelector('.icon').src = "assets/images/menu_white_36dp.svg";
+        icon.src = "assets/images/menu_white_36dp.svg"; // Ícone de menu
     } else {
         menuMobile.classList.add('open');
-        document.querySelector('.icon').src = "assets/images/close_white_36dp.svg";
+        icon.src = "assets/images/close_white_36dp.svg"; // Ícone de fechar
     }
 }
 

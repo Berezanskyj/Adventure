@@ -1,15 +1,15 @@
+/* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
-
-
 
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-image: url('../images/create_an_image_for_the_background_of_a_custom_clothing_and_gift_store_website_the_design_should_fe_yrbpkjvygbdxto4npr0o_3.png');
+    background-image: url('../images/background-image.png');
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.7); 
     background-blend-mode: darken;
@@ -17,82 +17,50 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0;
-}
-
-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-header {
-    box-shadow: 0px 3px 10px #0a0a0a;
 }
 
 .nav-bar {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding-inline: 1.7rem;
-}
-
-.login-container {
-    display: flex;
-    align-items: center;
-    /* gap: 15px; */
-    justify-content: center;
-}
-
-.nome-usuario {
-    color: #fff;
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 400;
-    /* margin-right: 10px; */
-    margin-bottom: 46px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0px 58px 0px 0px;
+    position: relative;
+    width: 100%;
+    z-index: 10;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    max-height: 150px;
-}
-
-.logo h1 {
-    color: #fff;
+    margin-right: auto;
 }
 
 .nav-list {
+    flex: 1;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 .nav-list ul {
     display: flex;
-    justify-content: center;
     list-style: none;
 }
 
 .nav-item {
     margin: 0 50px;
-}
-
-.nav-link {
-    text-decoration: none;
     font-size: 1.15rem;
-    color: #fff;
-    text-decoration: none;
     color: #fff;
     font-family: "Josefin Sans", sans-serif;
-    font-weight: 400;
+    text-decoration: none;
 }
 
 .nav-link {
+    list-style: none;
     text-decoration: none;
     font-size: 1.15rem;
     color: #fff;
+    font-family: "Josefin Sans", sans-serif;
     font-weight: 400;
     position: relative;
     display: inline-block;
@@ -100,44 +68,50 @@ header {
 }
 
 .nav-link::after {
+    list-style: none;
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    background-color: #ffffff; /* Cor da linha */
+    background-color: #ffffff;
     left: 0;
     bottom: 0;
     transition: width 0.3s ease-in-out;
 }
 
-.login-button, .login-button img{
-    padding-inline: 20px;
-}
-
 .nav-link:hover::after {
+    list-style: none;
     width: 100%;
 }
 
 .dropdown {
     position: relative;
-    display: inline-block;
+}
+
+.user-icon {
+    cursor: pointer;
 }
 
 .dropdown-menu {
+    list-style: none;
     display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 100%;
-    left: 66%;
-    transform: translateX(-50%);
+    top: calc(100% + 10px); 
+    left: 39%; /* Alinhamento ao centro */
+    transform: translateX(-50%); /* Ajuste para centralizar abaixo do ícone */
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 5px;
     z-index: 1;
+    width: 150px;
     text-align: center;
-    width: max-content;
+    padding: 0.5rem 0;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown-menu.show {
     display: block;
-    padding-top: 10px;
 }
 
 .dropdown-menu a {
@@ -149,159 +123,77 @@ header {
 }
 
 .dropdown-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Efeito hover */
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-
-.dropdown:hover .dropdown-menu {
-    padding-top: 10px;
-    display: block; /* Exibe o menu ao passar o mouse */
-}
-
-
-
-
-.dropdown img{
-    margin-left: 37px;
-    align-items: center;
-}
-
-
-.login-button li {
-    text-decoration: none;
-    list-style: none;
-    border: none;
-    padding: 10px 0px;
-    border-radius: 5px;
-    background-color: transparent;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-button li a {
-    list-style: none;
-    text-decoration: none;
-    color: #fff;
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 400;
-    font-size: 1.1rem;
-    border: 2px solid transparent; /* Borda invisível inicialmente */
-    border-radius: 10px;
-    padding: 10px;
-    transition: border-color 0.3s ease-in-out; /* Transição suave da borda */
-}
-
-.login-button li a:hover{
-    border-color: white; /* Borda branca ao passar o mouse */
-    background-color: rgba(255, 255, 255, 0.2)
-}
-
-.mobile-menu-icon {
+.mobile-menu, .mobile-menu-icon {
     display: none;
 }
-
-.mobile-menu {
-    display: none;
-}
-
-
 
 footer {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #F0F5F9; /* Cor do texto */
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    height: auto;
+    display: flex;
+    flex-direction: column; /* Muda para coluna para empilhar os itens */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    background-color: rgba(0, 0, 0, 0.8); /* Cor de fundo semelhante ao header */
+    padding: 20px 0; /* Padding vertical para espaçamento */
+    color: #fff; /* Cor do texto */
 }
 
-.logo-footer {
-    margin-bottom: 10px;
-    max-height: 100px;
-    align-items: center;
+.logo-footer img {
+    max-width: 150px; /* Ajuste a largura conforme necessário */
 }
 
 .texto-footer p {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 14px;
-    margin: 0;
-    text-align: center;
+    font-size: 1rem; /* Tamanho de fonte semelhante ao header */
+    font-family: "Josefin Sans", sans-serif; /* Fonte igual à usada no header */
+    margin: 10px 0 0; /* Margem para separar o texto do logo */
+    text-align: center; /* Centraliza o texto */
 }
 
-.texto-footer {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 400;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
 
+/* Estilos para dispositivos móveis */
 @media screen and (max-width: 730px) {
-    .nav-bar {
-        padding: 1.5rem 4rem;
-    }
-    .nav-item {
+    .nav-list,
+    .dropdown {
         display: none;
     }
-    .login-button {
-        margin-left: 0px;
-        display: none;
-    }
-
-    .login-button button {
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        background-color: transparent
-    }
-    
-    .login-button button a {
-        text-decoration: none;
-        color: #fff;
-        font-family: "Josefin Sans", sans-serif;
-        font-weight: 400;
-        font-size: 1.1rem;
-        padding: 5px 10px; /* Adiciona espaço interno para a borda */
-        border-radius: 10px;
-        transition: border-color 0.3s ease-in-out; /* Transição suave da borda */
-        margin-right: 9px;
-        border-color: white; /* Borda branca ao passar o mouse */
-        background-color: rgba(255, 255, 255, 0.2)
-    }
-
 
     .mobile-menu-icon {
         display: block;
     }
-    .mobile-menu-icon button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
+
+    .mobile-menu {
+        display: none;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        position: relative;
+        z-index: 5;
+        list-style: none; /* Remove decoração de lista */
     }
+
+    .mobile-menu.open {
+        display: block;
+    }
+
     .mobile-menu ul {
         display: flex;
         flex-direction: column;
+        padding: 1rem;
         text-align: center;
-        padding-bottom: 1rem;
-        background-color: rgba(0, 0, 0, 0.8);
+        list-style: none; /* Remove decoração de lista */
     }
+
     .mobile-menu .nav-item {
-        display: block;
-        padding-top: 1.2rem;
+        padding: 1rem 0;
+        margin: 0; /* Remove margem lateral */
+        
     }
-    .mobile-menu .login-button {
-        display: block;
-        padding: 1rem 2rem;
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-    .mobile-menu .login-button button {
-        width: 100%;
-    }
-    .open {
-        display: block;
+
+    .mobile-menu .nav-link {
+        font-size: 1.15rem;
+        color: #fff;
+        font-family: "Josefin Sans", sans-serif;
+        text-decoration: none; /* Remove sublinhado */
+        list-style: none;
     }
 }
