@@ -75,6 +75,52 @@ class Produtos {
         return $resultado;
     }
 
+    public function buscarCategoria($idCategoria){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $idCategoria
+        ];
+
+        $res = $sql->select("SELECT * FROM produto_categoria WHERE id = :id", $param);
+
+        if(count($res) != 0){
+            return $res;
+        } else {
+            return false;
+        }
+    }
+    public function buscarCores($idCores){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $idCores
+        ];
+
+        $res = $sql->select("SELECT * FROM produto_cores WHERE id = :id", $param);
+
+        if(count($res) != 0){
+            return $res;
+        } else {
+            return false;
+        }
+    }
+    public function buscarTamanho($idTamanho){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $idTamanho
+        ];
+
+        $res = $sql->select("SELECT * FROM produto_tamanho WHERE id = :id", $param);
+
+        if(count($res) != 0){
+            return $res;
+        } else {
+            return false;
+        }
+    }
+
     public function listarEstoque($id_produto, $id_cor, $id_tamanho) {
         $sql = new Database();
     

@@ -396,9 +396,6 @@ class Main{
 
         $endereco->registrarEndereco();
 
-        
-
-        die("OK");
     }
 
     public function recuperar_senha(){

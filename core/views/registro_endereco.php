@@ -106,6 +106,7 @@
         }}).then((result) =>{
             if(result.isConfirmed) {
                 UserAddressForm.submit();
+                window.location.href='?a=login'
             }
         });
         
