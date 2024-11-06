@@ -25,7 +25,7 @@ use core\classes\Store;
             <img src="assets/images/user-solid.svg" alt="User Icon" class="user-icon" onclick="toggleDropdown()">
             <ul class="dropdown-menu" id="dropdownMenu">
                 <?php if(Store::clienteLogado()): ?>
-                    <li><a class="nav-link" href="?a=user-account">Minha Conta</a></li>
+                    <li><a class="nav-link" href="?a=user_account">Minha Conta</a></li>
                     <li><a class="nav-link" href="?a=logout">Sair</a></li>
                 <?php else: ?>
                     <li><a class="nav-link" href="?a=login">Entrar</a></li>
@@ -48,7 +48,7 @@ use core\classes\Store;
         <li class="nav-item"><a href="?a=loja" class="nav-link">Produtos</a></li>
         <li class="nav-item"><a href="?a=sobre" class="nav-link">Sobre</a></li>
         <?php if(Store::clienteLogado()): ?>
-            <li><a class="nav-link" href="?a=user-account">Minha Conta</a></li>
+            <li><a class="nav-link" href="?a=user_account">Minha Conta</a></li>
             <li><a class="nav-link" href="?a=logout">Sair</a></li>
         <?php else: ?>
             <li><a class="nav-link" href="?a=login">Entrar</a></li>

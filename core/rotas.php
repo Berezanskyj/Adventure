@@ -16,8 +16,15 @@ $rotas = [
     'finalizar_compra_resumo' => 'carrinho@finalizar_compra_resumo',
     'endereco_alternativo' => 'carrinho@endereco_alternativo',
     'metodo_pagamento' => 'carrinho@metodo_pagamento',
+
+
+
     
-    'user_account' => 'main@user_account',
+    'user_account' => 'usuario@user_account',
+
+
+
+
 
     'logout' => 'main@logout',
     'login' => 'main@login',

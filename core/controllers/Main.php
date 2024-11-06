@@ -142,24 +142,24 @@ class Main{
         ]);
     }
 
-    public function user_account(){
+    // public function user_account(){
 
 
 
-        //verifica se ja existe algum usuario logado
-        if(Store::clienteLogado()){
-            $this->index();
-            return;
-        }
+    //     //verifica se ja existe algum usuario logado
+    //     if(Store::clienteLogado()){
+    //         $this->index();
+    //         return;
+    //     }
 
-        Store::Layout([
-            'layout/html_header',
-            'layout/header',
-            'user_account',
-            'layout/footer',
-            'layout/html_footer',
-        ]);
-    }
+    //     Store::Layout([
+    //         'layout/html_header',
+    //         'layout/header',
+    //         'user_account',
+    //         'layout/footer',
+    //         'layout/html_footer',
+    //     ]);
+    // }
 
     
 

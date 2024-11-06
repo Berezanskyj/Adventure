@@ -6,6 +6,20 @@ main{
     margin-top: 5rem;
 }
 
+h1, h2, p, button {
+    font-family: "Lexend Zetta", sans-serif;
+}
+
+h1, h2 {
+    font-weight: 900;
+    font-style: normal;
+}
+
+p {
+    font-weight: 300;
+    font-style: normal;
+}
+
 
 .banner {
     color: white;
@@ -152,6 +166,130 @@ button[type="submit"]:hover{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+}
+
+
+.why-choose-us {
+    padding: 50px 0;
+    background-color: #1E2022;;
+    text-align: center;
+}
+
+.why-choose-us h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.why-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.why-item {
+    width: 30%;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.why-item img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.why-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+.why-item p {
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Seção "Depoimentos de Clientes" */
+.testimonials {
+    padding: 50px 0;
+    background-color: #1E2022;;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.testimonial-carousel {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.testimonial-item {
+    max-width: 400px;
+    background-color: #1E2022;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-item p {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testimonial-item span {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Carrossel de depoimentos */
+.testimonial-item {
+    max-width: 400px;
+    height: 250px;
+    background-color: #1E2022;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.testimonial-item p {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.testimonial-item span {
+    font-weight: bold;
+    color: #FFD700;
 }
 
 /* Ajustes para telas menores */
