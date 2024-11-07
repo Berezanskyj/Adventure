@@ -8,7 +8,7 @@ use core\classes\Store;
     <nav class="nav-bar">
         <!-- Logo alinhado à esquerda -->
         <div class="logo">
-            <a href="?a=inicio"><img src="assets/images/header-logo.png" alt=""></a>
+            <a href="?a=inicio"><img src="assets/images/Novo Projeto.png" alt=""></a>
         </div>
 
         <!-- Opções de navegação centralizadas -->

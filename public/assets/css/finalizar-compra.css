@@ -9,15 +9,18 @@
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #1E2022; /* Tom escuro semelhante ao estilo do primeiro trecho */
+    color: white;
     border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #FFD700; /* Cor dourada para dar destaque */
+    font-size: 36px;
+    font-weight: 700;
 }
 
 .checkout-container {
@@ -26,38 +29,39 @@ h1 {
     gap: 20px;
 }
 
-.user-details {
-    background-color: #f9f9f9;
+.user-details, .order-summary {
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo translúcido escuro */
     padding: 15px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #9b9999; /* Bordas no tom cinza */
 }
 
 .user-details h2, .order-summary h2 {
-    color: #52616b;
-}
-
-.order-summary {
-    background-color: #f0f5f9;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #FFD700;
+    font-weight: 700;
+    text-align: center;
 }
 
 .order-summary p {
-    font-size: 18px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 300;
     margin-bottom: 8px;
 }
 
 .item {
     margin-bottom: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #9b9999;
     padding-bottom: 10px;
+    color: #fff;
 }
 
 .action-buttons {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .btn-cancelar-compra, .btn-finalizar-compra {
@@ -68,6 +72,8 @@ h1 {
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: "Lexend Zetta", sans-serif;
+    font-weight: 900;
 }
 
 .btn-cancelar-compra {
