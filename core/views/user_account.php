@@ -9,7 +9,7 @@
                     <li><a href="?a=user_account" onclick="mostrarConteudo('perfil')"><i class='bx bx-user'></i> Perfil</a></li>
                     <li><a href="#pedidos" onclick="mostrarConteudo('pedidos')"><i class='bx bx-receipt'></i> Pedidos</a></li>
                     <li><a href="#configuracoes" onclick="mostrarConteudo('configuracoes')"><i class='bx bx-cog'></i> Configurações</a></li>
-                    <li><a href="?a=sair"><i class='bx bx-log-out'></i> Sair</a></li>
+                    <li><a href="?a=logout"><i class='bx bx-log-out'></i> Sair</a></li>
                 </ul>
             </nav>
         </aside>

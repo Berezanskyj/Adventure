@@ -48,11 +48,11 @@ use core\classes\Store;
         <li class="nav-item"><a href="?a=loja" class="nav-link">Produtos</a></li>
         <li class="nav-item"><a href="?a=sobre" class="nav-link">Sobre</a></li>
         <?php if(Store::clienteLogado()): ?>
-            <li><a class="nav-link" href="?a=user_account">Minha Conta</a></li>
-            <li><a class="nav-link" href="?a=logout">Sair</a></li>
+            <li class="nav-item"><a class="nav-link" href="?a=user_account">Minha Conta</a></li>
+            <li class="nav-item"><a class="nav-link" href="?a=logout">Sair</a></li>
         <?php else: ?>
-            <li><a class="nav-link" href="?a=login">Entrar</a></li>
-            <li><a class="nav-link" href="?a=registrar_usuario">Registrar</a></li>
+            <li class="nav-item"><a class="nav-link" href="?a=login">Entrar</a></li>
+            <li class="nav-item"><a class="nav-link" href="?a=registrar_usuario">Registrar</a></li>
         <?php endif; ?>
     </ul>
 </div>
