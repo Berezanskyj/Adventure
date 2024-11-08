@@ -117,6 +117,8 @@ class Carrinho
 
             array_push($dadosTemp, $totalCarrinho);
 
+            $_SESSION['totalCarrinho'] = $totalCarrinho;
+
             $dados = [
                 'carrinho' => $dadosTemp
             ];
@@ -263,15 +265,18 @@ class Carrinho
 
 
     public function metodo_pagamento(){
-        Store::Layout([
-            'layout/html_header',
-            'layout/header',
-            'metodo_pagamento',
-            'layout/footer',
-            'layout/html_footer',
-        ]);
-        // Store::printData($_SESSION);
+
+            
+            Store::Layout([
+                'layout/html_header',
+                'layout/header',
+                'metodo_pagamento',
+                'layout/footer',
+                'layout/html_footer',
+            ]);
     }
+
+    
 
     
     // [cliente] => 2

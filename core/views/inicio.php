@@ -34,17 +34,17 @@
         <h2>Por Que Escolher a Nossa Empresa?</h2>
         <div class="why-content">
             <div class="why-item">
-                <img src="assets/images/quality.png" alt="Qualidade">
+                <img src="assets/images/qualidade.png" alt="Qualidade">
                 <h3>Qualidade</h3>
                 <p>Trabalhamos com materiais de alta qualidade, assegurando que nossos produtos se destaquem em qualquer situação.</p>
             </div>
             <div class="why-item">
-                <img src="assets/images/support.png" alt="Suporte">
+                <img src="assets/images/suporte.png" alt="Suporte">
                 <h3>Suporte Dedicado</h3>
                 <p>Nossa equipe de atendimento está sempre pronta para ajudar e garantir uma experiência sem complicações.</p>
             </div>
             <div class="why-item">
-                <img src="assets/images/customization.png" alt="Personalização">
+                <img src="assets/images/personalizacao.png" alt="Personalização">
                 <h3>Personalização Exclusiva</h3>
                 <p>Oferecemos soluções exclusivas para que cada produto tenha o toque especial que a sua empresa merece.</p>
             </div>

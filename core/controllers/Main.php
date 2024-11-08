@@ -142,27 +142,6 @@ class Main{
         ]);
     }
 
-    // public function user_account(){
-
-
-
-    //     //verifica se ja existe algum usuario logado
-    //     if(Store::clienteLogado()){
-    //         $this->index();
-    //         return;
-    //     }
-
-    //     Store::Layout([
-    //         'layout/html_header',
-    //         'layout/header',
-    //         'user_account',
-    //         'layout/footer',
-    //         'layout/html_footer',
-    //     ]);
-    // }
-
-    
-
     public function login(){
 
 
@@ -220,8 +199,11 @@ class Main{
             //login valido
             $_SESSION['cliente'] = $resultado->id;
             $_SESSION['usuario'] = $resultado->email;
-            $_SESSION['nome'] = $resultado->nome;
+            $_SESSION['nome'] =     $resultado->nome;
             $_SESSION['sobrenome'] = $resultado->sobrenome;
+            $_SESSION['cpf'] = $resultado->cpf;
+            $_SESSION['telefone'] = $resultado->telefone;
+            $_SESSION['data_cadastro'] = date('d/m/Y', strtotime($resultado->data_criacao));
 
             if(isset($_SESSION['tmp_carrinho'])){
                 unset($_SESSION['tmp_carrinho']);

@@ -195,8 +195,8 @@ button[type="submit"]:hover{
 }
 
 .why-item img {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 61%;
     margin-bottom: 15px;
 }
 
