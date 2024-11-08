@@ -90,33 +90,34 @@ class Main{
 
     public function filtrar_produtos() {
         $produtos = new Produtos();
-        
-        $categoria = $_POST['id_categoria'] ?? null; // Usa null se não existir
-        $tamanho = $_POST['id_tamanho'] ?? null; // Faz o mesmo para tamanho
-        $cor = $_POST['id_cor'] ?? null; // E para cor
-
-        $Nomecategoria =
-        $Nometamanho =
-        $Nomecor =
-
     
-        // if (empty($categoria)) {
-        //     // Se categoria está vazia (ou seja, "Todas" foi selecionado)
-        //     $categoria = "Todas"; // Aqui você pode fazer o que quiser
-        //     $tamanho = "Todas"; // Aqui você pode fazer o que quiser
-        //     $cor = "Todas"; // Aqui você pode fazer o que quiser
-        // }
-        
+        // Retrieve filter criteria from POST data
+        $categoria = $_POST['id_categoria'] ?? "TODOS";  // Default to "TODOS" if not set
+        $tamanho = $_POST['id_tamanho'] ?? "TODOS";      // Default to "TODOS" if not set
+        $cor = $_POST['id_cor'] ?? "TODOS";              // Default to "TODOS" if not set
+    
+        // Fetch filtered products
         $filtro = $produtos->filtrarProduto($categoria, $tamanho, $cor);
         
+        // List specific data
+        $categoriaNome = $produtos->listarCategoriaEspec($categoria);
+        $tamanhoNome = $produtos->listarTamanhoEspec($tamanho);
+        $corNome = $produtos->listarCorEspec($cor);
+
+        $nomecat = $categoriaNome[0]->nome_categoria ?? "Todas";
+        $nomecor = $corNome[0]->cor ?? "Todas";
+        $nometam = $tamanhoNome[0]->tamanho ?? "Todos";
+        
+        $_SESSION['categoria'] = $nomecat;
+        $_SESSION['cor'] = $nomecor;
+        $_SESSION['tamanho'] = $nometam;
+        
+        // Exibindo os valores
         // echo '<pre>';
-        // print_r('Cat: ' . $categoria . '<br>');
-        // print_r('Tam: ' . $tamanho . '<br>');
-        // print_r('Cor: ' . $cor . '<br>');
-        // print_r($filtro);
+        // print_r($_SESSION);      // Exibe o nome da cor
         // die();
     
-    
+        // Display layout with filters and filtered products
         Store::Layout([
             'layout/html_header',
             'layout/header',

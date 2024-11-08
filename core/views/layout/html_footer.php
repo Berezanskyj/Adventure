@@ -4,6 +4,8 @@
 <script src="assets/js/axios.min.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/inputmask.min.js"></script>
+
 
 </body>
 

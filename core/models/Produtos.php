@@ -39,40 +39,87 @@ class Produtos {
         return $resultado;
     }
 
-    public function filtrarProduto($categoria, $tamanho, $cor) {
+    public function listarCategoriaEspec($id){
         $sql = new Database();
-    
-        // Inicia a consulta SQL
-        $query = "SELECT * FROM produtos WHERE visivel = 1";
-    
-        // Inicializa um array para armazenar as condições
+
+        $param = [
+            ':id' => $id
+        ];
+
+        $resultado = $sql->select("SELECT nome_categoria FROM produto_categoria WHERE id = :id", $param);
+
+        if(count($resultado) != 0){
+            return $resultado;
+        } else {
+            return "Todos";
+        }
+
+        
+    }
+
+    public function listarTamanhoEspec($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id
+        ];
+
+
+        $resultado = $sql->select("SELECT tamanho FROM produto_tamanho WHERE id = :id", $param);
+
+        if(count($resultado) != 0){
+            return $resultado;
+        } else {
+            return "Todos";
+        }
+    }
+
+    public function listarCorEspec($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id
+        ];
+
+
+        $resultado = $sql->select("SELECT cor FROM produto_cores WHERE id = :id", $param);
+
+        if(count($resultado) != 0){
+            return $resultado;
+        } else {
+            return "Todos";
+        }
+    }
+
+    public function filtrarProduto($categoria, $tamanho, $cor) {
+        $bd = new Database();
+        
+        // Inicia a consulta SQL com o filtro de visibilidade
+        $sql = "SELECT * FROM produtos WHERE visivel = 1";
+        
+        // Array para armazenar as condições dinâmicas
         $conditions = [];
-        $params = [];
-    
-        // Adiciona condições baseadas nos filtros
-        if ($categoria !== "null" && !empty($categoria)) {
-            $conditions[] = "categoria_id = :categoria";
-            $params[':categoria'] = $categoria;
+        
+        // Adiciona condições apenas se os valores dos filtros não forem "TODOS" ou null
+        if ($categoria !== "Todas" && !is_null($categoria)) {
+            $conditions[] = "categoria_id = " . intval($categoria);
         }
-    
-        if ($tamanho !== "null" && !empty($tamanho)) {
-            $conditions[] = "tamanho_id = :tamanho";
-            $params[':tamanho'] = $tamanho;
+        if ($tamanho !== "Todos" && !is_null($tamanho)) {
+            $conditions[] = "tamanho_id = " . intval($tamanho);
         }
-    
-        if ($cor !== "null" && !empty($cor)) {
-            $conditions[] = "cor_id = :cor";
-            $params[':cor'] = $cor;
+        if ($cor !== "Todas" && !is_null($cor)) {
+            $conditions[] = "cor_id = " . intval($cor);
         }
-    
-        // Monta a consulta com base nas condições
+        
+        // Concatena as condições ao SQL apenas se houver alguma
         if (!empty($conditions)) {
-            $query .= " AND " . implode(' AND ', $conditions);
+            $sql .= " AND " . implode(" AND ", $conditions);
         }
-    
-        // Executa a consulta e retorna o resultado
-        $resultado = $sql->select($query, $params);
-        return $resultado;
+        
+        // Executa a consulta
+        $produtos = $bd->select($sql);
+        
+        return $produtos;
     }
 
     public function buscarCategoria($idCategoria){

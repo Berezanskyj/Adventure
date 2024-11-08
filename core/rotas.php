@@ -24,6 +24,10 @@ $rotas = [
 
 
 
+    'pagamento_processado' => 'pedido@pagamento_processado',
+
+
+
 
 
     'logout' => 'main@logout',

@@ -13,10 +13,6 @@ if (isset($_SESSION['carrinho'])) {
 <link rel="stylesheet" href="assets/css/produtos_loja.css">
 
 <div class="page-container">
-    <!-- Header Fixo no Topo -->
-    <header class="header">
-    </header>
-
     <!-- Conteúdo Principal -->
     <div class="container content">
         <!-- Barra Lateral de Filtros -->
@@ -26,9 +22,9 @@ if (isset($_SESSION['carrinho'])) {
                 <div class="filter-group">
                     <label for="categoria" id="nome_categoria">Categoria:</label>
                     <select id="categoria" name="id_categoria">
-                        <option value="null">Todas</option>
+                        <option>Todas</option>
                         <?php foreach ($categorias as $categoria): ?>
-                            <option value="<?= $categoria->id ?>">
+                            <option value="<?= $categoria->id ?>" name="nome_cat">
                                 <?= htmlspecialchars($categoria->nome_categoria) ?>
                             </option>
                         <?php endforeach; ?>
@@ -38,7 +34,7 @@ if (isset($_SESSION['carrinho'])) {
                 <div class="filter-group">
                     <label for="tamanho">Tamanho:</label>
                     <select id="tamanho" name="id_tamanho">
-                        <option value="null">Todos</option>
+                        <option>Todos</option>
                         <?php foreach ($tamanhos as $tamanho): ?>
                             <option value="<?= $tamanho->id ?>">
                                 <?= htmlspecialchars($tamanho->tamanho) ?>
@@ -50,7 +46,7 @@ if (isset($_SESSION['carrinho'])) {
                 <div class="filter-group">
                     <label for="cor">Cores:</label>
                     <select id="cor" name="id_cor">
-                        <option value="null">Todas</option>
+                        <option>Todas</option>
                         <?php foreach ($cores as $cor): ?>
                             <option value="<?= $cor->id ?>">
                                 <?= htmlspecialchars($cor->cor) ?>

@@ -55,6 +55,7 @@
 }
 
 .sidebar .btn {
+    text-decoration: none;
     background-color: #52616b;
     color: white;
     padding: 10px 15px;
@@ -142,6 +143,7 @@
 }
 
 .product-card .btn {
+    text-decoration: none;
     background-color: #52616b;
     color: white;
     padding: 10px;
