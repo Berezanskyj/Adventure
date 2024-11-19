@@ -117,7 +117,7 @@ class Carrinho
 
             array_push($dadosTemp, $totalCarrinho);
 
-            $_SESSION['totalCarrinho'] = $totalCarrinho;
+            $_SESSION['totalCarrinho'] = $precoTotal;
 
             $dados = [
                 'carrinho' => $dadosTemp

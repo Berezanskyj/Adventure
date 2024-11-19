@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS personalizacao (
 CREATE TABLE IF NOT EXISTS pedidos (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
-  data_pedido DATETIME NOT NULL,
-  status_pedido ENUM('pendente','enviado','entregue','cancelado') NOT NULL,
+  data_pedido DATE,
+  status_pedido ENUM('pedido_recebido','em_processamento','em_transito','entregue', 'cancelado') NOT NULL,
   total_pedido DECIMAL(10,2) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
