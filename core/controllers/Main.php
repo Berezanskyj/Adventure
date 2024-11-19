@@ -188,6 +188,7 @@ class Main{
         $cliente = new Clientes();
 
         $resultado = $cliente->validar_login($usuario, $senha);
+        
 
         if(is_bool($resultado)){
 
@@ -205,6 +206,18 @@ class Main{
             $_SESSION['cpf'] = $resultado->cpf;
             $_SESSION['telefone'] = $resultado->telefone;
             $_SESSION['data_cadastro'] = date('d/m/Y', strtotime($resultado->data_criacao));
+
+
+            $resEndereco = $cliente->buscarEndereco($_SESSION['cliente']);
+            $endereco = $resEndereco[0];
+
+            $_SESSION['rua'] = $endereco->rua;
+            $_SESSION['numero'] = $endereco->numero;
+            $_SESSION['cidade'] = $endereco->cidade;
+            $_SESSION['cep'] = $endereco->cep;
+            $_SESSION['bairro'] = $endereco->bairro;
+            $_SESSION['apelido'] = $endereco->apelido;
+            $_SESSION['complemento'] = $endereco->complemento;
 
             if(isset($_SESSION['tmp_carrinho'])){
                 unset($_SESSION['tmp_carrinho']);

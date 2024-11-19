@@ -191,6 +191,10 @@ form select {
     padding: 0;
 }
 
+p {
+    color: #fff;
+}
+
 .painel-container {
     display: flex;
     height: 100vh;
@@ -250,6 +254,67 @@ form select {
 .painel-secao h1 {
     color: #FFD700;
     margin-bottom: 20px;
+}
+
+.pedido-detalhe {
+    background-color: #2b2e31;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-detalhe h1 {
+    color: #FFD700;
+    margin-bottom: 20px;
+}
+
+.pedido-info p,
+.produtos h2,
+.entrega-info h2 {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.produto-item {
+    display: flex;
+    align-items: center;
+    background-color: #3e4449;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.produto-img {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.produto-detalhes h3 {
+    color: #FFD700;
+    margin-bottom: 5px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.status.entregue {
+    background-color: #4CAF50;
+}
+
+.status.pendente {
+    background-color: #FFA500;
+}
+
+.status.cancelado {
+    background-color: #d9534f;
 }
 
 .order-card {

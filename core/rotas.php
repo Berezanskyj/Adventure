@@ -21,6 +21,9 @@ $rotas = [
 
     
     'user_account' => 'usuario@user_account',
+    'user_pedidos' => 'usuario@user_pedidos',
+    'user_config' => 'usuario@user_config',
+    'pedido' => 'usuario@pedido',
 
 
 

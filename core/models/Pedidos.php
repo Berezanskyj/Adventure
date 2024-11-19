@@ -105,6 +105,53 @@ public function removerPedido($idPedido){
 
 }
 
+public function listarPedidosGeral(){
+    $sql = new Database();
+
+    $res = $sql->select("SELECT * FROM pedidos");
+
+    if(count($res) != 0){
+        return $res;
+    } else {
+        return false;
+    }
+}
+
+public function listarPedidosEspec($idPedido){
+    $sql = new Database();
+
+    $param = [
+        ':id' => $idPedido,
+    ];
+
+    $res = $sql->select("SELECT * FROM pedidos where id = :id", $param);
+
+    if(count($res) != 0){
+        return $res;
+    } else {
+        return false;
+    }
+}
+
+public function listarItensPedido($idPedido){
+    $sql = new Database();
+
+    $param = [
+        ':id' => $idPedido,
+    ];
+
+    $res = $sql->select("SELECT * FROM itens_pedidos where pedido_id = :id", $param);
+
+    if(count($res) != 0){
+        return $res;
+    } else {
+        return false;
+    }
+}
+
+
+
+
 
 
     
