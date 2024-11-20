@@ -31,8 +31,12 @@ class Usuario{
     }
 
     public function user_pedidos() {
+
+
+        $idUsuario = $_SESSION['id'];
+
         $pedidos = new Pedidos();
-        $pedido = $pedidos->listarPedidosGeral();
+        $pedido = $pedidos->listarPedidosGeral($idUsuario);
         
         if (Store::clienteLogado()) {
             Store::Layout([

@@ -105,10 +105,14 @@ public function removerPedido($idPedido){
 
 }
 
-public function listarPedidosGeral(){
+public function listarPedidosGeral($id){
     $sql = new Database();
 
-    $res = $sql->select("SELECT * FROM pedidos");
+    $param = [
+        ':id' => $id
+    ];
+
+    $res = $sql->select("SELECT * FROM pedidos WHERE id_usuario = :id", $param);
 
     if(count($res) != 0){
         return $res;
