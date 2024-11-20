@@ -296,14 +296,29 @@ class Main{
             return;
         }
 
-        $token = $cliente->registrarCliente();
+        $id = $cliente->registrarCliente();
 
-        //*envio do email para o cliente
-        $nome_usuario = $_POST['nome'];
-        $email_cliente = strtolower(trim($_POST['email']));
-        $nome_usuario = $_POST['nome'];
-        $envioEmail = new EnviarEmail();
-        $resultado = $envioEmail->EmailConfirmacaoCliente($email_cliente, $nome_usuario, $token);
+        $dados = $cliente->listarClienteID($id);
+
+        $nome = $dados[0]->nome;
+        $sobrenome = $dados[0]->sobrenome;
+        $email = $dados[0]->email;
+        $cpf = $dados[0]->cpf;
+        $telefone = $dados[0]->telefone;
+
+
+
+
+
+        $_SESSION['nome'] = $nome;
+        $_SESSION['sobrenome'] = $sobrenome;
+        $_SESSION['email'] = $email;
+        $_SESSION['cpf'] = $cpf;
+        $_SESSION['telefone'] = $telefone;
+        $_SESSION['id'] = $id;
+
+
+
 
 
         header("Location: ?a=registro_endereco");
@@ -385,12 +400,43 @@ class Main{
 
     }
 
+    public function email_enviado(){
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'email_enviado',
+            'layout/footer',
+            'layout/html_footer',
+        ]);
+    }
+
     public function criar_endereco(){
 
+        
+
+
+        $cep = $_POST['cep'];
+        $cidade = $_POST['cidade'];
+        $bairro = $_POST['bairro'];
+        $rua = $_POST['rua'];
+        $numero = $_POST['numero'];
+        $complemento = $_POST['complemento'];
+        $apelido = $_POST['apelido'];
+        $idUsuario = $_SESSION['id'];
+        
         $endereco = new Clientes();
 
 
-        $endereco->registrarEndereco();
+        $token = $endereco->registrarEndereco($cep, $cidade, $bairro, $rua, $numero, $complemento, $apelido, $idUsuario);
+
+
+        // //*envio do email para o cliente
+        $nome_usuario = $_SESSION['nome'];
+        $email_cliente = strtolower(trim($_SESSION['email']));
+        $envioEmail = new EnviarEmail();
+        $envioEmail->EmailConfirmacaoCliente($email_cliente, $nome_usuario, $token[0]->token);
+
+        $this->email_enviado();
 
     }
 

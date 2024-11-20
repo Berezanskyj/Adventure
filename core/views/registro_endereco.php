@@ -77,7 +77,7 @@
                     <label for="">Apelido</label>
                     <i class='bx bx-id-card'></i>
                 </div>
-                <button type="submit" class="btnUserAddress" onclick="animacao()">Registrar</button>
+                <button type="submit" class="btnUserAddress" id="formSubmit" onclick="animacao()">Registrar</button>
             </form>
         </div>
     </div>
@@ -92,25 +92,24 @@
     const btnUserAddress = document.querySelector('.btnUserAddress');
     const btnUserInformation = document.querySelector('.btnUserInformation');
 
-    function animacao(){
-        event.preventDefault(); // Impede o envio imediato do formulário
+    function animacao(event) {
+    event.preventDefault(); // Impede o envio imediato do formulário
 
-        Swal.fire({
+    Swal.fire({
         title: "Um e-mail foi enviado!",
-        text: "Por favor verifique para que consiga realizar o login.",
+        text: "Por favor, verifique para que consiga realizar o login.",
         icon: "info",
         confirmButtonText: "OK",
         customClass: {
             title: 'swal2-title',  // Aplicando a fonte ao título
             content: 'swal2-content' // Aplicando a fonte ao conteúdo
-        }}).then((result) =>{
-            if(result.isConfirmed) {
-                UserAddressForm.submit();
-                window.location.href='?a=login'
-            }
-        });
-        
-    }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById("formSubmit").submit(); // Submete o formulário
+        }
+    });
+}
 
     window.onload = function(){
         UserAddressForm.classList.add('active');

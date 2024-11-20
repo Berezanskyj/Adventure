@@ -13,9 +13,9 @@
 
     window.onload = function(){
         Swal.fire({
-        title: "Parabéns!",
-        text: "Você confirmou seu e-mail, já pode realizar seu login!",
-        icon: "success",
+        title: "Um e-mail foi enviado!",
+        text: "Por favor, verifique para que consiga realizar o login.",
+        icon: "info",
         confirmButtonText: "OK",
         customClass: {
             title: 'swal2-title',  // Aplicando a fonte ao título

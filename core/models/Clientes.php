@@ -88,33 +88,35 @@ class Clientes{
         $sql->insert("INSERT INTO usuario (nome, sobrenome, email, cpf, senha, telefone, nivel_usuario, token, ativo)
         VALUES (:nome, :sobrenome, :email, :cpf, :senha, :telefone, :nivel_usuario, :token, :ativo)", $param);
 
+        $lastUserId = $sql->lastInsertId();
+
         //retorna token
 
-        return $token;
+        return $lastUserId;
+        // return $token;
     }
 
-    public function registrarEndereco(){
+    public function registrarEndereco($cep, $cidade, $bairro, $rua, $numero, $complemento, $apelido, $id){
         $sql = new Database();
 
-        $result = $sql->select("SELECT id FROM usuario ORDER BY id DESC LIMIT 1;");
-        $lastUserId = $result[0]->id;
 
 
-        $param = [
-            ':id' => $lastUserId
+
+        $param1 = [
+            ':id' => $id
         ];
 
-        $token = $sql->select("SELECT token FROM usuario WHERE id = :id", $param);
+        $token = $sql->select("SELECT token FROM usuario WHERE id = :id", $param1);
 
         $param = [
-            ':cep' => trim($_POST['cep']),
-            ':cidade' => trim($_POST['cidade']),
-            ':bairro' => strtolower(trim($_POST['bairro'])),
-            ':rua' => $_POST['rua'],
-            ':numero' => trim($_POST['numero']),
-            ':complemento' => $_POST['complemento'],
-            ':apelido' => $_POST['apelido'],
-            ':id_usuario' => $lastUserId
+            ':cep' => $cep,
+            ':cidade' => $cidade,
+            ':bairro' => $bairro,
+            ':rua' => $rua,
+            ':numero' => $numero,
+            ':complemento' => $complemento,
+            ':apelido' => $apelido,
+            ':id_usuario' => $id
         ];
         
         $sql->insert("INSERT INTO enderecos (cep, cidade, bairro, rua, numero, complemento, apelido, id_usuario)
@@ -262,6 +264,24 @@ class Clientes{
         } else {
             return false;  // Retorna false se o usuário não foi encontrado
         }
+    }
+
+    public function listarClienteID($id){
+
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id
+        ];
+
+        $res = $sql->select("SELECT * FROM usuario WHERE id = $id");
+
+        if(count($res) != 0){
+            return $res;
+        } else {
+            return false;
+        }
+        
     }
 
     
