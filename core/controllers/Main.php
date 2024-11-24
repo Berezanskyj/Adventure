@@ -88,6 +88,25 @@ class Main{
         ]);
     }
 
+    public function detalhes_produto(){
+
+
+
+
+        // die('OLA');
+
+
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'detalhes_produto',
+            'layout/footer',
+            'layout/html_footer',
+        ]);
+
+
+    }
+
     public function filtrar_produtos() {
         $produtos = new Produtos();
     

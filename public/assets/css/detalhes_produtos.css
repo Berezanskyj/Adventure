@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Lexend:wght@300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap');
+
+.product-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #262A2D;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagem do Produto */
+.product-image {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Informações do Produto */
+.product-info {
+    flex: 1 1 50%;
+    padding: 20px;
+}
+
+.product-info h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #FFF;
+    font-family: "Lexend Exa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.product-info .description {
+    margin-bottom: 20px;
+    color: #DDD;
+    line-height: 1.6;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.product-info .price {
+    font-size: 24px;
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-family: "Lexend Exa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Personalização */
+.customization-options {
+    margin-bottom: 20px;
+}
+
+.option-group {
+    margin-bottom: 15px;
+}
+
+.option-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    color: #FFF;
+}
+
+.option-group select,
+.option-group input#upload-image,
+.option-group input#custom-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.option-group input#text-color{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.option-group input#text-color::-webkit-color-swatch{
+    border-radius: 15px;
+    border: none;
+}
+
+.option-group input#text-color::-moz-color-swatch{
+    border-radius: 15px;
+    border: none;
+}
+
+
+
+/* Botões */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Lexend Exa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.product-image {
+    position: relative;
+    overflow: hidden;
+    /* Garante que a imagem não ultrapasse os limites do container */
+    border-radius: 8px;
+}
+
+.product-image img {
+    transition: transform 0.3s ease;
+    /* Suaviza o efeito de zoom */
+    width: 100%;
+    /* Garante que a imagem se ajuste ao container */
+    height: auto;
+}
+
+.product-image:hover img {
+    transform: scale(1.2);
+    /* Aumenta a imagem em 20% */
+}
+
+.add-to-cart {
+    background-color: #52616b;
+    color: #fff;
+}
+
+.add-to-cart:hover {
+    background-color: #a08800;
+}
+
+.buy-now {
+    background-color: #52616b;
+    color: #fff;
+}
+
+.buy-now:hover {
+    background-color: #FFD700;
+}

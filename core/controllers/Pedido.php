@@ -43,12 +43,13 @@ class Pedido{
             $quantidade_carrinho = $_SESSION['carrinho'][$id_produto];
             $cor_id = $prod->cor_id;
             $tamanho_id = $prod->tamanho_id;
+            $nome = $prod->nome;
 
             $estoque = $produto->listarEstoque($id_produto, $cor_id, $tamanho_id);
             $estoque_disponivel = $estoque[0]->quantidade_disponivel ?? 0;
 
             if ($estoque_disponivel < $quantidade_carrinho) {
-                $_SESSION['erro'] = "Estoque insuficiente para o produto: {$prod->nome}.";
+                $_SESSION['erro'] = "Estoque insuficiente para o produto: {$id_produto}.";
                 header("Location: ?a=metodo_pagamento");
                 exit;
             }

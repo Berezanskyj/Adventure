@@ -104,7 +104,13 @@
     flex-wrap: wrap;
     gap: 20px;
     width: 75%;
+    text-decoration: none;
 }
+
+.products a {
+    text-decoration: none;
+}
+
 
 .product-card {
     background-color: #262A2D;
@@ -115,6 +121,12 @@
     color: white;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Aumenta 5% no hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destacar */
 }
 
 .product-card img {
