@@ -6,6 +6,7 @@ $rotas = [
     'inicio' => 'main@index',  //* Define a rota 'inicio' para o método 'index' do controlador 'main'
     'loja' => 'main@loja',     //* Define a rota 'loja' para o método 'loja' do controlador 'main'
     'detalhes_produto' => 'main@detalhes_produto',     //* Define a rota 'loja' para o método 'loja' do controlador 'main'
+    'personalizacao_produto' => 'main@personalizacao_produto',     //* Define a rota 'loja' para o método 'loja' do controlador 'main'
     'sobre' => 'main@sobre',
 
 

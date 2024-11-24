@@ -88,14 +88,56 @@ class Main{
         ]);
     }
 
-    public function detalhes_produto(){
+    public function detalhes_produto() {
+        // Recuperar o ID do produto
+        $id = $_GET['id'];
+    
+        // Instância do modelo Produtos
+        $produto = new Produtos();
+    
+        // Consultar detalhes do produto
+        $atributos = $produto->consultaEstoquePorID($id);
+        $res = $produto->retornarProdutoPorID($id);
+    
+        // Verificar se o produto existe
+        if (empty($res)) {
+            die('Produto não encontrado.');
+        }
+    
+        // Inicializar os detalhes do produto
+        $produto_detalhes = [
+            'cores' => [],
+            'tamanhos' => [],
+        ];
+    
+        // Processar atributos para cores e tamanhos
+        foreach ($atributos as $item) {
+            // Adicionar cor
+            $cor = $produto->buscarCores($item->cor_id);
+            if (!empty($cor) && !in_array($cor[0]->cor, $produto_detalhes['cores'])) {
+                $produto_detalhes['cores'][] = $cor[0]->cor;
+            }
+    
+            // Adicionar tamanho
+            $tamanho = $produto->buscarTamanho($item->tamanho_id);
+            if (!empty($tamanho) && !in_array($tamanho[0]->tamanho, $produto_detalhes['tamanhos'])) {
+                $produto_detalhes['tamanhos'][] = $tamanho[0]->tamanho;
+            }
+        }
 
-
-
-
-        // die('OLA');
-
-
+        $cat = $produto->buscarCategoria($res[0]->categoria_id);
+    
+        // Enviar dados para sessão
+        $_SESSION['nome_produto_det'] = $res[0]->nome_produto;
+        $_SESSION['img_produto_det'] = $res[0]->imagem_produto;
+        $_SESSION['id_produto_det'] = $id;
+        $_SESSION['desc_produto_det'] = $res[0]->descricao;
+        $_SESSION['valor_produto_det'] = $res[0]->preco;
+        $_SESSION['categoria_produto_det'] = $cat[0]->nome_categoria;
+        $_SESSION['cores_produto_det'] = implode(', ', $produto_detalhes['cores']);
+        $_SESSION['tamanhos_produto_det'] = implode(', ', $produto_detalhes['tamanhos']);
+    
+        // Carregar o layout
         Store::Layout([
             'layout/html_header',
             'layout/header',
@@ -103,8 +145,56 @@ class Main{
             'layout/footer',
             'layout/html_footer',
         ]);
+    }
 
+    public function personalizacao_produto()
+    {
+        $id_produto = $_GET['id'];
+    
+        $produto = new Produtos();
+    
+        // Consultar os atributos do produto
+        $atributos = $produto->consultaEstoquePorID($id_produto);
 
+        $prod = $produto->retornarProdutoPorID($id_produto);
+
+        $_SESSION['nome_produto_det'] = $prod[0]->nome_produto;
+        $_SESSION['desc_produto_det'] = $prod[0]->descricao;
+        $_SESSION['valor_produto_det'] = $prod[0]->preco;
+        $_SESSION['imagem_produto_det'] = $prod[0]->imagem_produto;
+    
+        // Dados principais do produto (exemplo apenas do primeiro item)
+        $produto_detalhes = [
+            'id' => $atributos[0]->produto_id ?? null,
+            'cores' => [],
+            'tamanhos' => []
+        ];
+    
+        // Buscar cores e tamanhos para o produto
+        foreach ($atributos as $item) {
+            // Adicionar cor, se não estiver já listada
+            $cor = $produto->buscarCores($item->cor_id);
+            if (!empty($cor) && !in_array($cor[0]->cor, $produto_detalhes['cores'])) {
+                $produto_detalhes['cores'][] = $cor[0]->cor;
+            }
+    
+            // Adicionar tamanho, se não estiver já listado
+            $tamanho = $produto->buscarTamanho($item->tamanho_id);
+            if (!empty($tamanho) && !in_array($tamanho[0]->tamanho, $produto_detalhes['tamanhos'])) {
+                $produto_detalhes['tamanhos'][] = $tamanho[0]->tamanho;
+            }
+        }
+    
+        // Enviar dados para a view
+        Store::Layout([
+            'layout/html_header',
+            'layout/header',
+            'personalizacao_produto',
+            'layout/footer',
+            'layout/html_footer',
+        ], [
+            'produto_detalhes' => $produto_detalhes,
+        ]);
     }
 
     public function filtrar_produtos() {

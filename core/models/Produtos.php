@@ -218,19 +218,54 @@ class Produtos
     }
 
     public function buscarProdutosCarrinho($ids)
-{
-    // Converte os IDs em uma lista separada por vírgula para a consulta SQL
-    $ids = implode(',', $ids);
+    {
+        // Converte os IDs em uma lista separada por vírgula para a consulta SQL
+        $ids = implode(',', $ids);
 
-    // Conexão com o banco de dados
-    $db = new Database();
+        // Conexão com o banco de dados
+        $db = new Database();
 
-    // Consulta SQL
-    $sql = "SELECT * FROM produtos WHERE id IN ($ids)";
+        // Consulta SQL
+        $sql = "SELECT * FROM produtos WHERE id IN ($ids)";
 
-    // Executa a consulta
-    $result = $db->select($sql);
+        // Executa a consulta
+        $result = $db->select($sql);
 
-    return $result;
-}
+        return $result;
+    }
+
+    public function consultaEstoquePorID($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id,
+        ];
+
+
+        $res = $sql->select("SELECT * FROM estoque WHERE produto_id = :id", $param);
+
+
+        if(count($res) != 0){
+            return $res;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function retornarProdutoPorID($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id
+        ];
+
+        $res = $sql->select("SELECT * FROM produtos WHERE id = :id", $param);
+
+        if(count($res) != 0){
+            return $res;
+        } else {
+            return false;
+        }
+    }
 }
