@@ -181,7 +181,7 @@ class Clientes{
         ];
 
         $sql = new Database();
-        $resultado = $sql->select("SELECT * FROM usuario WHERE email = :usuario AND ativo = 1", $param);
+        $resultado = $sql->select("SELECT * FROM usuario WHERE email = :usuario AND ativo = 1 AND nivel_usuario = 2", $param);
 
 
         if(count($resultado) != 1){
