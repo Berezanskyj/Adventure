@@ -98,7 +98,38 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    
+
+
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona todos os elementos com o id "status"
+    const statusElements = document.querySelectorAll("#status");
+
+    // Itera sobre os elementos encontrados
+    statusElements.forEach((element) => {
+        const statusText = element.textContent.trim().toLowerCase(); // Obtém o texto do status
+
+        // Remove classes existentes antes de adicionar a nova
+        element.classList.remove("success", "danger", "warning");
+
+        // Aplica a classe correspondente ao status
+        if (statusText === "cancelado") {
+            element.classList.add("danger");
+        } else if (statusText === "enviado") {
+            element.classList.add("primary");
+        } else if (statusText === "pendente") {
+            element.classList.add("warning");
+        } else {
+            element.classList.add("success");
+        }
+    });
+});
+
+
 
 
 // themeToggler.addEventListener('click', () => {

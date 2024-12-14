@@ -79,90 +79,31 @@
                 <input type="date" id="date-input" disabled>
             </div>
 
-            <div class="insights">
-                <div class="sales">
-                    <span class="material-icons-sharp">query_stats</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Total de Vendas</h3>
-                            <h1>R$<?= $totalVenda[0]->total_vendas?>,00</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx='38' cy='38' r='36'></circle>
-                            </svg>
-                            <div class="number">
-                                <p>81%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <small class="text-muted">Últimas 24hrs</small>
-                </div>
-
-                <div class="income">
-                    <span class="material-icons-sharp">query_stats</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Total de Estoque</h3>
-                            <h1><?= $totalEstoque[0]->total_estoque?></h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx='38' cy='38' r='36'></circle>
-                            </svg>
-                            <div class="number">
-                                <p>100%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <small class="text-muted">Últimas 24hrs</small>
-                </div>
-
-                <div class="expenses">
-                    <span class="material-icons-sharp">query_stats</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Novos Clientes no Último Mês</h3>
-                            <h1><?=$totalClientes[0]->novos_clientes?></h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx='38' cy='38' r='36'></circle>
-                            </svg>
-                            <div class="number">
-                                <p>50%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <small class="text-muted">Últimas 24hrs</small>
-                </div>
-            </div>
-
-
-
-
-
             <div class="recent-orders">
-                <h2>Últimos Pedidos</h2>
+                <h2>Usuários Cadastrados</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Pedido</th>
-                            <th>Cliente</th>
-                            <th>Status</th>
-                            <th>Total Pedido</th>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
                             <th></th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($pedidos as $pedido): ?>
+                        <?php foreach ($usuarios as $usuario): ?>
                         <tr>
-                            <td><?=$pedido->pedido_id?></td>
-                            <td><?=$pedido->nome_usuario?></td>
-                            <td class="success" id="status"><?=$pedido->status_pedido?></td>
-                            <td>R$<?=number_format($pedido->total_pedido, 2, ',', '.')?></td>
-                            <td class="primary">Detalhes</td>
+                            <td><?=$usuario->id?></td>
+                            <td><?=$usuario->nome?></td>
+                            <td><?=$usuario->sobrenome?></td>
+                            <td><?=$usuario->email?></td>
+                            <td><?=$usuario->cpf?></td>
+                            <td><?=$usuario->telefone?></td>
+                            <td class="primary"><a href="">Detalhes</a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

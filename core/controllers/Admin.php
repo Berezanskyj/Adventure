@@ -26,6 +26,10 @@ class Admin
         $totalVenda = $vendas->totalVendas();
         $totalEstoque = $vendas->totalEstoque();
         $totalClientes = $vendas->totalClientes();
+        $pedidos = $vendas->listarPedidos();
+
+        // Store::printData($teste);
+        // die();
 
         // Store::printData($totalClientes);
         // Store::printData($totalEstoque);
@@ -46,7 +50,8 @@ class Admin
         ], [
             'totalVenda' => $totalVenda,
             'totalEstoque' => $totalEstoque,
-            'totalClientes' => $totalClientes
+            'totalClientes' => $totalClientes,
+            'pedidos' => $pedidos,
         ]);
     }
 
@@ -123,5 +128,37 @@ class Admin
             // die('AQUI');
             header("Location: ?a=index");
         }
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['admin']);
+        unset($_SESSION['usuario_admin']);
+        unset($_SESSION['nome_admin']);
+        unset($_SESSION['sobrenome_admin']);
+        unset($_SESSION['cpf_admin']);
+        unset($_SESSION['telefone_admin']);
+        unset($_SESSION['data_cadastro_admin']);
+        $this->index();
+        
+    }
+
+    public function usuario_admin(){
+
+        $u = new AdminModel();
+
+
+        $usuarios = $u->listarClientes();
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/usuario',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'usuarios' => $usuarios,
+        ]);
     }
 }

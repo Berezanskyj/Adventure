@@ -7,8 +7,10 @@ $rotas = [
 
     'admin_login' => 'admin@admin_login',
     'login_admin_submit' => 'admin@login_admin_submit',
+    'logout' => 'admin@logout',
 
-    'lista_clientes' => 'admin@lista_clientes'
+    'lista_clientes' => 'admin@lista_clientes',
+    'usuario_admin' => 'admin@usuario_admin',
 ];
 
 //* Define a ação padrão como 'inicio'

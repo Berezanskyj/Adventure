@@ -127,6 +127,10 @@ b {
     color: var(--color-primary);
 }
 
+.sent{
+    color: var(--color-dark-variant);
+}
+
 .danger {
     color: var(--color-danger);
 }
@@ -208,7 +212,7 @@ aside .sidebar a span {
 
 aside .sidebar a:last-child {
     position: absolute;
-    bottom: 2rem;
+    bottom: 15rem;
     width: 100%;
 
 }
