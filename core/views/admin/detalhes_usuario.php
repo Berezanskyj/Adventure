@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="assets/css/home.css">
-<link rel="stylesheet" href="assets/css/crud.css">
 
 <div class="container">
     <aside>
@@ -74,78 +73,31 @@
     </aside>
 
     <main>
-        <h1>Dashboard</h1>
+        <h1>Gerenciar Usuários</h1>
 
         <div class="date">
             <input type="date" id="date-input" disabled>
         </div>
 
-        <div class="recent-orders">
-            <!-- CRUD Section -->
-            <div class="crud-header">
-                <h2>Lista de Usuários</h2>
+        <form id="user-details-form" class="form-container">
+            <label for="user-id" class="form-label">ID do Usuário</label>
+            <input type="number" id="user-id" name="user-id" placeholder="ID" readonly class="form-input form-input-readonly">
+
+            <label for="user-name" class="form-label">Nome</label>
+            <input type="text" id="user-name" name="user-name" placeholder="Digite o nome" class="form-input">
+
+            <label for="user-email" class="form-label">Email</label>
+            <input type="email" id="user-email" name="user-email" placeholder="Digite o email" class="form-input">
+
+            <label for="user-description" class="form-label">Descrição</label>
+            <textarea id="user-description" name="user-description" placeholder="Digite uma descrição" class="form-textarea"></textarea>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-save">Salvar</button>
+                <button type="button" class="btn btn-delete">Excluir</button>
+                <button type="button" class="btn btn-cancel">Cancelar</button>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($usuarios as $usuario): ?>
-                        <tr>
-                            <td><?= $usuario->id ?></td>
-                            <td><?= $usuario->nome ?></td>
-                            <td><?= $usuario->sobrenome ?></td>
-                            <td><?= $usuario->email ?></td>
-                            <td><?= $usuario->cpf ?></td>
-                            <td><?= $usuario->telefone ?></td>
-                            <td>
-                                <button
-                                    class="btn btn-success add-user" data-id="<?= $usuario->id ?>" data-id="<?= $usuario->id ?>"
-                                    data-nome="<?= $usuario->nome ?>"
-                                    data-sobrenome="<?= $usuario->sobrenome ?>"
-                                    data-email="<?= $usuario->email ?>"
-                                    data-cpf="<?= $usuario->cpf ?>"
-                                    data-telefone="<?= $usuario->telefone ?>" id="botao-editar">Editar</button>
-                                <button class="btn btn-danger" onclick="excluirUsuario(<?= $usuario->id ?>)">Excluir</button>
-                            </td>
-                        </tr>
-
-        </div>
-        <!-- Add/Edit User Modal -->
-        <div class="modal" id="user-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h2 id="modal-title">Editar Usuário</h2>
-                <form id="user-form" method="post">
-                    <input type="hidden" name="id" id="idUsuarioModal"">
-                    <label for="name">Nome</label>
-                    <input type="text" id="name" name="name">
-                    <label for="surname">Sobrenome</label>
-                    <input type="text" id="surname" name="surname">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email">
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" name="cpf">
-                    <label for="telefone">Telefone</label>
-                    <input type="text" id="telefone" name="telefone">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-    <?php endforeach; ?>
-    </tbody>
-    </table>
-    </section>
-
-
+        </form>
 
 
 
@@ -172,8 +124,4 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-usuario.js"></script>

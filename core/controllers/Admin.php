@@ -8,6 +8,7 @@ use core\classes\Store;
 use core\models\Clientes;
 use core\models\Produtos;
 use core\models\AdminModel;
+use Exception;
 use PDO;
 
 class Admin
@@ -19,7 +20,7 @@ class Admin
             return;
         }
 
-        
+
         $vendas = new AdminModel();
 
         // Obter os dados
@@ -76,14 +77,14 @@ class Admin
     public function login_admin_submit()
     {
 
-        
+
 
         if (Store::adminLogado()) {
             $this->index();
             return;
         }
 
-        
+
 
         if (
             !isset($_POST['username']) ||
@@ -95,7 +96,7 @@ class Admin
             return;
         }
 
-        
+
 
 
         $usuario = trim(strtolower($_POST['username']));
@@ -105,15 +106,13 @@ class Admin
 
         $resultado = $admin->validar_login($usuario, $senha);
 
-        
+
         if (is_bool($resultado)) {
 
             //login invalido
             $_SESSION['erro'] = 'Login inválido';
             $this->admin_login();
             return;
-
-            
         } else {
 
             //login valido
@@ -140,10 +139,10 @@ class Admin
         unset($_SESSION['telefone_admin']);
         unset($_SESSION['data_cadastro_admin']);
         $this->index();
-        
     }
 
-    public function usuario_admin(){
+    public function usuario_admin()
+    {
 
         $u = new AdminModel();
 
@@ -160,5 +159,100 @@ class Admin
         ], [
             'usuarios' => $usuarios,
         ]);
+    }
+
+    public function detalhes_usuario()
+    {
+
+        // Store::printData($_GET);
+        // die();
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/detalhes_usuario',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ]);
+    }
+
+    public function editar_usuario()
+    {
+        try {
+            // Receber os dados do POST
+            $id = $_POST['id'];
+            $nome = $_POST['name'];
+            $sobrenome = $_POST['surname'];
+            $email = $_POST['email'];
+            $cpf = $_POST['cpf'];
+            $telefone = $_POST['telefone'];
+
+            // Modelo para acessar o banco
+            $usuario = new AdminModel();
+
+            // Tenta atualizar os dados
+            $alterar = $usuario->editarCliente($id, $nome, $sobrenome, $email, $cpf, $telefone);
+
+
+            // Retorna sucesso ou falha com base no resultado
+            if ($alterar) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Usuário atualizado com sucesso.',
+                    'data' => $_POST
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Não foi possível atualizar o usuário.',
+                    'data' => $_POST,
+                ]);
+            }
+        } catch (Exception $e) {
+            // Captura e exibe o erro no formato JSON
+            echo json_encode([
+                'success' => false,
+                'message' => 'Ocorreu um erro ao tentar atualizar o usuário.',
+                'data' => $_POST
+            ]);
+        }
+        exit;
+    }
+
+
+    public function excluir_usuario()
+    {
+        try{
+
+        
+        $id = $_GET['id'];
+
+        $usuario = new AdminModel();
+
+        // Tenta atualizar os dados
+        $inativar = $usuario->inativarCliente($id);
+
+        if ($inativar) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Usuário atualizado com sucesso.',
+                'data' => $_GET
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não foi possível atualizar o usuário.',
+                'data' => $_GET,
+            ]);
+        }
+    } catch (Exception $e) {
+        // Captura e exibe o erro no formato JSON
+        echo json_encode([
+            'success' => false,
+            'message' => 'Ocorreu um erro ao tentar atualizar o usuário.',
+            'data' => $_GET
+        ]);
+    }
+    exit;
     }
 }

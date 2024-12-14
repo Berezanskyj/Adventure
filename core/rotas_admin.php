@@ -11,6 +11,10 @@ $rotas = [
 
     'lista_clientes' => 'admin@lista_clientes',
     'usuario_admin' => 'admin@usuario_admin',
+    'detalhes_usuario' => 'admin@detalhes_usuario',
+    'editar_usuario' => 'admin@editar_usuario',
+    'excluir_usuario' => 'admin@excluir_usuario',
+
 ];
 
 //* Define a ação padrão como 'inicio'
