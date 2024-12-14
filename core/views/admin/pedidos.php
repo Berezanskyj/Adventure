@@ -81,44 +81,38 @@
         </div>
 
         <div class="recent-orders">
-            <!-- CRUD Section -->
-            <div class="crud-header">
-                <h2>Lista de Usuários</h2>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($usuarios as $usuario): ?>
+            <div class="recent-orders">
+                <h2>Lista de Pedidos</h2>
+                <table>
+                    <thead>
                         <tr>
-                            <td><?= $usuario->id ?></td>
-                            <td><?= $usuario->nome ?></td>
-                            <td><?= $usuario->sobrenome ?></td>
-                            <td><?= $usuario->email ?></td>
-                            <td><?= $usuario->cpf ?></td>
-                            <td><?= $usuario->telefone ?></td>
-                            <td>
-                                <button
-                                    class="btn btn-success add-user" 
-                                    data-id="<?= $usuario->id ?>"
-                                    data-nome="<?= $usuario->nome ?>"
-                                    data-sobrenome="<?= $usuario->sobrenome ?>"
-                                    data-email="<?= $usuario->email ?>"
-                                    data-cpf="<?= $usuario->cpf ?>"
-                                    data-telefone="<?= $usuario->telefone ?>"
-                                    id="botao-editar">Editar</button>
-                                <button class="btn btn-danger" onclick="excluirUsuario(<?= $usuario->id ?>)">Excluir</button>
-                            </td>
+                            <th>Pedido</th>
+                            <th>Cliente</th>
+                            <th>Status</th>
+                            <th>Total Pedido</th>
+                            <th></th>
+
                         </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($pedidos as $pedido): ?>
+                            <tr>
+                                <td><?= $pedido->pedido_id ?></td>
+                                <td><?= $pedido->nome_usuario ?></td>
+                                <td class="success" id="status"><?= $pedido->status_pedido ?></td>
+                                <td>R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?></td>
+                                <td>
+                                    <button class="btn btn-success add-user">Editar</button>
+                                    <button class="btn btn-danger">Excluir</button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <a href="?a=pedidos">Mostrar mais</a>
+            </div>
+
+
 
         </div>
         <!-- Add/Edit User Modal -->
@@ -126,26 +120,26 @@
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h2 id="modal-title">Editar Usuário</h2>
-                <form id="user-form" method="post" action="?a=editar_usuario">
-                    <input type="hidden" name="id" id="idUsuarioModal">
-                    <label for="name">Nome</label>
-                    <input type="text" name="name" id="nomeUsuarioModal">
+                <form id="user-form" method="post">
+                    <input type="hidden" name="id" id="idUsuarioModal"">
+                    <label for=" name">Nome</label>
+                    <input type="text" id="name" name="name">
                     <label for="surname">Sobrenome</label>
-                    <input type="text" name="surname" id="sobrenomeUsuarioModal">
+                    <input type="text" id="surname" name="surname">
                     <label for="email">E-mail</label>
-                    <input type="email"  name="email" id="emailUsuarioModal">
+                    <input type="email" id="email" name="email">
                     <label for="cpf">CPF</label>
-                    <input type="text"  name="cpf" id="cpfUsuarioModal">
+                    <input type="text" id="cpf" name="cpf">
                     <label for="telefone">Telefone</label>
-                    <input type="text" name="telefone" id="telefoneUsuarioModal">
+                    <input type="text" id="telefone" name="telefone">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
             </div>
         </div>
-    <?php endforeach; ?>
-    </tbody>
-    </table>
-    </section>
+
+        </tbody>
+        </table>
+        </section>
 
 
 
@@ -174,8 +168,8 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-usuario.js"></script>
+<script src="assets/js/modal-pedidos.js"></script>

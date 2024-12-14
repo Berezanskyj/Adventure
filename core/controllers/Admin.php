@@ -27,7 +27,7 @@ class Admin
         $totalVenda = $vendas->totalVendas();
         $totalEstoque = $vendas->totalEstoque();
         $totalClientes = $vendas->totalClientes();
-        $pedidos = $vendas->listarPedidos();
+        $pedidos = $vendas->listarPedidosRecentes();
 
         // Store::printData($teste);
         // die();
@@ -245,14 +245,39 @@ class Admin
                 'data' => $_GET,
             ]);
         }
-    } catch (Exception $e) {
-        // Captura e exibe o erro no formato JSON
-        echo json_encode([
-            'success' => false,
-            'message' => 'Ocorreu um erro ao tentar atualizar o usuário.',
-            'data' => $_GET
-        ]);
+        } catch (Exception $e) {
+            // Captura e exibe o erro no formato JSON
+            echo json_encode([
+                'success' => false,
+                'message' => 'Ocorreu um erro ao tentar atualizar o usuário.',
+                'data' => $_GET
+            ]);
+        }
+        exit;
     }
-    exit;
+
+    public function pedidos(){
+
+        $vendas = new AdminModel();
+
+        // Obter os dados
+        $totalVenda = $vendas->totalVendas();
+        $totalEstoque = $vendas->totalEstoque();
+        $totalClientes = $vendas->totalClientes();
+        $pedidos = $vendas->listarPedidos();
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/pedidos',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'totalVenda' => $totalVenda,
+            'totalEstoque' => $totalEstoque,
+            'totalClientes' => $totalClientes,
+            'pedidos' => $pedidos,
+        ]);
     }
 }

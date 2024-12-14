@@ -85,6 +85,13 @@ class AdminModel
     public function listarPedidos(){
         $sql = new Database();
 
+        $res = $sql->select("SELECT pedidos.id AS pedido_id, CONCAT(usuario.nome, ' ', usuario.sobrenome) AS nome_usuario, pedidos.data_pedido, pedidos.status_pedido, pedidos.total_pedido, pedidos.data_criacao, pedidos.data_atualizacao FROM pedidos JOIN usuario ON pedidos.id_usuario = usuario.id ORDER BY pedidos.data_pedido;");
+
+        return $res;
+    }
+    public function listarPedidosRecentes(){
+        $sql = new Database();
+
         $res = $sql->select("SELECT pedidos.id AS pedido_id, CONCAT(usuario.nome, ' ', usuario.sobrenome) AS nome_usuario, pedidos.data_pedido, pedidos.status_pedido, pedidos.total_pedido, pedidos.data_criacao, pedidos.data_atualizacao FROM pedidos JOIN usuario ON pedidos.id_usuario = usuario.id ORDER BY pedidos.data_pedido DESC LIMIT 5;");
 
         return $res;

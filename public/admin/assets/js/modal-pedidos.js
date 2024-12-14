@@ -1,16 +1,6 @@
 const addUserButtons = document.querySelectorAll('.add-user');
 const userModal = document.getElementById('user-modal');
-
-
 const IDuserModal = document.getElementById('idUsuarioModal');
-const nomeUsuarioModal = document.getElementById('nomeUsuarioModal');
-const sobrenomeUsuarioModal = document.getElementById('sobrenomeUsuarioModal');
-const emailUsuarioModal = document.getElementById('emailUsuarioModal');
-const cpfUsuarioModal = document.getElementById('cpfUsuarioModal');
-const telefoneUsuarioModal = document.getElementById('telefoneUsuarioModal');
-
-
-
 const closeModal = document.querySelector('.close-modal');
 
 // Inputs da modal
@@ -23,30 +13,11 @@ console.log(inputId);
 addUserButtons.forEach((button) => {
     button.addEventListener('click', () => {
         const userId = button.getAttribute('data-id');
-        const nome = button.getAttribute('data-nome');
-        const sobrenome = button.getAttribute('data-sobrenome');
-        const email = button.getAttribute('data-email');
-        const cpf = button.getAttribute('data-cpf');
-        const telefone = button.getAttribute('data-telefone');
 
         console.log(inputId);
 
-        const cpfInput = document.getElementById('cpfUsuarioModal');
-        const telefoneInput = document.getElementById('telefoneUsuarioModal');
-
-        const cpfMask = new Inputmask('999.999.999-99'); // Máscara CPF
-        const telefoneMask = new Inputmask('(99) 9 9999-9999'); // Máscara Telefone
-
-        cpfMask.mask(cpfInput);
-        telefoneMask.mask(telefoneInput);
-
         // Preenche os inputs da modal
         IDuserModal.value = userId;
-        nomeUsuarioModal.value = nome;
-        sobrenomeUsuarioModal.value = sobrenome;
-        emailUsuarioModal.value = email;
-        cpfUsuarioModal.value = cpf;
-        telefoneUsuarioModal.value = telefone;
 
 
         // Exibe a modal

@@ -44,7 +44,7 @@
                         <span class="material-icons-sharp arrow">arrow_drop_down</span>
                     </a>
                     <div class="dropdown-content" style="display: none;">
-                        <a href="#">Listar Pedidos</a>
+                        <a href="?a=pedidos">Listar Pedidos</a>
                         <a href="#">Listar Clientes</a>
                     </div>
                 </div>
