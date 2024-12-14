@@ -4,6 +4,43 @@ const menuBtn = document.querySelector("#menu-btn");
 const closeBtn = document.querySelector("#close-btn");
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const themeToggler = document.querySelector('.theme-toggler');
+
+    // Checar se há um tema salvo no localStorage
+    const savedTheme = localStorage.getItem('theme');
+
+    // Aplicar o tema salvo (se houver)
+    if (savedTheme) {
+        document.body.classList.add(savedTheme);
+        if (savedTheme === 'dark-theme-variables') {
+            themeToggler.querySelector('span:nth-child(1)').classList.remove('active'); // Light mode ícone
+            themeToggler.querySelector('span:nth-child(2)').classList.add('active');   // Dark mode ícone
+        } else {
+            themeToggler.querySelector('span:nth-child(1)').classList.add('active');
+            themeToggler.querySelector('span:nth-child(2)').classList.remove('active');
+        }
+    }
+
+    // Alternar entre dark e light theme e salvar no localStorage
+    themeToggler.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme-variables');
+
+        const isDarkMode = document.body.classList.contains('dark-theme-variables');
+
+        // Salvar a preferência do tema no localStorage
+        if (isDarkMode) {
+            localStorage.setItem('theme', 'dark-theme-variables');
+            themeToggler.querySelector('span:nth-child(1)').classList.remove('active');
+            themeToggler.querySelector('span:nth-child(2)').classList.add('active');
+        } else {
+            localStorage.setItem('theme', 'light-theme-variables');
+            themeToggler.querySelector('span:nth-child(1)').classList.add('active');
+            themeToggler.querySelector('span:nth-child(2)').classList.remove('active');
+        }
+    });
+});
+
 
 
 
@@ -64,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-themeToggler.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme-variables');
+// themeToggler.addEventListener('click', () => {
+//     document.body.classList.toggle('dark-theme-variables');
 
-    themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
-    themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
-})
+//     themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
+//     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
+// })

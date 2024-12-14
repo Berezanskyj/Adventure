@@ -85,7 +85,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total de Vendas</h3>
-                            <h1>R$1.000,00</h1>
+                            <h1>R$<?= $totalVenda[0]->total_vendas?>,00</h1>
                         </div>
                         <div class="progress">
                             <svg>
@@ -104,7 +104,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total de Estoque</h3>
-                            <h1>+999</h1>
+                            <h1><?= $totalEstoque[0]->total_estoque?></h1>
                         </div>
                         <div class="progress">
                             <svg>
@@ -122,8 +122,8 @@
                     <span class="material-icons-sharp">query_stats</span>
                     <div class="middle">
                         <div class="left">
-                            <h3>Total de Despesas</h3>
-                            <h1>R$10.000,00</h1>
+                            <h3>Novos Clientes no Último Mês</h3>
+                            <h1><?=$totalClientes[0]->novos_clientes?></h1>
                         </div>
                         <div class="progress">
                             <svg>
@@ -149,8 +149,8 @@
                         <tr>
                             <th>Pedido</th>
                             <th>Cliente</th>
-                            <th>Pagamento</th>
                             <th>Status</th>
+                            <th>Total Pedido</th>
                             <th></th>
                             
                         </tr>
@@ -159,8 +159,8 @@
                         <tr>
                             <td>132</td>
                             <td>Joao Carlos</td>
-                            <td>Pix</td>
                             <td class="success">Enviado</td>
+                            <td>R$100,00</td>
                             <td class="primary">Detalhes</td>
                         </tr>
                     </tbody>
@@ -183,7 +183,7 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Olá, <b>USUARIO</b></p>
+                        <p>Olá, <b><?=$_SESSION['nome_admin']?></b></p>
                         <small class="text-muted">Admin</small>
                     </div>
                     <!-- <div class="profile-photo">
@@ -193,6 +193,6 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 

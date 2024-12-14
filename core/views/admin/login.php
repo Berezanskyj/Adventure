@@ -1,33 +1,16 @@
-<div class="d-flex align-items-center justify-content-center vh-100 bg-dark text-light">
+<link rel="stylesheet" href="assets/css/login.css">
 
+<div class="login-container">
+        <h1>Login</h1>
+        <form action="?a=login_admin_submit" method="POST">
+            <label for="username">Usuário</label>
+            <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <!-- Logo centralizada -->
-                        <div class="text-center mb-4">
-                            <img src="assets/images/logo-preto.png" alt="Logo" class="logo">
-                        </div>
-                        <form action="?a=login_admin_submit" method="POST">
-                            <!-- Campo para o nome de usuário -->
-                            <div class="mb-3">
-                                <label for="username" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="username" name="username" required>
-                            </div>
-                            <!-- Campo para a senha -->
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <!-- Botão de login -->
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Entrar</button>
-                            </div>
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
 
-
-                            <?php if (isset($_SESSION['erro'])): ?>
+            <button type="submit">Entrar</button>
+            <?php if (isset($_SESSION['erro'])): ?>
                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                 <script>
                                     Swal.fire({
@@ -42,9 +25,5 @@
                                 </script>
                                 <?php unset($_SESSION['erro']) ?>
                             <?php endif; ?>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>

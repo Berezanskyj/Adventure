@@ -5,7 +5,7 @@ $rotas = [
 
     'inicio' => 'admin@index',  //* Define a rota 'inicio' para o método 'index' do controlador 'main'
 
-    'admin_login' => 'admin@login',
+    'admin_login' => 'admin@admin_login',
     'login_admin_submit' => 'admin@login_admin_submit',
 
     'lista_clientes' => 'admin@lista_clientes'
