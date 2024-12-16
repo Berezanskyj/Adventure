@@ -31,9 +31,11 @@ class Usuario{
     }
 
     public function user_pedidos() {
+        // Store::printData($_SESSION);
+        // die();
 
 
-        $idUsuario = $_SESSION['id'];
+        $idUsuario = $_SESSION['cliente'];
 
         $pedidos = new Pedidos();
         $pedido = $pedidos->listarPedidosGeral($idUsuario);

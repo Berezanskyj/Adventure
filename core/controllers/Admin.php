@@ -222,29 +222,29 @@ class Admin
 
     public function excluir_usuario()
     {
-        try{
+        try {
 
-        
-        $id = $_GET['id'];
 
-        $usuario = new AdminModel();
+            $id = $_GET['id'];
 
-        // Tenta atualizar os dados
-        $inativar = $usuario->inativarCliente($id);
+            $usuario = new AdminModel();
 
-        if ($inativar) {
-            echo json_encode([
-                'success' => true,
-                'message' => 'Usuário atualizado com sucesso.',
-                'data' => $_GET
-            ]);
-        } else {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Não foi possível atualizar o usuário.',
-                'data' => $_GET,
-            ]);
-        }
+            // Tenta atualizar os dados
+            $inativar = $usuario->inativarCliente($id);
+
+            if ($inativar) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Usuário atualizado com sucesso.',
+                    'data' => $_GET
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Não foi possível atualizar o usuário.',
+                    'data' => $_GET,
+                ]);
+            }
         } catch (Exception $e) {
             // Captura e exibe o erro no formato JSON
             echo json_encode([
@@ -256,7 +256,8 @@ class Admin
         exit;
     }
 
-    public function pedidos(){
+    public function pedidos()
+    {
 
         $vendas = new AdminModel();
 
@@ -265,6 +266,11 @@ class Admin
         $totalEstoque = $vendas->totalEstoque();
         $totalClientes = $vendas->totalClientes();
         $pedidos = $vendas->listarPedidos();
+
+
+        // Store::printData($itens);
+
+        // die();
 
 
         Store::Layout_admin([
@@ -279,5 +285,30 @@ class Admin
             'totalClientes' => $totalClientes,
             'pedidos' => $pedidos,
         ]);
+    }
+
+    public function alterar_pedidos()
+    {
+
+        $vendas = new AdminModel();
+        $pedidos = $vendas->listarPedidos();
+
+        Store::printData($pedidos);
+        die();
+    }
+
+    public function obterItensPedido()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idPedido = $_POST['idPedido'];
+            $vendas = new AdminModel();
+            $itens = $vendas->itens_pedidos($idPedido);
+
+            echo json_encode(['success' => true, 'data' => $itens]);
+            exit;
+        }
+
+        echo json_encode(['success' => false, 'message' => 'Método não permitido.']);
+        exit;
     }
 }

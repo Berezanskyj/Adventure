@@ -1,6 +1,18 @@
-const addUserButtons = document.querySelectorAll('.add-user');
-const userModal = document.getElementById('user-modal');
-const IDuserModal = document.getElementById('idUsuarioModal');
+const addPedidoButtons = document.querySelectorAll('.add-user');
+const pedidoModal = document.getElementById('order-modal');
+
+//capturando valores da modal
+const IDPedidoModal = document.getElementById('idPedidoModal');
+const NomePedidoModal = document.getElementById('nome_usuario');
+const TotalPedidoModal = document.getElementById('total_pedido');
+const DataPedidoModal = document.getElementById('data_pedido');
+const StatusPedidoModal = document.getElementById('status_pedido');
+const MetodoPagamentoModal = document.getElementById('metodo_pagamento');
+const StatusPamentoModal = document.getElementById('status_pagamento')
+const itensTableBody = document.querySelector('#itens_pedido tbody');
+
+
+//
 const closeModal = document.querySelector('.close-modal');
 
 // Inputs da modal
@@ -10,33 +22,100 @@ console.log(inputId);
 
 
 // Abrir modal e preencher os campos
-addUserButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        const userId = button.getAttribute('data-id');
+addPedidoButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+        // Captura os atributos de dados do botão clicado
+        const pedidoId = button.getAttribute('data-id');
+        const pedidoClienteNome = button.getAttribute('data-nome');
+        const statusPedido = button.getAttribute('data-status');
+        const totalPedido = button.getAttribute('data-total');
+        const dataPedido = button.getAttribute('data-criado');
+        const metodoPagamento = button.getAttribute('data-metodo-pagamento');
+        const statusPagamento = button.getAttribute('data-status-pagamento');
 
-        console.log(inputId);
+        // Preenche os campos da modal
+        IDPedidoModal.value = pedidoId;
+        NomePedidoModal.value = pedidoClienteNome;
+        TotalPedidoModal.value = totalPedido;
+        DataPedidoModal.value = dataPedido;
+        StatusPedidoModal.value = statusPedido;
+        StatusPamentoModal.value = statusPagamento;
 
-        // Preenche os inputs da modal
-        IDuserModal.value = userId;
+        // Ajuste no método de pagamento
+        if (metodoPagamento === 'cartao_credito') {
+            MetodoPagamentoModal.value = "Cartão de Crédito";
+        } else if (metodoPagamento === 'pix') {
+            MetodoPagamentoModal.value = "Pix";
+        } else {
+            MetodoPagamentoModal.value = "Transferência Bancária";
+        }
 
+        // Limpar a tabela antes de preenchê-la com os itens
+        itensTableBody.innerHTML = '';
+
+        try {
+            // Faz a requisição para buscar os itens do pedido via POST
+            const response = await fetch('?a=obterItensPedido', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ idPedido: pedidoId })
+            });
+
+            // Converte a resposta para JSON
+            const result = await response.json();
+
+            if (result.success) {
+                // Preenche a tabela com os itens do pedido
+                result.data.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td>${item.item_id}</td>
+                            <td>${item.produto_nome}</td>
+                            <td>${item.cor_nome || '-'}</td>
+                            <td>${item.tamanho_nome || '-'}</td>
+                            <td>${item.quantidade}</td>
+                            <td>R$${parseFloat(item.preco_unitario).toFixed(2).replace('.', ',')}</td>
+                        </tr>
+                    `;
+                    itensTableBody.insertAdjacentHTML('beforeend', row);
+                });
+            } else {
+                // Exibe mensagem de erro caso o backend não retorne sucesso
+                Swal.fire({
+                    title: 'Erro!',
+                    text: result.message || 'Não foi possível carregar os itens do pedido.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                });
+            }
+        } catch (error) {
+            // Exibe mensagem de erro caso a requisição falhe
+            Swal.fire({
+                title: 'Erro inesperado!',
+                text: 'Ocorreu um problema ao carregar os itens do pedido. Tente novamente.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+            });
+            console.error('Erro na solicitação:', error);
+        }
 
         // Exibe a modal
-        userModal.style.display = 'block';
+        pedidoModal.style.display = 'block';
     });
 });
 
 // Fechar modal
 closeModal.addEventListener('click', () => {
-    userModal.style.display = 'none';
+    pedidoModal.style.display = 'none';
 });
 
 window.addEventListener('click', (event) => {
-    if (event.target === userModal) {
-        userModal.style.display = 'none';
+    if (event.target === pedidoModal) {
+        pedidoModal.style.display = 'none';
     }
 });
 
-document.getElementById('user-form').addEventListener('submit', async function (event) {
+document.getElementById('order-form').addEventListener('submit', async function (event) {
     event.preventDefault(); // Previne o comportamento padrão do formulário (recarregar a página)
 
     // Captura os dados do formulário
@@ -44,7 +123,7 @@ document.getElementById('user-form').addEventListener('submit', async function (
 
     try {
         // Envia os dados via AJAX para o PHP
-        const response = await fetch('?a=editar_usuario', {
+        const response = await fetch('?a=editar_pedido', {
             method: 'POST',
             body: formData,
         });
@@ -97,17 +176,17 @@ window.addEventListener('load', function () {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Máscara para CPF
-    const cpfInput = document.getElementById('cpf');
-    const telefoneInput = document.getElementById('telefone');
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Máscara para CPF
+//     const cpfInput = document.getElementById('cpf');
+//     const telefoneInput = document.getElementById('telefone');
 
-    const cpfMask = new Inputmask('999.999.999-99'); // Máscara CPF
-    const telefoneMask = new Inputmask('(99) 9 9999-9999'); // Máscara Telefone
+//     const cpfMask = new Inputmask('999.999.999-99'); // Máscara CPF
+//     const telefoneMask = new Inputmask('(99) 9 9999-9999'); // Máscara Telefone
 
-    cpfMask.mask(cpfInput);
-    telefoneMask.mask(telefoneInput);
-});
+//     cpfMask.mask(cpfInput);
+//     telefoneMask.mask(telefoneInput);
+// });
 
 
 function excluirUsuario(id) {

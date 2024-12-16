@@ -82,14 +82,29 @@ class AdminModel
         }
     }
 
-    public function listarPedidos(){
+    public function listarPedidos()
+    {
         $sql = new Database();
 
-        $res = $sql->select("SELECT pedidos.id AS pedido_id, CONCAT(usuario.nome, ' ', usuario.sobrenome) AS nome_usuario, pedidos.data_pedido, pedidos.status_pedido, pedidos.total_pedido, pedidos.data_criacao, pedidos.data_atualizacao FROM pedidos JOIN usuario ON pedidos.id_usuario = usuario.id ORDER BY pedidos.data_pedido;");
+
+        $res = $sql->select("SELECT pedidos.id AS pedido_id, CONCAT(usuario.nome, ' ', usuario.sobrenome) AS nome_usuario, pedidos.data_pedido, pedidos.status_pedido, pedidos.total_pedido, pedidos.data_criacao, pedidos.data_atualizacao, GROUP_CONCAT(CONCAT('ID: ', itens_pedidos.id, ', Produto: ', produtos.nome_produto, ', Cor: ', produto_cores.cor, ', Tamanho: ', produto_tamanho.tamanho, ', Quantidade: ', itens_pedidos.quantidade, ', Preço Unitário: ', FORMAT(itens_pedidos.preco_unitario, 2)) SEPARATOR '; ') AS itens_pedido, metodo_pagamento.metodo AS metodo_pagamento, status_pagamento.id AS status_pagamento FROM pedidos JOIN usuario ON pedidos.id_usuario = usuario.id LEFT JOIN itens_pedidos ON pedidos.id = itens_pedidos.pedido_id LEFT JOIN produtos ON itens_pedidos.produto_id = produtos.id LEFT JOIN produto_cores ON itens_pedidos.cor_id = produto_cores.id LEFT JOIN produto_tamanho ON itens_pedidos.tamanho_id = produto_tamanho.id LEFT JOIN pagamento ON pedidos.id = pagamento.pedido_id LEFT JOIN metodo_pagamento ON pagamento.metodo_pagamento_id = metodo_pagamento.id LEFT JOIN status_pagamento ON pagamento.status_pagamento_id = status_pagamento.id GROUP BY pedidos.id ORDER BY pedidos.id;");
 
         return $res;
     }
-    public function listarPedidosRecentes(){
+
+    public function itens_pedidos($idPedido){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $idPedido
+        ];
+
+        $res = $sql->select("SELECT itens_pedidos.produto_id AS item_id, produtos.nome_produto AS produto_nome, produto_cores.cor AS cor_nome, produto_tamanho.tamanho AS tamanho_nome, itens_pedidos.quantidade, itens_pedidos.preco_unitario FROM itens_pedidos LEFT JOIN produtos ON itens_pedidos.produto_id = produtos.id LEFT JOIN produto_cores ON itens_pedidos.cor_id = produto_cores.id LEFT JOIN produto_tamanho ON itens_pedidos.tamanho_id = produto_tamanho.id WHERE itens_pedidos.pedido_id = :id;",$param);
+
+        return $res;
+    }
+    public function listarPedidosRecentes()
+    {
         $sql = new Database();
 
         $res = $sql->select("SELECT pedidos.id AS pedido_id, CONCAT(usuario.nome, ' ', usuario.sobrenome) AS nome_usuario, pedidos.data_pedido, pedidos.status_pedido, pedidos.total_pedido, pedidos.data_criacao, pedidos.data_atualizacao FROM pedidos JOIN usuario ON pedidos.id_usuario = usuario.id ORDER BY pedidos.data_pedido DESC LIMIT 5;");
@@ -97,35 +112,37 @@ class AdminModel
         return $res;
     }
 
-    public function listarClientes(){
+    public function listarClientes()
+    {
         $sql = new Database();
 
         $res = $sql->select("SELECT * FROM usuario WHERE ativo = 1");
 
-        if(count($res) != 0){
+        if (count($res) != 0) {
             return $res;
         } else {
             return false;
         }
     }
 
-    public function editarCliente($id, $nome, $sobrenome, $email, $cpf, $telefone){
+    public function editarCliente($id, $nome, $sobrenome, $email, $cpf, $telefone)
+    {
 
-        try{
+        try {
 
-        
-        $sql = new Database();
 
-        $param = [
-            ':id' => $id,
-            ':nome' => $nome,
-            ':sobrenome' => $sobrenome,
-            ':email' => $email,
-            ':cpf' => $cpf,
-            ':telefone' => $telefone,
-        ];
+            $sql = new Database();
 
-        $res = $sql->update("UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, email = :email, cpf = :cpf, telefone = :telefone, data_atualizacao = NOW() WHERE id = :id", $param);
+            $param = [
+                ':id' => $id,
+                ':nome' => $nome,
+                ':sobrenome' => $sobrenome,
+                ':email' => $email,
+                ':cpf' => $cpf,
+                ':telefone' => $telefone,
+            ];
+
+            $res = $sql->update("UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, email = :email, cpf = :cpf, telefone = :telefone, data_atualizacao = NOW() WHERE id = :id", $param);
 
             return true;
         } catch (PDOException $e) {
@@ -133,18 +150,19 @@ class AdminModel
         }
     }
 
-    public function inativarCliente($id){
+    public function inativarCliente($id)
+    {
 
-        try{
+        try {
 
-        
-        $sql = new Database();
 
-        $param = [
-            ':id' => $id,
-        ];
+            $sql = new Database();
 
-        $res = $sql->update("UPDATE usuario SET ativo = 0, data_atualizacao = NOW() WHERE id = :id", $param);
+            $param = [
+                ':id' => $id,
+            ];
+
+            $res = $sql->update("UPDATE usuario SET ativo = 0, data_atualizacao = NOW() WHERE id = :id", $param);
 
             return true;
         } catch (PDOException $e) {

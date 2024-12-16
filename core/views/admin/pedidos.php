@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="assets/css/home.css">
-<link rel="stylesheet" href="assets/css/crud.css">
+<link rel="stylesheet" href="assets/css/crud-pedidos.css">
 
 <div class="container">
     <aside>
@@ -102,7 +102,16 @@
                                 <td class="success" id="status"><?= $pedido->status_pedido ?></td>
                                 <td>R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?></td>
                                 <td>
-                                    <button class="btn btn-success add-user">Editar</button>
+                                    <button
+                                        class="btn btn-success add-user"
+                                        data-id="<?= $pedido->pedido_id ?>"
+                                        data-nome="<?= $pedido->nome_usuario ?>"
+                                        data-status="<?= $pedido->status_pedido ?>"
+                                        data-total="R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?>"
+                                        data-criado="<?= date('d/m/Y', strtotime($pedido->data_criacao)) ?>"
+                                        data-metodo-pagamento="<?=$pedido->metodo_pagamento?>"
+                                        data-status-pagamento="<?=$pedido->status_pagamento?>"
+                                        id="botao-editar">Editar</button>
                                     <button class="btn btn-danger">Excluir</button>
                                 </td>
                             </tr>
@@ -115,27 +124,77 @@
 
 
         </div>
-        <!-- Add/Edit User Modal -->
-        <div class="modal" id="user-modal" style="display: none;">
+        <!-- Update Order Modal -->
+        <div class="modal" id="order-modal" style="display: none;">
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
-                <h2 id="modal-title">Editar Usuário</h2>
-                <form id="user-form" method="post">
-                    <input type="hidden" name="id" id="idUsuarioModal"">
-                    <label for=" name">Nome</label>
-                    <input type="text" id="name" name="name">
-                    <label for="surname">Sobrenome</label>
-                    <input type="text" id="surname" name="surname">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email">
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" name="cpf">
-                    <label for="telefone">Telefone</label>
-                    <input type="text" id="telefone" name="telefone">
+                <h2 id="modal-title">Atualizar Pedido</h2>
+                <form id="order-form" method="post" action="?a=alterar_pedidos">
+                    <input type="hidden" name="id" id="idPedidoModal">
+
+                    <label for="nome_usuario">Nome do Usuário</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" readonly>
+
+                    <label for="status_pedido">Status do Pedido</label>
+                    <select id="status_pedido" name="status_pedido">
+                        <option value="pendente">Pendente</option>
+                        <option value="enviado">Enviado</option>
+                        <option value="entregue">Entregue</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+
+                    <label for="total_pedido">Total do Pedido (R$)</label>
+                    <input type="text" id="total_pedido" name="total_pedido" readonly>
+
+                    <label for="data_pedido">Data do Pedido</label>
+                    <input type="text" id="data_pedido" name="data_pedido" readonly>
+
+                    <label for="itens_pedido">Itens do Pedido</label>
+                    <table id="itens_pedido" class="order-items-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Produto</th>
+                                <th>Cor</th>
+                                <th>Tamanho</th>
+                                <th>Quantidade</th>
+                                <th>Preço Unitário (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>26</td>
+                            <td>Camiseta</td>
+                            <td>Vermelha</td>
+                            <td>GG</td>
+                            <td>12</td>
+                            <td>R$26,99</td>
+                        </tbody>
+                    </table>
+
+                    <label for="metodo_pagamento">Método de pagamento</label>
+                    <input type="text" id="metodo_pagamento" name="metodo_pagamento" readonly>
+
+                    <label for="status_pagamento">Status do Pagamento</label>
+                    <select id="status_pagamento" name="status_pagamento">
+                        <option value="1">Pendente</option>
+                        <option value="pendente">Em Processamento</option>
+                        <option value="3">Pago</option>
+                        <option value="4">Recusado</option>
+                        <option value="6">Cancelado</option>
+                        <option value="7">Reembolsado</option>
+                    </select>
+
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" rows="4" placeholder="Digite uma mensagem..."></textarea>
+
+                    <label for="anexos">Anexar Arquivos</label>
+                    <input type="file" id="anexos" name="anexos" multiple>
+
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
             </div>
         </div>
+
 
         </tbody>
         </table>
