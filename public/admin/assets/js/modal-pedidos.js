@@ -269,3 +269,35 @@ function ativarPedido(id) {
             });
         }
     })};
+
+
+    function searchOrders() {
+        var input = document.getElementById('search-input');
+        var filter = input.value.toLowerCase();
+        var table = document.querySelector('.recent-orders table');
+        var rows = table.getElementsByTagName('tr');
+    
+        // Itera sobre todas as linhas da tabela, começando pela segunda linha (para pular o cabeçalho)
+        for (var i = 1; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var found = false;
+    
+            // Verifica se algum valor nas células corresponde ao que foi digitado
+            for (var j = 0; j < cells.length; j++) {
+                var cell = cells[j];
+                if (cell) {
+                    if (cell.innerText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+    
+            // Mostra ou esconde a linha dependendo da busca
+            if (found) {
+                rows[i].style.display = '';
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+    }

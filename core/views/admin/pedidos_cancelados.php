@@ -74,6 +74,26 @@
     </aside>
 
     <main>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b><?= $_SESSION['nome_admin'] ?></b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <!-- <div class="profile-photo">
+                        <img src="images/logo-adventure-preto.png" alt="">
+                    </div> -->
+                </div>
+            </div>
+        </div>
         <h1>Dashboard</h1>
 
         <div class="date">
@@ -84,6 +104,9 @@
             <div class="recent-orders-header">
                 <h2>Lista de Pedidos</h2>
                 <a href="?a=pedidos" class="btn">Pedidos</a>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
             </div>
             <table>
                 <thead>
@@ -191,26 +214,7 @@
 
 </main>
 
-<div class="right">
-    <div class="top">
-        <button id="menu-btn">
-            <span class="material-icons-sharp">menu</span>
-        </button>
-        <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-        </div>
-        <div class="profile">
-            <div class="info">
-                <p>Olá, <b><?= $_SESSION['nome_admin'] ?></b></p>
-                <small class="text-muted">Admin</small>
-            </div>
-            <!-- <div class="profile-photo">
-                        <img src="images/logo-adventure-preto.png" alt="">
-                    </div> -->
-        </div>
-    </div>
-</div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

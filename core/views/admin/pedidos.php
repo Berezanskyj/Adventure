@@ -74,8 +74,27 @@
     </aside>
 
     <main>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b><?= $_SESSION['nome_admin'] ?></b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <!-- <div class="profile-photo">
+                        <img src="images/logo-adventure-preto.png" alt="">
+                    </div> -->
+                </div>
+            </div>
+        </div>
         <h1>Dashboard</h1>
-
         <div class="date">
             <input type="date" id="date-input" disabled>
         </div>
@@ -84,6 +103,9 @@
             <div class="recent-orders-header">
                 <h2>Lista de Pedidos</h2>
                 <a href="?a=pedidos_cancelados" class="btn">Pedidos Cancelados</a>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
             </div>
             <table>
                 <thead>
@@ -115,7 +137,7 @@
                                     data-metodo-pagamento="<?= $pedido->metodo_pagamento ?>"
                                     data-status-pagamento="<?= $pedido->status_pagamento ?>"
                                     id="botao-editar">Editar</button>
-                                <button class="btn btn-danger" onclick="excluirPedido(<?= $pedido->pedido_id ?>)">Excluir</button>
+                                <button class="btn btn-danger" onclick="excluirPedido(<?= $pedido->pedido_id ?>)">Cancelar</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -123,8 +145,9 @@
             </table>
         </div>
 
-
-
+        
+        
+    </div>
 </div>
 <!-- Update Order Modal -->
 <div class="modal" id="order-modal" style="display: none;">
@@ -202,27 +225,7 @@
 
 </main>
 
-<div class="right">
-    <div class="top">
-        <button id="menu-btn">
-            <span class="material-icons-sharp">menu</span>
-        </button>
-        <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-        </div>
-        <div class="profile">
-            <div class="info">
-                <p>Olá, <b><?= $_SESSION['nome_admin'] ?></b></p>
-                <small class="text-muted">Admin</small>
-            </div>
-            <!-- <div class="profile-photo">
-                        <img src="images/logo-adventure-preto.png" alt="">
-                    </div> -->
-        </div>
-    </div>
-</div>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
