@@ -225,3 +225,47 @@ function excluirPedido(id) {
         }
     });
 }
+
+
+
+function ativarPedido(id) {
+    console.log(id);
+    Swal.fire({
+        title: "Você tem certeza?",
+        text: "Não será possível reverter essa alteração!",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#35AB55",
+        cancelButtonColor: "#6E7881",
+        confirmButtonText: "Sim, ativar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Usando $.ajax para fazer a requisição AJAX
+            console.log(result.data)
+            $.ajax({
+                url: "?a=ativar_pedido",  // Ação para excluir o usuário
+                type: "GET",
+                data: { id: id },  // Enviando o ID do usuário a ser deletado
+                success: function(response) {
+                    // Se a exclusão for bem-sucedida, exibe a mensagem de sucesso
+                    Swal.fire({
+                        title: "Pedido Ativo!",
+                        text: "O pedido selecionado foi ativado.",
+                        icon: "success"
+                    }).then(() => {
+                        // Recarrega a página após o alerta de sucesso
+                        location.reload(); // Recarregar a página
+                    });
+                },
+                error: function() {
+                    // Se ocorrer um erro durante a requisição
+                    Swal.fire({
+                        title: "Erro!",
+                        text: "Ocorreu um erro ao tentar ativar o pedido.",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    })};

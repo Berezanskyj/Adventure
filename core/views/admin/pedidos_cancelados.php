@@ -83,7 +83,7 @@
         <div class="recent-orders">
             <div class="recent-orders-header">
                 <h2>Lista de Pedidos</h2>
-                <a href="?a=pedidos_cancelados" class="btn">Pedidos Cancelados</a>
+                <a href="?a=pedidos" class="btn">Pedidos</a>
             </div>
             <table>
                 <thead>
@@ -104,18 +104,7 @@
                             <td class="success" id="status"><?= ucwords($pedido->status_pedido) ?></td>
                             <td>R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?></td>
                             <td>
-                                <button
-                                    class="btn btn-success add-user"
-                                    data-id="<?= $pedido->pedido_id ?>"
-                                    data-id-usuario="<?= $pedido->usuario_id ?>"
-                                    data-nome="<?= $pedido->nome_usuario ?>"
-                                    data-status="<?= $pedido->status_pedido ?>"
-                                    data-total="R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?>"
-                                    data-criado="<?= date('d/m/Y', strtotime($pedido->data_criacao)) ?>"
-                                    data-metodo-pagamento="<?= $pedido->metodo_pagamento ?>"
-                                    data-status-pagamento="<?= $pedido->status_pagamento ?>"
-                                    id="botao-editar">Editar</button>
-                                <button class="btn btn-danger" onclick="excluirPedido(<?= $pedido->pedido_id ?>)">Excluir</button>
+                                <button class="btn btn-warning" onclick="ativarPedido(<?= $pedido->pedido_id ?>)">Ativar</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

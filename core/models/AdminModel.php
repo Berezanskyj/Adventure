@@ -92,6 +92,16 @@ class AdminModel
         return $res;
     }
 
+    public function listarPedidosCancelados()
+    {
+        $sql = new Database();
+
+
+        $res = $sql->select("SELECT pedidos.id AS pedido_id, usuario.id AS usuario_id, CONCAT(usuario.nome, ' ', usuario.sobrenome) AS nome_usuario, pedidos.data_pedido, pedidos.status_pedido, pedidos.total_pedido, pedidos.data_criacao, pedidos.data_atualizacao, GROUP_CONCAT(CONCAT('ID: ', itens_pedidos.id, ', Produto: ', produtos.nome_produto, ', Cor: ', produto_cores.cor, ', Tamanho: ', produto_tamanho.tamanho, ', Quantidade: ', itens_pedidos.quantidade, ', Preço Unitário: ', FORMAT(itens_pedidos.preco_unitario, 2)) SEPARATOR '; ') AS itens_pedido, metodo_pagamento.metodo AS metodo_pagamento, status_pagamento.id AS status_pagamento FROM pedidos JOIN usuario ON pedidos.id_usuario = usuario.id LEFT JOIN itens_pedidos ON pedidos.id = itens_pedidos.pedido_id LEFT JOIN produtos ON itens_pedidos.produto_id = produtos.id LEFT JOIN produto_cores ON itens_pedidos.cor_id = produto_cores.id LEFT JOIN produto_tamanho ON itens_pedidos.tamanho_id = produto_tamanho.id LEFT JOIN pagamento ON pedidos.id = pagamento.pedido_id LEFT JOIN metodo_pagamento ON pagamento.metodo_pagamento_id = metodo_pagamento.id LEFT JOIN status_pagamento ON pagamento.status_pagamento_id = status_pagamento.id WHERE pedidos.status_pedido = 'cancelado' GROUP BY pedidos.id ORDER BY pedidos.id;");
+
+        return $res;
+    }
+
     public function itens_pedidos($idPedido)
     {
         $sql = new Database();
@@ -237,6 +247,25 @@ class AdminModel
             ];
 
             $res = $sql->update("UPDATE pedidos SET status_pedido = 'cancelado', data_atualizacao = NOW() WHERE id = :id", $param);
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+    public function ativarPedido($id){
+        try {
+
+
+            $sql = new Database();
+
+            $param = [
+                ':id' => $id,
+            ];
+
+            $res = $sql->update("UPDATE pedidos SET status_pedido = 'pendente', data_atualizacao = NOW() WHERE id = :id", $param);
 
             return true;
         } catch (PDOException $e) {

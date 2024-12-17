@@ -412,4 +412,71 @@ class Admin
         }
         exit;
     }
+
+    public function ativar_pedido(){
+        try {
+
+
+            $id = $_GET['id'];
+            
+
+            $pedido = new AdminModel();
+
+            // Tenta atualizar os dados
+            $inativar = $pedido->ativarPedido($id);
+
+            if ($inativar) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'pedido atualizado com sucesso.',
+                    'data' => $_GET
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Não foi possível atualizar o pedido.',
+                    'data' => $_GET,
+                ]);
+            }
+        } catch (Exception $e) {
+            // Captura e exibe o erro no formato JSON
+            echo json_encode([
+                'success' => false,
+                'message' => 'Ocorreu um erro ao tentar atualizar o pedido.',
+                'data' => $_GET
+            ]);
+        }
+        exit;
+    }
+
+    public function pedidos_cancelados()
+    {
+
+        $vendas = new AdminModel();
+
+        // Obter os dados
+        $totalVenda = $vendas->totalVendas();
+        $totalEstoque = $vendas->totalEstoque();
+        $totalClientes = $vendas->totalClientes();
+        $pedidos = $vendas->listarPedidosCancelados();
+
+
+        // Store::printData($itens);
+
+        // die();
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/pedidos_cancelados',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'totalVenda' => $totalVenda,
+            'totalEstoque' => $totalEstoque,
+            'totalClientes' => $totalClientes,
+            'pedidos' => $pedidos,
+        ]);
+    }
 }

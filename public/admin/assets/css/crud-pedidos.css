@@ -1,3 +1,29 @@
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light)
+}
+
+
 .crud-header {
     display: flex;
     justify-content: space-between;
@@ -37,8 +63,12 @@
     background: var(--color-danger);
     color: var(--color-white);
 }
+.btn-warning {
+    background: var(--color-warning);
+    color: var(--color-white);
+}
 
-.btn-success:hover, .btn-danger:hover {
+.btn-success:hover, .btn-danger:hover, .btn-warning:hover {
     opacity: 0.8;
 }
 
@@ -144,4 +174,34 @@ body.modal-open {
 
 .order-items-table td {
     background: var(--color-white);
+}
+
+.recent-orders-header {
+    display: flex;               /* Ativa o Flexbox */
+    justify-content: space-between; /* Faz o título ir para a esquerda e o botão para a direita */
+    align-items: center;         /* Alinha os itens verticalmente no centro */
+    margin-bottom: 1.5rem;       /* Adiciona espaçamento abaixo do cabeçalho */
+}
+
+.recent-orders-header h2 {
+    margin: 0;                   /* Remove a margem padrão do título h2 */
+    font-size: 1.5rem;           /* Ajuste de tamanho do título */
+    color: var(--color-dark);    /* Ajuste da cor do título, se necessário */
+}
+
+.recent-orders-header .btn {
+    padding: 0.5rem 1rem;        /* Ajuste de padding do botão */
+    border-radius: var(--border-radius-2); /* Borda arredondada */
+    border: none;                /* Remove a borda padrão */
+    cursor: pointer;             /* Mostra o cursor como pointer */
+    background-color: var(--color-primary); /* Cor de fundo do botão */
+    color: var(--color-white);    /* Cor do texto do botão */
+    text-decoration: none;       /* Remove o sublinhado do link */
+    transition: background 0.3s ease; /* Animação de transição de cor */
+    margin-left: 70rem;
+}
+
+.recent-orders-header .btn:hover {
+    background-color: var(--color-primary-variant); /* Cor de fundo ao passar o mouse */
+    color: #fff;                          /* Cor do texto ao passar o mouse */
 }
