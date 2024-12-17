@@ -99,38 +99,39 @@
                             <tr>
                                 <td><?= $pedido->pedido_id ?></td>
                                 <td><?= $pedido->nome_usuario ?></td>
-                                <td class="success" id="status"><?= $pedido->status_pedido ?></td>
+                                <td class="success" id="status"><?= ucwords($pedido->status_pedido) ?></td>
                                 <td>R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?></td>
                                 <td>
                                     <button
                                         class="btn btn-success add-user"
                                         data-id="<?= $pedido->pedido_id ?>"
+                                        data-id-usuario="<?= $pedido->usuario_id ?>"
                                         data-nome="<?= $pedido->nome_usuario ?>"
                                         data-status="<?= $pedido->status_pedido ?>"
                                         data-total="R$<?= number_format($pedido->total_pedido, 2, ',', '.') ?>"
                                         data-criado="<?= date('d/m/Y', strtotime($pedido->data_criacao)) ?>"
-                                        data-metodo-pagamento="<?=$pedido->metodo_pagamento?>"
-                                        data-status-pagamento="<?=$pedido->status_pagamento?>"
+                                        data-metodo-pagamento="<?= $pedido->metodo_pagamento ?>"
+                                        data-status-pagamento="<?= $pedido->status_pagamento ?>"
                                         id="botao-editar">Editar</button>
-                                    <button class="btn btn-danger">Excluir</button>
+                                    <button class="btn btn-danger" onclick="excluirPedido(<?= $pedido->pedido_id ?>)">Excluir</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <a href="?a=pedidos">Mostrar mais</a>
             </div>
 
 
 
         </div>
         <!-- Update Order Modal -->
-        <div class="modal" id="order-modal" style="display: none;">
+        <div class="modal" id="order-modal" style="display: none;" >
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h2 id="modal-title">Atualizar Pedido</h2>
-                <form id="order-form" method="post" action="?a=alterar_pedidos">
+                <form id="order-form" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="idPedidoModal">
+                    <input type="hidden" name="idUsuario" id="idUsuario">
 
                     <label for="nome_usuario">Nome do Usuário</label>
                     <input type="text" id="nome_usuario" name="nome_usuario" readonly>
@@ -140,7 +141,6 @@
                         <option value="pendente">Pendente</option>
                         <option value="enviado">Enviado</option>
                         <option value="entregue">Entregue</option>
-                        <option value="cancelado">Cancelado</option>
                     </select>
 
                     <label for="total_pedido">Total do Pedido (R$)</label>
@@ -162,12 +162,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <td>26</td>
-                            <td>Camiseta</td>
-                            <td>Vermelha</td>
-                            <td>GG</td>
-                            <td>12</td>
-                            <td>R$26,99</td>
                         </tbody>
                     </table>
 

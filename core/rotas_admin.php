@@ -17,6 +17,7 @@ $rotas = [
     'pedidos' => 'admin@pedidos',
     'alterar_pedidos' => 'admin@alterar_pedidos',
     'obterItensPedido' => 'admin@obterItensPedido',
+    'excluir_pedido' => 'admin@excluir_pedido',
 
 ];
 

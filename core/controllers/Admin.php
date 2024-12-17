@@ -289,12 +289,77 @@ class Admin
 
     public function alterar_pedidos()
     {
+        if (isset($_FILES['anexos']) && $_FILES['anexos']['error'] === UPLOAD_ERR_OK) {
+            $arquivo = $_FILES['anexos'];
+        } else {
+            $arquivo = null; // Caso não tenha anexo
+        }
 
-        $vendas = new AdminModel();
-        $pedidos = $vendas->listarPedidos();
+        $email = new EnviarEmail();
+        $model = new AdminModel();
 
-        Store::printData($pedidos);
-        die();
+        // Dados do pedido
+        $id_pedido = $_POST['id'];
+        $usuario = $_POST['idUsuario'];
+        $nomeCompletoUsuario = $_POST['nome_usuario'];
+        $statusPedido = ucwords($_POST['status_pedido']);
+        $totalPedido = $_POST['total_pedido'];
+        $dataPedido = $_POST['data_pedido'];
+        $metodoPagamento = $_POST['metodo_pagamento'];
+        $statusPagamento = $_POST['status_pagamento'];
+        $mensagem = $_POST['mensagem'];
+        $itens = $model->itens_pedidos($id_pedido);
+        $Pegaremail = $model->emailUsuario($usuario);
+        $emailCliente = $Pegaremail[0]->email;
+
+    
+        
+
+
+
+        $atualizaStatusPedido = $model->atualizaStatusPedido($id_pedido, $statusPedido);
+        $atualizaStatusPagamento = $model->atualizaStatusPagamento($id_pedido, $statusPagamento);
+
+        $statusPedidoAtualizado = $atualizaStatusPedido[0]->status_pedido;
+        $statusPagamentoAtualizado = $atualizaStatusPagamento[0]->status_pagamento_id;
+
+         // Corrigir status do pagamento
+        $statusPagamentoCorrigido = match ($statusPagamentoAtualizado) {
+            "1" => "Pendente",
+            "2" => "Em Processamento",
+            "3" => "Pago",
+            "4" => "Recusado",
+            "6" => "Cancelado",
+            default => "Reembolsado",
+        };
+
+
+
+        // Chamar a função de envio de e-mail com anexo
+        $envia = $email->enviarEmailProdutos(
+            $nomeCompletoUsuario,
+            ucwords($statusPedidoAtualizado),
+            $statusPagamentoCorrigido,
+            $mensagem,
+            $emailCliente,
+            $itens,
+            $id_pedido,
+            $metodoPagamento,
+            $dataPedido,
+            $totalPedido,
+            $arquivo // Passando o anexo aqui
+        );
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Pedido atualizado com sucesso!',
+            'data' => [
+                'id_pedido' => $id_pedido,
+                'status_pedido' => $statusPedido,
+                'mensagem' => $mensagem,
+            ],
+        ]);
+        exit;
     }
 
     public function obterItensPedido()
@@ -309,6 +374,42 @@ class Admin
         }
 
         echo json_encode(['success' => false, 'message' => 'Método não permitido.']);
+        exit;
+    }
+
+    public function excluir_pedido(){
+        try {
+
+
+            $id = $_GET['id'];
+            
+
+            $pedido = new AdminModel();
+
+            // Tenta atualizar os dados
+            $inativar = $pedido->inativarPedido($id);
+
+            if ($inativar) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'pedido atualizado com sucesso.',
+                    'data' => $_GET
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Não foi possível atualizar o pedido.',
+                    'data' => $_GET,
+                ]);
+            }
+        } catch (Exception $e) {
+            // Captura e exibe o erro no formato JSON
+            echo json_encode([
+                'success' => false,
+                'message' => 'Ocorreu um erro ao tentar atualizar o pedido.',
+                'data' => $_GET
+            ]);
+        }
         exit;
     }
 }
