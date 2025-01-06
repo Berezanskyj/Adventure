@@ -49,7 +49,7 @@
                     <a href="#">Listar Clientes</a>
                 </div>
             </div>
-            <a href="">
+            <a href="?a=pagamentos">
                 <span class="material-icons-sharp">credit_card</span>
                 <h3>Pagamentos</h3>
             </a>

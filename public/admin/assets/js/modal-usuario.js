@@ -1,5 +1,6 @@
 const addUserButtons = document.querySelectorAll('.add-user');
 const userModal = document.getElementById('user-modal');
+const registerUserModal = document.getElementById('register-user-modal');
 
 
 const IDuserModal = document.getElementById('idUsuarioModal');
@@ -109,6 +110,128 @@ document.getElementById('user-form').addEventListener('submit', async function (
     }
 });
 
+
+// document.getElementById('register-user-form').addEventListener('submit', async function (event) {
+//     // event.preventDefault(); // Previne o comportamento padrão do formulário (recarregar a pagia)
+
+//     const formData = new FormData(this);
+
+//     try {
+//         const response = await fetch('?a=registrar_usuario', {
+//             method: 'POST',
+//             body: formData,
+//         });
+
+//         const result = await response.json();
+
+//         if (result.success) {
+//             localStorage.setItem('RegisteruserUpdateSuccess', 'true');
+
+//             // Recarrega a página
+//             location.reload();
+
+//             console.log(result.data);
+//             console.log(response.json);
+//         } else {
+//             Swal.fire({
+//                 title: 'Erro!',
+//                 text: result.message || 'erro.',
+//                 icon: 'error',
+//                 confirmButtonText: 'OK',
+//             });
+//             console.log(result.data);
+//             console.log(response.json);
+//         }
+//     } catch (error) {
+//         Swal.fire({
+//             title: 'Erro!',
+//             text: 'Ocorreu um erro ao cadastrar o usuário.' + error.message,
+//             icon: 'error',
+//             confirmButtonText: 'OK',
+//         });
+//         console.log("Erro na solicitacao", error.message);
+//     }
+// });
+
+
+function registrarUsuario() {
+    // Captura os valores do formulário
+    const nome = $('#registronomeUsuarioModal').val();
+    const sobrenome = $('#registrosobrenomeUsuarioModal').val();
+    const email = $('#registroemailUsuarioModal').val();
+    const cpf = $('#registrocpfUsuarioModal').val();
+    const telefone = $('#registrotelefoneUsuarioModal').val();
+    const senha = $('#registrosenha').val();
+    const nivelUsuario = $('#nivel_usuario').val();
+    const cpfNoMask = $('#registrocpfUsuarioModal').val().replace(/\D/g, ''); // Remove a máscara do CPF
+    const telefoneNoMask = $('#registrotelefoneUsuarioModal').val().replace(/\D/g, ''); // Remove a máscara do telefone
+
+    // Validações básicas antes do envio
+    if (!nome || !sobrenome || !email || !cpf || !telefone || !senha) {
+        alert("Todos os campos devem ser preenchidos.");
+        return;
+    }
+
+    if (cpfNoMask.length < 11) {
+        Swal.fire({
+            title: 'CPF Inválido!',
+            text: 'O CPF deve conter todos os caracteres.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+        });
+        return;
+    }
+
+    if (telefoneNoMask.length < 11) {
+        Swal.fire({
+            title: 'Telefone Inválido!',
+            text: 'O telefone deve conter todos os caracteres (incluindo DDD).',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+        });
+        return;
+    }
+
+    // Envia os dados via AJAX
+    $.ajax({
+        url: '?a=registrar_usuario',
+        type: 'POST',
+        data: {
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email,
+            cpf: cpf,
+            telefone: telefone,
+            senha: senha,
+            nivel_usuario: nivelUsuario
+        },
+        success: function (response) {
+            // Exibe a resposta do servidor no console
+            console.log("Resposta do servidor:", response);
+
+            Swal.fire({
+                title: 'Sucesso!',
+                text: 'Usuário cadastrado com sucesso.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+            }).then(() => {
+                location.reload(); // Recarrega a página após o alerta de sucesso
+            });
+        },
+        error: function (error) {
+            console.error("Erro no servidor:", error);
+            console.log("Resposta do servidor:", error);
+
+            Swal.fire({
+                title: 'Erro.',
+                text: 'Erro ao registrar usuário. Tente novamente.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+            });
+        }
+    });
+}
+
 // Após o carregamento da página, verifica se o sucesso foi registrado
 window.addEventListener('load', function () {
     if (localStorage.getItem('userUpdateSuccess') === 'true') {
@@ -124,6 +247,8 @@ window.addEventListener('load', function () {
         localStorage.removeItem('userUpdateSuccess');
     }
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -157,7 +282,7 @@ function excluirUsuario(id) {
                 url: "?a=excluir_usuario",  // Ação para excluir o usuário
                 type: "GET",
                 data: { id: id },  // Enviando o ID do usuário a ser deletado
-                success: function(response) {
+                success: function (response) {
                     // Se a exclusão for bem-sucedida, exibe a mensagem de sucesso
                     Swal.fire({
                         title: "Usuário Excluído!",
@@ -168,7 +293,7 @@ function excluirUsuario(id) {
                         location.reload(); // Recarregar a página
                     });
                 },
-                error: function() {
+                error: function () {
                     // Se ocorrer um erro durante a requisição
                     Swal.fire({
                         title: "Erro!",
@@ -180,3 +305,24 @@ function excluirUsuario(id) {
         }
     });
 }
+
+function abrirModal() {
+    registerUserModal.style.display = 'block'
+
+    const cpfInput = document.getElementById('registrocpfUsuarioModal');
+    const telefoneInput = document.getElementById('registrotelefoneUsuarioModal');
+
+    const cpfMask = new Inputmask('999.999.999-99'); // Máscara CPF
+    const telefoneMask = new Inputmask('(99) 9 9999-9999'); // Máscara Telefone
+
+    cpfMask.mask(cpfInput);
+    telefoneMask.mask(telefoneInput);
+}
+
+
+function fecharModal() {
+    registerUserModal.style.display = 'none'
+
+}
+
+

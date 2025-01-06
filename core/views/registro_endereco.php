@@ -42,7 +42,7 @@
                 <h2>Endereço</h2>
                 <div class="input-box-cep">
                     <div class="cep-container">
-                        <input type="text" name="cep" id="cep" autocomplete="new-password" required maxlength="8" minlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="text" name="cep" id="cep" autocomplete="new-password" required>
                         <label for="cep">Cep</label>
                         <button type="button" id="pesquisaCEP" class="btn-cep" onclick="consultaEndereco()"><i class='bx bx-search-alt'></i></button>
                     </div>
@@ -85,6 +85,11 @@
 
 
 <script src="assets/js/registro_endereco.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/js/mascaras_usuario.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
     const UserInformationForm = document.querySelector('.UserInformationForm');

@@ -48,7 +48,7 @@
                         <a href="#">Listar Clientes</a>
                     </div>
                 </div>
-                <a href="">
+                <a href="?a=pagamentos">
                     <span class="material-icons-sharp">credit_card</span>
                     <h3>Pagamentos</h3>
                 </a>
@@ -176,6 +176,7 @@
 
         <div class="right">
             <div class="top">
+                
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
                 </button>
@@ -187,6 +188,7 @@
                     <div class="info">
                         <p>Olá, <b><?=$_SESSION['nome_admin']?></b></p>
                         <small class="text-muted">Admin</small>
+                        
                     </div>
                     <!-- <div class="profile-photo">
                         <img src="images/logo-adventure-preto.png" alt="">

@@ -21,12 +21,12 @@
                     <i class='bx bx-mail-send'></i>
                 </div>
                 <div class="input-box">
-                    <input type="tel" name="telefone" id="telefone" autocomplete="new-password" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="11" maxlength="11">
+                    <input type="tel" name="telefone" id="telefone" autocomplete="new-password" required>
                     <label for="">Telefone</label>
                     <i class='bx bx-phone'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" name="cpf" id="cpf" autocomplete="new-password" required maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <input type="text" name="cpf" id="cpf" autocomplete="new-password" required>
                     <label for="">CPF</label>
                     <i class='bx bx-credit-card-front'></i>
                 </div>
@@ -105,9 +105,9 @@
     </div>
 </div>
 
-
-<script>
-
-
-    
-</script>
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/js/mascaras_usuario.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->

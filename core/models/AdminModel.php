@@ -236,7 +236,8 @@ class AdminModel
     }
 
 
-    public function inativarPedido($id){
+    public function inativarPedido($id)
+    {
         try {
 
 
@@ -255,7 +256,8 @@ class AdminModel
     }
 
 
-    public function ativarPedido($id){
+    public function ativarPedido($id)
+    {
         try {
 
 
@@ -271,5 +273,74 @@ class AdminModel
         } catch (PDOException $e) {
             return false;
         }
+    }
+
+    public function cadastrarUsuario($nome, $sobrenome, $email, $cpf, $senha, $telefone, $nivel)
+    {
+        // Instancia o objeto da classe de banco de dados
+        $sql = new Database();
+
+        $paramCheck = [
+            ':email' => trim(strtolower($email)),
+        ];
+
+        // Define os parâmetros para o SQL
+        $param = [
+            ':nome' => $nome,
+            ':sobrenome' => $sobrenome,
+            ':email' => trim(strtolower($email)), // Normaliza o email para minúsculas e remove espaços extras
+            ':cpf' => $cpf,
+            ':senha' => password_hash(trim($senha), PASSWORD_DEFAULT, ['cost' => 10]), // Criptografa a senha
+            ':telefone' => $telefone,
+            ':nivel_usuario' => $nivel,
+            ':token' => NULL, // Token nulo por padrão
+            ':ativo' => 1     // Ativa o usuário por padrão
+        ];
+
+        try {
+            // Verifica se o e-mail já existe no banco de dados
+            $res = $sql->select("SELECT * FROM usuario WHERE email = :email", $paramCheck);
+
+            if (count($res) != 0) {
+                echo("E-mail já cadastrado");
+
+            } else {
+
+                // Tenta executar o comando SQL com os parâmetros
+                $sql->insert("INSERT INTO usuario (nome, sobrenome, email, cpf, telefone, senha, nivel_usuario, token, ativo) VALUES (:nome, :sobrenome, :email, :cpf, :telefone, :senha, :nivel_usuario, :token, :ativo )", $param);
+                
+                $verifica = $sql->select("SELECT * FROM usuario WHERE email = :email", $paramCheck);
+
+                if (count($verifica) != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+                
+
+            }
+        } catch (Exception $e) {
+            // Captura o erro e o registra ou exibe
+            error_log('Erro ao cadastrar usuário: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+
+
+
+
+    public function verificaUsuario($id)
+    {
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id
+        ];
+
+
+        $res = $sql->select("SELECT nivel_usuario FROM usuario WHERE id = :id", $param);
+
+        return $res;
     }
 }

@@ -83,46 +83,29 @@
         <div class="recent-orders">
             <!-- CRUD Section -->
             <div class="crud-header">
-                <h2>Lista de Usuários</h2>
-                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModal()">Cadastrar Usuário</button>
+                <h2>Lista de Métodos de Pagamento</h2>
+                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModal()">Criar Método de Pagamento</button>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Ações</th>
+                        <th>Pedido</th>
+                        <th>Método de Pagamento</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($usuarios as $usuario): ?>
-                        <tr>
-                            <td><?= $usuario->id ?></td>
-                            <td><?= $usuario->nome ?></td>
-                            <td><?= $usuario->sobrenome ?></td>
-                            <td><?= $usuario->email ?></td>
-                            <td><?= $usuario->cpf ?></td>
-                            <td><?= $usuario->telefone ?></td>
-                            <td>
-                                <button
-                                    class="btn btn-success add-user"
-                                    data-id="<?= $usuario->id ?>"
-                                    data-nome="<?= $usuario->nome ?>"
-                                    data-sobrenome="<?= $usuario->sobrenome ?>"
-                                    data-email="<?= $usuario->email ?>"
-                                    data-cpf="<?= $usuario->cpf ?>"
-                                    data-telefone="<?= $usuario->telefone ?>"
-                                    id="botao-editar">Editar</button>
-                                <button class="btn btn-danger" onclick="excluirUsuario(<?= $usuario->id ?>)">Excluir</button>
-                            </td>
-                        </tr>
-
+                    <tr>
+                        <td>1</td>
+                        <td>789</td>
+                        <td>Cartão de Crédito</td>
+                        <td>Pendente</td>
+                    </tr>
+                    <!-- Adicione mais linhas aqui, se necessário -->
+                </tbody>
+            </table>
         </div>
-        <?php endforeach; ?>
         <!-- Add/Edit User Modal -->
         <div class="modal" id="user-modal" style="display: none;">
             <div class="modal-content">
@@ -144,38 +127,9 @@
                 </form>
             </div>
         </div>
-
-
-    <div class="modal" id="register-user-modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close-modal" onclick="fecharModal()">&times;</span>
-            <h2 id="register-modal-title">Editar Usuário</h2>
-            <form id="register-user-form" method="post" action="?a=registrar_usuario">
-                <label for="Registroname">Nome</label>
-                <input type="text" name="nome" id="registronomeUsuarioModal">
-                <label for="Registrosurname">Sobrenome</label>
-                <input type="text" name="sobrenome" id="registrosobrenomeUsuarioModal">
-                <label for="Registroemail">E-mail</label>
-                <input type="email" name="email" id="registroemailUsuarioModal">
-                <label for="Registrocpf">CPF</label>
-                <input type="text" name="cpf" id="registrocpfUsuarioModal">
-                <label for="Registrotelefone">Telefone</label>
-                <input type="text" name="telefone" id="registrotelefoneUsuarioModal" autocomplete="tel">
-                <label for="Registrosenha">Senha</label>
-                <input type="password" name="senha" id="registrosenha" autocomplete="current-password">
-                <label for="nivel">Tipo de Usuario</label>
-                <select name="nivel_usuario" id="nivel_usuario">
-                    <option value="1">Admin</option>
-                    <option value="2">Usuario</option>
-                </select>
-                <button type="button" class="btn btn-primary" onclick="registrarUsuario()">Salvar</button>
-
-            </form>
-        </div>
-    </div>
-    </tbody>
-    </table>
-    </section>
+        </tbody>
+        </table>
+        </section>
 
 
 
@@ -204,8 +158,8 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-usuario.js"></script>
+<script src="assets/js/modal-pagamentos.js"></script>

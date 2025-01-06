@@ -20,6 +20,8 @@ $rotas = [
     'excluir_pedido' => 'admin@excluir_pedido',
     'ativar_pedido' => 'admin@ativar_pedido',
     'pedidos_cancelados' => 'admin@pedidos_cancelados',
+    'pagamentos' => 'admin@pagamentos',
+    'registrar_usuario' => 'admin@registrar_usuario',
 
 ];
 

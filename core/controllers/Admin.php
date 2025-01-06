@@ -9,6 +9,7 @@ use core\models\Clientes;
 use core\models\Produtos;
 use core\models\AdminModel;
 use Exception;
+use PDOException;
 use PDO;
 
 class Admin
@@ -22,6 +23,15 @@ class Admin
 
 
         $vendas = new AdminModel();
+
+        $nivel_usuario = $vendas->verificaUsuario($_SESSION['admin']);
+
+        // if($nivel_usuario != 1){
+        //     $this->admin_login();
+        //     return;
+        // }
+
+        // die();
 
         // Obter os dados
         $totalVenda = $vendas->totalVendas();
@@ -183,7 +193,7 @@ class Admin
             $id = $_POST['id'];
             $nome = $_POST['name'];
             $sobrenome = $_POST['surname'];
-            $email = $_POST['email'];
+            $email = strtolower(trim($_POST['email']));
             $cpf = $_POST['cpf'];
             $telefone = $_POST['telefone'];
 
@@ -312,8 +322,8 @@ class Admin
         $Pegaremail = $model->emailUsuario($usuario);
         $emailCliente = $Pegaremail[0]->email;
 
-    
-        
+
+
 
 
 
@@ -323,7 +333,7 @@ class Admin
         $statusPedidoAtualizado = $atualizaStatusPedido[0]->status_pedido;
         $statusPagamentoAtualizado = $atualizaStatusPagamento[0]->status_pagamento_id;
 
-         // Corrigir status do pagamento
+        // Corrigir status do pagamento
         $statusPagamentoCorrigido = match ($statusPagamentoAtualizado) {
             "1" => "Pendente",
             "2" => "Em Processamento",
@@ -377,12 +387,13 @@ class Admin
         exit;
     }
 
-    public function excluir_pedido(){
+    public function excluir_pedido()
+    {
         try {
 
 
             $id = $_GET['id'];
-            
+
 
             $pedido = new AdminModel();
 
@@ -413,12 +424,13 @@ class Admin
         exit;
     }
 
-    public function ativar_pedido(){
+    public function ativar_pedido()
+    {
         try {
 
 
             $id = $_GET['id'];
-            
+
 
             $pedido = new AdminModel();
 
@@ -478,5 +490,63 @@ class Admin
             'totalClientes' => $totalClientes,
             'pedidos' => $pedidos,
         ]);
+    }
+
+    public function pagamentos()
+    {
+        // die('OLA');
+
+
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/pagamentos',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ]);
+    }
+
+    public function registrar_usuario()
+    {
+        $nome = $_POST['nome'];
+        $sobrenome = $_POST['sobrenome'];
+        $email = $_POST['email'];
+        $cpf = $_POST['cpf'];
+        $telefone = $_POST['telefone'];
+        $senha = $_POST['senha'];
+        $nivel_usuario = $_POST['nivel_usuario'];
+
+
+        $usuario = new AdminModel();
+
+        try {
+            $cadastrar = $usuario->cadastrarUsuario($nome, $sobrenome, $email, $cpf, $telefone, $senha, $nivel_usuario);
+
+            Store::printData($cadastrar);
+            // echo $cadastrar;
+
+            if($cadastrar == 'E-mail já cadastrado'){
+                echo json_encode([
+                    'status' => 'success',
+                    'success' => true,
+                    'message' => 'Usuario cadastrado com sucesso.',
+                ]);
+                http_response_code(200); // Cadastro bem-sucedido
+            } else {
+                echo json_encode([
+                    'status' => 'error',
+                    'error' => true,
+                    'message' => 'Não foi possível cadastrar o usuario.',
+                ]);
+                http_response_code(400); // Define o status HTTP como erro (Bad Request)
+            }
+
+            
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(["error" => $e->getMessage()]);
+        }
     }
 }
