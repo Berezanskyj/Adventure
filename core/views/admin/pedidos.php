@@ -194,7 +194,7 @@
             <input type="text" id="metodo_pagamento" name="metodo_pagamento" readonly>
 
             <label for="status_pagamento">Status do Pagamento</label>
-            <select id="status_pagamento" name="status_pagamento">
+            <select id="status_pagamento" name="status_pagamento" disabled>
                 <option value="1">Pendente</option>
                 <option value="pendente">Em Processamento</option>
                 <option value="3">Pago</option>

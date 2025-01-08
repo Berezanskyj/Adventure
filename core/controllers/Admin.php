@@ -494,8 +494,15 @@ class Admin
 
     public function pagamentos()
     {
-        // die('OLA');
+        
+        $db = new AdminModel();
 
+        $pagamento = $db->listarPagamentos();
+        $statusPagamento = $db->listarStatusPagamento();
+
+        // Store::printData($pagamento);
+
+        // die();
 
 
 
@@ -505,6 +512,9 @@ class Admin
             'admin/pagamentos',
             'admin/layout/footer',
             'admin/layout/html_footer',
+        ], [
+            'pagamento' => $pagamento,
+            'status' => $statusPagamento
         ]);
     }
 
@@ -548,5 +558,64 @@ class Admin
             http_response_code(500);
             echo json_encode(["error" => $e->getMessage()]);
         }
+    }
+
+    public function criar_status_pagamento(){
+        $nome = $_POST['nome'];
+
+        $db = new AdminModel();
+
+        $pagamento = $db->cadastrarStatusPagamento(strtolower(trim(str_replace(' ', '_', $nome))));
+
+        if($pagamento == 'Status já cadastrado'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Usuario cadastrado com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar o usuario.',
+                'data' => $nome,
+                'requisicao' => $_POST
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
+
+    public function editar_pagamento(){
+
+        $status = $_POST['status'];
+        $pedido = $_POST['pedido'];
+        
+        // Status já está atualizado
+
+        $db = new AdminModel();
+
+
+        $atualizar = $db->atualizarPagamento($pedido, $status);
+
+
+
+        if($atualizar == 'Status já está atualizado'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Pagamento atualizado com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível atualizar o pagamento.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+
+        
     }
 }

@@ -22,6 +22,8 @@ $rotas = [
     'pedidos_cancelados' => 'admin@pedidos_cancelados',
     'pagamentos' => 'admin@pagamentos',
     'registrar_usuario' => 'admin@registrar_usuario',
+    'editar_pagamento' => 'admin@editar_pagamento',
+    'criar_status_pagamento' => 'admin@criar_status_pagamento',
 
 ];
 

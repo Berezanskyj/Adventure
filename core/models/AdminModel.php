@@ -302,13 +302,12 @@ class AdminModel
             $res = $sql->select("SELECT * FROM usuario WHERE email = :email", $paramCheck);
 
             if (count($res) != 0) {
-                echo("E-mail já cadastrado");
-
+                echo ("E-mail já cadastrado");
             } else {
 
                 // Tenta executar o comando SQL com os parâmetros
                 $sql->insert("INSERT INTO usuario (nome, sobrenome, email, cpf, telefone, senha, nivel_usuario, token, ativo) VALUES (:nome, :sobrenome, :email, :cpf, :telefone, :senha, :nivel_usuario, :token, :ativo )", $param);
-                
+
                 $verifica = $sql->select("SELECT * FROM usuario WHERE email = :email", $paramCheck);
 
                 if (count($verifica) != 0) {
@@ -316,8 +315,6 @@ class AdminModel
                 } else {
                     return false;
                 }
-                
-
             }
         } catch (Exception $e) {
             // Captura o erro e o registra ou exibe
@@ -325,10 +322,6 @@ class AdminModel
             return false;
         }
     }
-
-
-
-
 
     public function verificaUsuario($id)
     {
@@ -342,5 +335,76 @@ class AdminModel
         $res = $sql->select("SELECT nivel_usuario FROM usuario WHERE id = :id", $param);
 
         return $res;
+    }
+
+    public function listarPagamentos()
+    {
+
+        $sql = new Database();
+
+        $res = $sql->select("SELECT pagamento.id AS pagamento_id, pagamento.pedido_id, status_pagamento.nome_status AS status_pagamento, metodo_pagamento.metodo AS metodo_pagamento FROM pagamento JOIN status_pagamento ON pagamento.status_pagamento_id = status_pagamento.id JOIN metodo_pagamento ON pagamento.metodo_pagamento_id = metodo_pagamento.id;");
+
+
+        return $res;
+    }
+
+    public function listarStatusPagamento()
+    {
+        $sql = new Database();
+
+        $res = $sql->select("SELECT * FROM status_pagamento;");
+
+        if (count($res) != 0) {
+            return $res;
+        } else {
+            return false;
+        }
+    }
+
+    public function cadastrarStatusPagamento($status)
+    {
+        $sql = new Database();
+        $param = [
+            ':nome_status' => strtolower(trim($status))
+        ];
+
+        // Verifica se o status já existe
+        $res = $sql->select("SELECT * FROM status_pagamento WHERE nome_status = :nome_status", $param);
+
+        if (count($res) != 0) {
+            echo "Status já cadastrado";
+            return false;
+        } else {
+            // Corrigindo a inserção
+            $sql->insert("INSERT INTO status_pagamento (nome_status) VALUES (:nome_status)", $param);
+
+            // Verifica se foi inserido com sucesso
+            $verifica = $sql->select("SELECT * FROM status_pagamento WHERE nome_status = :nome_status", $param);
+
+            return count($verifica) != 0;
+        }
+    }
+
+
+    public function atualizarPagamento($pedido, $status)
+    {
+        $sql = new Database();
+        $param = [
+            ':pedido_id' => $pedido,
+            ':status_pagamento_id' => $status
+        ];
+
+        $verif = $sql->select("SELECT * FROM pagamento WHERE status_pagamento_id = :status_pagamento_id AND pedido_id = :pedido_id", $param);
+
+        $dados = $verif[0]->status_pagamento_id;
+
+        if ($dados != $status) {
+
+            $sql->update("UPDATE pagamento SET status_pagamento_id = :status_pagamento_id WHERE pedido_id = :pedido_id;", $param);
+
+            return true;
+        } else {
+            echo "Status já está atualizado";
+        }
     }
 }
