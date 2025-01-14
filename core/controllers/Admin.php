@@ -618,4 +618,76 @@ class Admin
 
         
     }
+
+    public function produtos_categorias(){
+
+        $db = new AdminModel();
+        $categorias = $db->listarCategorias();
+
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/categorias',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'categoria' => $categorias,
+        ]);
+        // die('AQIUO');
+    }
+
+    public function criar_categoria_produto(){
+
+        $categoria = $_POST['categoria'];
+
+
+
+        $db = new AdminModel();
+
+
+        $cadastrar = $db->cadastrarCategoria($categoria);
+
+        if($cadastrar == 'Categoria já existe'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Categoria cadastrada com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar a categoria.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
+
+    public function editar_categoria_produto(){
+        $categoria = ucfirst($_POST['categoria']);
+        $id = $_POST['id'];
+
+        $db = new AdminModel();
+
+        $atualizar = $db->alterarCategoria($id, $categoria);
+
+        if($atualizar == 'Categoria já está atualizado'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Categoria cadastrada com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar a categoria.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
 }

@@ -407,4 +407,61 @@ class AdminModel
             echo "Status já está atualizado";
         }
     }
+
+    public function listarCategorias()
+    {
+        $sql = new Database();
+        $res = $sql->select("SELECT * FROM produto_categoria");
+
+        if (count($res) != 0) {
+            return $res;
+        } else {
+            return false;
+        }
+    }
+
+    public function cadastrarCategoria($categoria)
+    {
+        $sql = new Database();
+        $param = [
+            ':nome_categoria' => $categoria,
+        ];
+
+        $verificar = $sql->select("SELECT * FROM produto_categoria WHERE nome_categoria = :nome_categoria", $param);
+
+        if (count($verificar) != 0) {
+            echo "Categoria já existe";
+            return false;
+        } else {
+            $sql->insert("INSERT INTO produto_categoria (nome_categoria) VALUES (:nome_categoria)", $param);
+
+            $verificar = $sql->select("SELECT * FROM produto_categoria WHERE nome_categoria = :nome_categoria", $param);
+
+            return true;
+        }
+    }
+
+    public function alterarCategoria($id, $nome)
+    {
+        $sql = new Database();
+        $param = [
+            ':id' => $id,
+            ':nome_categoria' => $nome,
+        ];
+
+        $param2 = [
+            ':id' => $id,
+        ];
+
+        $verificar = $sql->select("SELECT nome_categoria FROM produto_categoria WHERE id = :id", $param2);
+
+        $dados = $verificar[0]->nome_categoria;
+
+        if (isset($dados) || $dados != $nome) {
+            $sql->update("UPDATE produto_categoria SET nome_categoria = :nome_categoria WHERE id = :id", $param);
+            return true;
+        } else {
+            echo "Categoria já está atualizado";
+        }
+    }
 }

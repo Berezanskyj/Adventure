@@ -24,6 +24,9 @@ $rotas = [
     'registrar_usuario' => 'admin@registrar_usuario',
     'editar_pagamento' => 'admin@editar_pagamento',
     'criar_status_pagamento' => 'admin@criar_status_pagamento',
+    'produtos_categorias' => 'admin@produtos_categorias',
+    'criar_categoria_produto' => 'admin@criar_categoria_produto',
+    'editar_categoria_produto' => 'admin@editar_categoria_produto',
 
 ];
 
