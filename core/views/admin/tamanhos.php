@@ -83,65 +83,61 @@
         <div class="recent-orders">
             <!-- CRUD Section -->
             <div class="crud-header">
-                <h2>Lista de Pagamentos</h2>
-                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModal()">Criar Status de Pagamento</button>
+                <h2>Lista de Tamanhos</h2>
+                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModalRegistro()">Cadastrar tamanho</button>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Pedido</th>
-                        <th>Método de Pagamento</th>
-                        <th>Status</th>
+                        <th>ID</th>
+                        <th>Tamanho</th>
+                        <th>Data de criação</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pagamento as $pagamentos):?>
-                        
 
-                    <tr>
-                        <td><?= $pagamentos->pedido_id ?></td>
-                        <td><?= $pagamentos->metodo_pagamento ?></td>
-                        <td id="statusPagamento"><?= ucwords(str_replace('_', ' ', $pagamentos->status_pagamento)); ?></td>
-                        <td>
-                            <button id="botao-editar" class="btn btn-success add-user" onclick="abrirChangeModal('<?=$pagamentos->pedido_id?>', '<?=$pagamentos->metodo_pagamento?>')">Editar</button>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
+
+
+                    <?php foreach ($tamanho as $tamanho): ?>
+                        <tr>
+                            <td><?= $tamanho->id ?></td>
+                            <td><?= ucfirst($tamanho->tamanho) ?></td>
+                            <td><?= date("d/m/Y", strtotime($tamanho->data_criacao)) ?></td>
+                            <td>
+                                <button id="botao-editar" class="btn btn-success add-user" onclick="abrirModalEditar('<?=$tamanho->id?>', '<?=$tamanho->tamanho?>')">Editar</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>
         <!-- Add/Edit User Modal -->
         <div class="modal" id="register-modal" style="display: none;">
             <div class="modal-content">
-                <span class="close-modal" onclick="fecharModal()">&times;</span>
-                <h2 id="modal-title">Criar Status</h2>
-                <form id="register-form" method="post" action="?a=criar_status_pagamento">
-                    <label for="name">Nome</label>
-                    <input type="text" name="nameStatusRegister" id="nomeStatusModal">
-                    <button type="button" class="btn btn-primary" onclick="registerStatus()">Salvar</button>
+                <span class="close-modal" onclick="fecharModalRegistro()">&times;</span>
+                <h2 id="modal-title">Cadastrar tamanho</h2>
+                <form id="register-form" method="post" action="?a=criar_tamanho_produto">
+                    <label for="name">Tamanho</label>
+                    <input type="text" name="nameCategory" id="nameCategoryModal">
+                    <button type="button" class="btn btn-primary" onclick="cadastrarTamanho()">Salvar</button>
                 </form>
             </div>
         </div>
 
 
         <!-- Change order status modal -->
-        <div class="modal" id="change-order-modal" style="display: none;">
+        <div class="modal" id="change-size-modal" style="display: none;">
             <div class="modal-content">
-                <span class="close-modal" onclick="fecharChangeModal()">&times;</span>
-                <h2 id="modal-title">Criar Status</h2>
-                <form id="register-form" method="post" action="?a=editar_pagamento">
-                    <label for="pedido">Pedido</label>
-                    <input type="text" name="pedido" id="pedido" disabled>
-                    <label for="metodo">Método de Pagamento</label>
-                    <input type="text" name="metodo" id="metodo" disabled>
-                    <label for="status_pagamento">Status do Pagamento</label>
-                    <select id="status_pagamento" name="status_pagamento">
-                    <?php foreach ($status as $statusPagamento):?>
-                        <option value="<?=$statusPagamento->id?>"><?=ucfirst(str_replace('_', ' ',$statusPagamento->nome_status))?></option>
-                    <?php endforeach;?>
-                    </select>
-                    <button type="button" class="btn btn-primary" onclick="changePaymentStatus()">Salvar</button>
+                <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
+                <h2 id="modal-title">Editar tamanho</h2>
+                <form id="register-form" method="post" action="?a=editar_tamanho_produto">
+                    <label for="id">ID</label>
+                    <input type="text" name="id" id="id" disabled>
+                    <label for="tamanho">Tamanho</label>
+                    <input type="text" name="tamanho" id="tamanho">
+                    <button type="button" class="btn btn-primary" onclick="editarTamanho()">Salvar</button>
                 </form>
             </div>
         </div>
@@ -180,4 +176,4 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-pagamentos.js"></script>
+<script src="assets/js/modal-tamanhos.js"></script>

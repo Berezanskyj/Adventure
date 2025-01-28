@@ -34,7 +34,7 @@
                 <div class="dropdown-content" style="display: none;">
                     <a href="#">Gerenciar Produtos</a>
                     <a href="?a=produtos_categorias">Categorias</a>
-                    <a href="#">Tamanhos</a>
+                    <a href="?a=produtos_tamanhos">Tamanhos</a>
                     <a href="#">Cores</a>
                 </div>
             </div>
@@ -83,7 +83,7 @@
         <div class="recent-orders">
             <!-- CRUD Section -->
             <div class="crud-header">
-                <h2>Lista de Pagamentos</h2>
+                <h2>Lista de Categorias</h2>
                 <button class="btn btn-primary" id="create-payment-method" onclick="abrirModalRegistro()">Cadastrar Categoria</button>
             </div>
             <table>

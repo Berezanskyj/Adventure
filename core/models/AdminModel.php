@@ -464,4 +464,65 @@ class AdminModel
             echo "Categoria já está atualizado";
         }
     }
+
+
+
+
+    public function listarTamanhos()
+    {
+        $sql = new Database();
+        $res = $sql->select("SELECT * FROM produto_tamanho");
+
+        if (count($res) != 0) {
+            return $res;
+        } else {
+            return false;
+        }
+    }
+
+    public function cadastrarTamanho($tamanho)
+    {
+        $sql = new Database();
+        $param = [
+            ':tamanho' => $tamanho,
+        ];
+
+        $verificar = $sql->select("SELECT * FROM produto_tamanho WHERE tamanho = :tamanho", $param);
+
+        if (count($verificar) != 0) {
+            echo "Tamanho já existe";
+            return false;
+        } else {
+            $sql->insert("INSERT INTO produto_tamanho (tamanho) VALUES (:tamanho)", $param);
+
+            $verificar = $sql->select("SELECT * FROM produto_tamanho WHERE tamanho = :tamanho", $param);
+
+            return true;
+        }
+    }
+
+
+    public function alteraTamanho($id, $nome)
+    {
+        $sql = new Database();
+        $param = [
+            ':id' => $id,
+            ':tamanho' => $nome,
+        ];
+
+        $param2 = [
+            ':id' => $id,
+        ];
+
+        $verificar = $sql->select("SELECT tamanho FROM produto_tamanho WHERE id = :id", $param2);
+
+        $dados = $verificar[0]->tamanho;
+
+        if (isset($dados) || $dados != $nome) {
+            $sql->update("UPDATE produto_tamanho SET tamanho = :tamanho WHERE id = :id", $param);
+            return true;
+        } else {
+            echo "Tamanho já está atualizado";
+        }
+    }
 }

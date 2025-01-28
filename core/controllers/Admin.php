@@ -690,4 +690,87 @@ class Admin
             http_response_code(400); // Define o status HTTP como erro (Bad Request)
         }
     }
+
+
+
+    //* ==========================================
+
+    public function produtos_tamanhos(){
+
+        $db = new AdminModel();
+        $tamanhos = $db->listarTamanhos();
+
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/tamanhos',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'tamanho' => $tamanhos,
+        ]);
+        // die('AQIUO');
+    }
+
+    public function criar_tamanho_produto(){
+
+        $tamanho = $_POST['tamanho'];
+
+
+
+        $db = new AdminModel();
+
+
+        $cadastrar = $db->cadastrarTamanho($tamanho);
+
+        if($cadastrar == 'Tamanho já existe'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Tamanho cadastrado com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar o Tamanho.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
+
+    public function editar_tamanho_produto(){
+        $categoria = ucfirst($_POST['tamanho']);
+        $id = $_POST['id'];
+
+        $db = new AdminModel();
+
+        $atualizar = $db->alteraTamanho($id, $categoria);
+
+        if($atualizar == 'Tamanho já está atualizado'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Tamanho cadastrado com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar o tamanho.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
+
+
+
+
+
+
+    
 }

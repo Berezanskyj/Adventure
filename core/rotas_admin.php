@@ -27,6 +27,9 @@ $rotas = [
     'produtos_categorias' => 'admin@produtos_categorias',
     'criar_categoria_produto' => 'admin@criar_categoria_produto',
     'editar_categoria_produto' => 'admin@editar_categoria_produto',
+    'produtos_tamanhos' => 'admin@produtos_tamanhos',
+    'criar_tamanho_produto' => 'admin@criar_tamanho_produto',
+    'editar_tamanho_produto' => 'admin@editar_tamanho_produto',
 
 ];
 
