@@ -192,6 +192,7 @@ button[type="submit"]:hover{
     text-align: center;
     margin: 20px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: "Lexend Zetta", sans-serif;
 }
 
 .why-item img {
@@ -249,6 +250,8 @@ button[type="submit"]:hover{
 .testimonial-item span {
     font-weight: bold;
     color: #FFD700;
+    font-family: "Lexend Zetta", sans-serif;
+    font-size: 16px;
 }
 
 
@@ -270,14 +273,24 @@ button[type="submit"]:hover{
 /* Carrossel de depoimentos */
 .testimonial-item {
     max-width: 400px;
-    height: 250px;
+    height: 477px;
     background-color: #1E2022;
     padding: 20px;
     color: white;
     border-radius: 8px;
-    text-align: left;
+    text-align: center; /* Garante que o texto também fique centralizado */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza a imagem e o conteúdo */
+    justify-content: center; /* Centraliza verticalmente */
+}
+
+.testimonial-carousel img {
+    max-width: 300px; /* Ajuste conforme necessário */
+    max-height: 300px;
+    margin-bottom: 15px;
 }
 
 .testimonial-item p {

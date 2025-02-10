@@ -56,14 +56,17 @@
         <h2>Depoimentos de Clientes</h2>
         <div class="testimonial-carousel">
             <div class="testimonial-item">
+            <img src="assets/images/logos/colgate.png"alt="Descrição da imagem">
                 <p>"Os uniformes personalizados são de excelente qualidade! Ficamos impressionados com a rapidez do atendimento e com o resultado final."</p>
                 <span>— Empresa X</span>
             </div>
             <div class="testimonial-item">
+            <img src="assets/images/logos/colgate.png"alt="Descrição da imagem">
                 <p>"Recebemos nossos brindes personalizados e estamos muito satisfeitos. Com certeza faremos novos pedidos."</p>
                 <span>— Empresa Y</span>
             </div>
             <div class="testimonial-item">
+            <img src="assets/images/logos/colgate.png"alt="Descrição da imagem">
                 <p>"A equipe foi extremamente atenciosa e o processo foi muito fácil. Os brindes ficaram incríveis!"</p>
                 <span>— Empresa Z</span>
             </div>
