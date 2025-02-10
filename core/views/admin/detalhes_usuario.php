@@ -34,7 +34,7 @@
                     <a href="#">Gerenciar Produtos</a>
                     <a href="?a=produtos_categorias">Categorias</a>
                     <a href="?a=produtos_tamanhos">Tamanhos</a>
-                    <a href="#">Cores</a>
+                    <a href="?a=produtos_cores">Cores</a>
                 </div>
             </div>
             <div class="dropdown">

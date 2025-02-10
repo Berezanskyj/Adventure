@@ -525,4 +525,61 @@ class AdminModel
             echo "Tamanho já está atualizado";
         }
     }
+
+    public function listarCores(){
+        $sql = new Database();
+        $cores = $sql->select("SELECT * FROM produto_cores");
+
+        if (count($cores) != 0) {
+            return $cores;
+        } else {
+            return false;
+        }
+    }
+
+    public function cadastrarcor($cor)
+    {
+        $sql = new Database();
+        $param = [
+            ':cor' => $cor,
+        ];
+
+        $verificar = $sql->select("SELECT * FROM produto_cores WHERE cor = :cor", $param);
+
+        if (count($verificar) != 0) {
+            echo "cor já existe";
+            return false;
+        } else {
+            $sql->insert("INSERT INTO produto_cores (cor) VALUES (:cor)", $param);
+
+            $verificar = $sql->select("SELECT * FROM produto_cores WHERE cor = :cor", $param);
+
+            return true;
+        }
+    }
+
+
+    public function alteracor($id, $nome)
+    {
+        $sql = new Database();
+        $param = [
+            ':id' => $id,
+            ':cor' => $nome,
+        ];
+
+        $param2 = [
+            ':id' => $id,
+        ];
+
+        $verificar = $sql->select("SELECT cor FROM produto_cores WHERE id = :id", $param2);
+
+        $dados = $verificar[0]->cor;
+
+        if (isset($dados) || $dados != $nome) {
+            $sql->update("UPDATE produto_cores SET cor = :cor WHERE id = :id", $param);
+            return true;
+        } else {
+            echo "cor já está atualizado";
+        }
+    }
 }

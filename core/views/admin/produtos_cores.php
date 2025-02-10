@@ -83,14 +83,14 @@
         <div class="recent-orders">
             <!-- CRUD Section -->
             <div class="crud-header">
-                <h2>Lista de Tamanhos</h2>
-                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModalRegistro()">Cadastrar tamanho</button>
+                <h2>Lista de Cores</h2>
+                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModalRegistro()">Cadastrar Cor</button>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tamanho</th>
+                        <th>Cor</th>
                         <th>Data de criação</th>
                         <th>Ações</th>
                     </tr>
@@ -99,13 +99,13 @@
 
 
 
-                    <?php foreach ($tamanho as $tamanho): ?>
+                    <?php foreach ($cor as $cor): ?>
                         <tr>
-                            <td><?= $tamanho->id ?></td>
-                            <td><?= ucfirst($tamanho->tamanho) ?></td>
-                            <td><?= date("d/m/Y", strtotime($tamanho->data_criacao)) ?></td>
+                            <td><?= $cor->id ?></td>
+                            <td><?= ucfirst($cor->cor) ?></td>
+                            <td><?= date("d/m/Y", strtotime($cor->data_criacao)) ?></td>
                             <td>
-                                <button id="botao-editar" class="btn btn-success add-user" onclick="abrirModalEditar('<?=$tamanho->id?>', '<?=$tamanho->tamanho?>')">Editar</button>
+                                <button id="botao-editar" class="btn btn-success add-user" onclick="abrirModalEditar('<?=$cor->id?>', '<?=$cor->cor?>')">Editar</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -117,27 +117,27 @@
         <div class="modal" id="register-modal" style="display: none;">
             <div class="modal-content">
                 <span class="close-modal" onclick="fecharModalRegistro()">&times;</span>
-                <h2 id="modal-title">Cadastrar tamanho</h2>
-                <form id="register-form" method="post" action="?a=criar_tamanho_produto">
-                    <label for="name">Tamanho</label>
+                <h2 id="modal-title">Cadastrar Cor</h2>
+                <form id="register-form" method="post" action="?a=criar_categoria_produto">
+                    <label for="name">Cor</label>
                     <input type="text" name="nameCategory" id="nameCategoryModal">
-                    <button type="button" class="btn btn-primary" onclick="cadastrarTamanho()">Salvar</button>
+                    <button type="button" class="btn btn-primary" onclick="cadastrarCor()">Salvar</button>
                 </form>
             </div>
         </div>
 
 
         <!-- Change order status modal -->
-        <div class="modal" id="change-size-modal" style="display: none;">
+        <div class="modal" id="change-category-modal" style="display: none;">
             <div class="modal-content">
                 <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
-                <h2 id="modal-title">Editar tamanho</h2>
-                <form id="register-form" method="post" action="?a=editar_tamanho_produto">
+                <h2 id="modal-title">Editar Cor</h2>
+                <form id="register-form" method="post" action="?a=editar_categoria">
                     <label for="id">ID</label>
                     <input type="text" name="id" id="id" disabled>
-                    <label for="tamanho">Tamanho</label>
-                    <input type="text" name="tamanho" id="tamanho">
-                    <button type="button" class="btn btn-primary" onclick="editarTamanho()">Salvar</button>
+                    <label for="categoria">Cor</label>
+                    <input type="text" name="categoria" id="categoria">
+                    <button type="button" class="btn btn-primary" onclick="editarCor()">Salvar</button>
                 </form>
             </div>
         </div>
@@ -176,4 +176,4 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-tamanhos.js"></script>
+<script src="assets/js/modal-cores.js"></script>

@@ -767,6 +767,78 @@ class Admin
         }
     }
 
+    public function produtos_cores(){
+
+        $db = new AdminModel();
+        $cores = $db->listarCores();
+
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/produtos_cores',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'cor' => $cores,
+        ]);
+        // die('AQIUO');
+    }
+
+    public function criar_cor_produto(){
+
+        $tamanho = $_POST['categoria'];
+
+
+
+        $db = new AdminModel();
+
+
+        $cadastrar = $db->cadastrarCor($tamanho);
+
+        if($cadastrar == 'Tamanho já existe'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Tamanho cadastrado com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar o Tamanho.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
+
+    public function editar_cor_produto(){
+        $categoria = ucfirst($_POST['categoria']);
+        $id = $_POST['id'];
+
+        $db = new AdminModel();
+
+        $atualizar = $db->alteracor($id, $categoria);
+
+        if($atualizar == 'Tamanho já está atualizado'){
+            echo json_encode([
+                'status' => 'success',
+                'success' => true,
+                'message' => 'Tamanho cadastrado com sucesso.',
+            ]);
+            http_response_code(200); // Cadastro bem-sucedido
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'error' => true,
+                'message' => 'Não foi possível cadastrar o tamanho.',
+            ]);
+            http_response_code(400); // Define o status HTTP como erro (Bad Request)
+        }
+    }
+
 
 
 
