@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="assets/css/home.css">
-<link rel="stylesheet" href="assets/css/crud-usuario.css">
+<link rel="stylesheet" href="assets/css/cadastro_produto.css">
 
 <div class="container">
     <aside>
@@ -45,11 +44,11 @@
                     <span class="material-icons-sharp arrow">arrow_drop_down</span>
                 </a>
                 <div class="dropdown-content" style="display: none;">
-                    <a href="?a=pedidos">Listar Pedidos</a>
+                    <a href="#">Listar Pedidos</a>
                     <a href="#">Listar Clientes</a>
                 </div>
             </div>
-            <a href="?a=pagamentos">
+            <a href="">
                 <span class="material-icons-sharp">credit_card</span>
                 <h3>Pagamentos</h3>
             </a>
@@ -73,83 +72,76 @@
 
     </aside>
 
-    <main>
-        <h1>Dashboard</h1>
 
-        <div class="date">
-            <input type="date" id="date-input" disabled>
-        </div>
+    <style>
 
-        <div class="recent-orders">
-            <!-- CRUD Section -->
-            <div class="crud-header">
-                <h2>Lista de Categorias</h2>
-                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModalRegistro()">Cadastrar Categoria</button>
+    </style>
+</head>
+<body>
+    
+<main>
+            <div class="titulo-cadastro">
+
+                <h1>Cadastro de Produto</h1>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Categoria</th>
-                        <th>Data de criação</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-
-
-                    <?php foreach ($categoria as $categoria): ?>
-                        <tr>
-                            <td><?= $categoria->id ?></td>
-                            <td><?= ucfirst($categoria->nome_categoria) ?></td>
-                            <td><?= date("d/m/Y", strtotime($categoria->data_criacao)) ?></td>
-                            <td>
-                                <button id="botao-editar" class="btn btn-success add-user" onclick="abrirModalEditar('<?=$categoria->id?>', '<?=$categoria->nome_categoria?>')">Editar</button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-
-                </tbody>
-            </table>
-        </div>
-        <!-- Add/Edit User Modal -->
-        <div class="modal" id="register-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal" onclick="fecharModalRegistro()">&times;</span>
-                <h2 id="modal-title">Cadastrar Categoria</h2>
-                <form id="register-form" method="post" action="?a=criar_categoria_produto">
-                    <label for="name">Nome da categoria</label>
-                    <input type="text" name="nameCategory" id="nameCategoryModal">
-                    <button type="button" class="btn btn-primary" onclick="cadastrarCategoria()">Salvar</button>
-                </form>
-            </div>
-        </div>
-
-
-        <!-- Change order status modal -->
-        <div class="modal" id="change-category-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
-                <h2 id="modal-title">Editar Categoria</h2>
-                <form id="register-form" method="post" action="?a=editar_categoria">
-                    <label for="id">ID</label>
-                    <input type="text" name="id" id="id" disabled>
+            <form id="product-form" class="product-form">
+                <div class="full-width">
+                    <label for="nome_produto">Nome do Produto</label>
+                    <input type="text" id="nome_produto" name="nome_produto" required>
+                </div>
+                <div>
+                    <label for="preco">Preço</label>
+                    <input type="text" id="preco" name="preco" required>
+                </div>
+                <div>
                     <label for="categoria">Categoria</label>
-                    <input type="text" name="categoria" id="categoria">
-                    <button type="button" class="btn btn-primary" onclick="editarCategoria()">Salvar</button>
-                </form>
-            </div>
-        </div>
-        </tbody>
-        </table>
-        </section>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Selecione</option>
+                        <option value="roupas">Roupas</option>
+                        <option value="eletronicos">Eletrônicos</option>
+                        <option value="acessorios">Acessórios</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="tamanho">Tamanho</label>
+                    <select id="tamanho" name="tamanho" required>
+                        <option value="">Selecione</option>
+                        <option value="roupas">P</option>
+                        <option value="eletronicos">M</option>
+                        <option value="acessorios">G</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="cor">Cor</label>
+                    <select id="cor" name="cor" required>
+                        <option value="">Selecione</option>
+                        <option value="roupas">Vermelho</option>
+                        <option value="eletronicos">Azul</option>
+                        <option value="acessorios">Verde</option>
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label for="imagem">Imagem do Produto</label>
+                    <input type="file" id="imagem" name="imagem" accept="image/*">
+                    <div class="image-preview" id="imagePreview">
+                        <span>Pré-visualização da imagem</span>
+                    </div>
+                </div>
+                <div class="full-width">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" required></textarea>
+                </div>
+                <div class="full-width">
+                    <label for="visivel">Visivel no site</label>
+                    <select name="visivel" id="visivel">
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </select>
+                </div>
+                <button class="full-width" type="submit">Cadastrar Produto</button>
+            </form>
+        </main>
 
-
-
-
-
-    </main>
 
     <div class="right">
         <div class="top">
@@ -172,8 +164,6 @@
         </div>
     </div>
 </div>
-<!-- <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-categorias.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.7/dist/inputmask.min.js"></script>
+<script src="assets/js/cadastro-produto.js"></script>

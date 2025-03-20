@@ -9,8 +9,8 @@ define('BASE_URL',           'http://localhost:8080/adventure/public/');
 //MYSQL
 define('MYSQL_SERVER',          'localhost');
 define('MYSQL_DATABASE',        'adventure');
-define('MYSQL_USER',            'adventure');
-define('MYSQL_PASS',            '_8.T]V7yTc0CQQU6');
+define('MYSQL_USER',            'root');
+define('MYSQL_PASS',            '');
 define('MYSQL_CHARSET',         'utf8mb4');
 
 //email

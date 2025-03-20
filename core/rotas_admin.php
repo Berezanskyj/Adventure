@@ -33,6 +33,7 @@ $rotas = [
     'produtos_cores' => 'admin@produtos_cores',
     'criar_cor_produto' => 'admin@criar_cor_produto',
     'editar_cor_produto' => 'admin@editar_cor_produto',
+    'gerencia_produtos' => 'admin@gerencia_produtos',
 
 ];
 

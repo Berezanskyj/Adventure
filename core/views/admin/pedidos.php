@@ -32,7 +32,7 @@
                     <span class="material-icons-sharp arrow">arrow_drop_down</span>
                 </a>
                 <div class="dropdown-content" style="display: none;">
-                    <a href="#">Gerenciar Produtos</a>
+                    <a href="?a=gerencia_produtos">Gerenciar Produtos</a>
                     <a href="?a=produtos_categorias">Categorias</a>
                     <a href="?a=produtos_tamanhos">Tamanhos</a>
                     <a href="?a=produtos_cores">Cores</a>

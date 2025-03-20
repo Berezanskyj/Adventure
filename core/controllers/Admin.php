@@ -839,6 +839,18 @@ class Admin
         }
     }
 
+    public function gerencia_produtos(){
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/gerencia_produtos',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ]);
+        // die('AQIUO');
+    }
+
 
 
 
