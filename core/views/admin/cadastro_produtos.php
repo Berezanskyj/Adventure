@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="assets/css/cadastro_produto.css">
+<link rel="stylesheet" href="assets/css/home.css">
 
 <div class="container">
     <aside>
