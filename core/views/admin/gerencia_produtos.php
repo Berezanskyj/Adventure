@@ -109,6 +109,7 @@
                             <td>Rosa</td>
                             <td>
                                 <button id="botao-editar" class="btn btn-success add-user">Editar</button>
+                                <button id="botao-editar" class="btn btn-warning add-user">Estoque</button>
                             </td>
                         </tr>
 

@@ -149,6 +149,11 @@ small {
     color: var(--color-white);
 }
 
+.btn-warning {
+    background: var(--color-warning);
+    color: var(--color-white);
+}
+
 .btn-danger {
     background: var(--color-danger);
     color: var(--color-white);
