@@ -226,3 +226,13 @@ body.modal-open {
     font-family: poppins, sans-serif;
     font-size: 0.88rem;
 }
+
+.crud-header button{
+    background-color: var(--color-primary);
+}
+
+.crud-header button:hover{
+    background-color: var(--color-primary-variant);
+    color: white;
+
+}

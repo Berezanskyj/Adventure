@@ -83,7 +83,7 @@
             <!-- CRUD Section -->
             <div class="crud-header">
                 <h2>Lista de Produtos</h2>
-                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModalRegistro()">Cadastrar Produto</button>
+                <button class="btn btn-primary" id="create-payment-method" onclick="cadastrarProduto()">Cadastrar Produto</button>
             </div>
             <table>
                 <thead>
@@ -99,56 +99,26 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <?php foreach ($produto as $produto): ?>
                         <tr>
-                            <td>1</td>
-                            <td><img src="../assets\images\produtos\camiseta-1-azul.png" alt="ERRO"></td>
-                            <td>Camiseta</td>
-                            <td>R$49.99</td>
-                            <td>Camiseta</td>
-                            <td>GG</td>
-                            <td>Rosa</td>
+                            <td><?=$produto->id ?></td>
+                            <td><img src="../assets\images\produtos\<?=$produto->imagem_produto ?>" alt="ERRO"></td>
+                            <td><?=$produto->nome_produto ?></td>
+                            <td>R$ <?=str_replace('.', ',', $produto->preco) ?></td>
+                            <td><?=$produto->nome_categoria ?></td>
+                            <td><?=$produto->tamanho ?></td>
+                            <td><?=$produto->cor ?></td>
                             <td>
                                 <button id="botao-editar" class="btn btn-success add-user">Editar</button>
                                 <button id="botao-editar" class="btn btn-warning add-user">Estoque</button>
                             </td>
                         </tr>
+                    <?php endforeach; ?>
 
                 </tbody>
             </table>
         </div>
-        <!-- Add/Edit User Modal -->
-        <div class="modal" id="register-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal" onclick="fecharModalRegistro()">&times;</span>
-                <h2 id="modal-title">Cadastrar Categoria</h2>
-                <form id="register-form" method="post" action="?a=criar_categoria_produto">
-                    <label for="name">Nome da categoria</label>
-                    <input type="text" name="nameCategory" id="nameCategoryModal">
-                    <button type="button" class="btn btn-primary" onclick="cadastrarCategoria()">Salvar</button>
-                </form>
-            </div>
-        </div>
-
-
-        <!-- Change order status modal -->
-        <div class="modal" id="change-category-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
-                <h2 id="modal-title">Editar Categoria</h2>
-                <form id="register-form" method="post" action="?a=editar_categoria">
-                    <label for="id">ID</label>
-                    <input type="text" name="id" id="id" disabled>
-                    <label for="categoria">Categoria</label>
-                    <input type="text" name="categoria" id="categoria">
-                    <button type="button" class="btn btn-primary" onclick="editarCategoria()">Salvar</button>
-                </form>
-            </div>
-        </div>
-        </tbody>
-        </table>
-        </section>
-
-
 
 
 
@@ -179,4 +149,4 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-categorias.js"></script>
+<script src="assets/js/gerenciarProdutos.js"></script>

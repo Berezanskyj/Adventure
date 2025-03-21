@@ -582,4 +582,16 @@ class AdminModel
             echo "cor já está atualizado";
         }
     }
+
+    public function buscarProdutos(){
+        $sql = new Database();
+
+        $produtos = $sql->select("SELECT p.id, p.nome_produto, p.descricao, p.preco, c.nome_categoria, t.tamanho, co.cor, p.imagem_produto, p.visivel, p.data_criacao, p.data_atualizacao FROM produtos p JOIN produto_categoria c ON p.categoria_id = c.id JOIN produto_tamanho t ON p.tamanho_id = t.id JOIN produto_cores co ON p.cor_id = co.id;");
+
+        if (count($produtos) != 0) {
+            return $produtos;
+        } else {
+            return false;
+        }
+    }
 }

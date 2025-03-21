@@ -100,9 +100,9 @@
         </div>
 
         <div class="recent-orders">
-            <div class="recent-orders-header">
+            <div class="crud-header">
                 <h2>Lista de Pedidos</h2>
-                <a href="?a=pedidos_cancelados" class="btn">Pedidos Cancelados</a>
+                <button href="?a=pedidos_cancelados" class="btn">Pedidos Cancelados</button>
             </div>
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
@@ -145,9 +145,9 @@
             </table>
         </div>
 
-        
-        
-    </div>
+
+
+</div>
 </div>
 <!-- Update Order Modal -->
 <div class="modal" id="order-modal" style="display: none;">
