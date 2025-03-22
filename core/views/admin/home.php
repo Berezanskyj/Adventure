@@ -162,7 +162,7 @@
                             <td><?=$pedido->nome_usuario?></td>
                             <td class="success" id="status"><?=$pedido->status_pedido?></td>
                             <td>R$<?=number_format($pedido->total_pedido, 2, ',', '.')?></td>
-                            <td class="primary"><a href="?a=detalhes_pedido&id=<?=$pedido->pedido_id?>">Detalhes</a></td>
+                            <!-- <td class="primary"><a href="?a=detalhes_pedido&id=<?=$pedido->pedido_id?>">Detalhes</a></td> -->
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

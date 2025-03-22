@@ -514,6 +514,7 @@ main .recent-orders a {
     color: var(--color-dark);
     width: 100%;
     display: block;
+    margin-bottom: 7px;
 }
 
 .product-form input,

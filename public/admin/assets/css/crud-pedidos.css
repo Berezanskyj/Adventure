@@ -233,6 +233,4 @@ body.modal-open {
 
 .crud-header button:hover{
     background-color: var(--color-primary-variant);
-    color: white;
-
 }

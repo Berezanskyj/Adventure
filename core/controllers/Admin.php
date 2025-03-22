@@ -494,7 +494,7 @@ class Admin
 
     public function pagamentos()
     {
-        
+
         $db = new AdminModel();
 
         $pagamento = $db->listarPagamentos();
@@ -537,7 +537,7 @@ class Admin
             Store::printData($cadastrar);
             // echo $cadastrar;
 
-            if($cadastrar == 'E-mail já cadastrado'){
+            if ($cadastrar == 'E-mail já cadastrado') {
                 echo json_encode([
                     'status' => 'success',
                     'success' => true,
@@ -552,22 +552,21 @@ class Admin
                 ]);
                 http_response_code(400); // Define o status HTTP como erro (Bad Request)
             }
-
-            
         } catch (PDOException $e) {
             http_response_code(500);
             echo json_encode(["error" => $e->getMessage()]);
         }
     }
 
-    public function criar_status_pagamento(){
+    public function criar_status_pagamento()
+    {
         $nome = $_POST['nome'];
 
         $db = new AdminModel();
 
         $pagamento = $db->cadastrarStatusPagamento(strtolower(trim(str_replace(' ', '_', $nome))));
 
-        if($pagamento == 'Status já cadastrado'){
+        if ($pagamento == 'Status já cadastrado') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -586,11 +585,12 @@ class Admin
         }
     }
 
-    public function editar_pagamento(){
+    public function editar_pagamento()
+    {
 
         $status = $_POST['status'];
         $pedido = $_POST['pedido'];
-        
+
         // Status já está atualizado
 
         $db = new AdminModel();
@@ -600,7 +600,7 @@ class Admin
 
 
 
-        if($atualizar == 'Status já está atualizado'){
+        if ($atualizar == 'Status já está atualizado') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -615,11 +615,10 @@ class Admin
             ]);
             http_response_code(400); // Define o status HTTP como erro (Bad Request)
         }
-
-        
     }
 
-    public function produtos_categorias(){
+    public function produtos_categorias()
+    {
 
         $db = new AdminModel();
         $categorias = $db->listarCategorias();
@@ -638,7 +637,8 @@ class Admin
         // die('AQIUO');
     }
 
-    public function criar_categoria_produto(){
+    public function criar_categoria_produto()
+    {
 
         $categoria = $_POST['categoria'];
 
@@ -649,7 +649,7 @@ class Admin
 
         $cadastrar = $db->cadastrarCategoria($categoria);
 
-        if($cadastrar == 'Categoria já existe'){
+        if ($cadastrar == 'Categoria já existe') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -666,7 +666,8 @@ class Admin
         }
     }
 
-    public function editar_categoria_produto(){
+    public function editar_categoria_produto()
+    {
         $categoria = ucfirst($_POST['categoria']);
         $id = $_POST['id'];
 
@@ -674,7 +675,7 @@ class Admin
 
         $atualizar = $db->alterarCategoria($id, $categoria);
 
-        if($atualizar == 'Categoria já está atualizado'){
+        if ($atualizar == 'Categoria já está atualizado') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -695,7 +696,8 @@ class Admin
 
     //* ==========================================
 
-    public function produtos_tamanhos(){
+    public function produtos_tamanhos()
+    {
 
         $db = new AdminModel();
         $tamanhos = $db->listarTamanhos();
@@ -714,7 +716,8 @@ class Admin
         // die('AQIUO');
     }
 
-    public function criar_tamanho_produto(){
+    public function criar_tamanho_produto()
+    {
 
         $tamanho = $_POST['tamanho'];
 
@@ -725,7 +728,7 @@ class Admin
 
         $cadastrar = $db->cadastrarTamanho($tamanho);
 
-        if($cadastrar == 'Tamanho já existe'){
+        if ($cadastrar == 'Tamanho já existe') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -742,7 +745,8 @@ class Admin
         }
     }
 
-    public function editar_tamanho_produto(){
+    public function editar_tamanho_produto()
+    {
         $categoria = ucfirst($_POST['tamanho']);
         $id = $_POST['id'];
 
@@ -750,7 +754,7 @@ class Admin
 
         $atualizar = $db->alteraTamanho($id, $categoria);
 
-        if($atualizar == 'Tamanho já está atualizado'){
+        if ($atualizar == 'Tamanho já está atualizado') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -767,7 +771,8 @@ class Admin
         }
     }
 
-    public function produtos_cores(){
+    public function produtos_cores()
+    {
 
         $db = new AdminModel();
         $cores = $db->listarCores();
@@ -786,7 +791,8 @@ class Admin
         // die('AQIUO');
     }
 
-    public function criar_cor_produto(){
+    public function criar_cor_produto()
+    {
 
         $tamanho = $_POST['categoria'];
 
@@ -797,7 +803,7 @@ class Admin
 
         $cadastrar = $db->cadastrarCor($tamanho);
 
-        if($cadastrar == 'Tamanho já existe'){
+        if ($cadastrar == 'Tamanho já existe') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -814,7 +820,8 @@ class Admin
         }
     }
 
-    public function editar_cor_produto(){
+    public function editar_cor_produto()
+    {
         $categoria = ucfirst($_POST['categoria']);
         $id = $_POST['id'];
 
@@ -822,7 +829,7 @@ class Admin
 
         $atualizar = $db->alteracor($id, $categoria);
 
-        if($atualizar == 'Tamanho já está atualizado'){
+        if ($atualizar == 'Tamanho já está atualizado') {
             echo json_encode([
                 'status' => 'success',
                 'success' => true,
@@ -839,7 +846,8 @@ class Admin
         }
     }
 
-    public function gerencia_produtos(){
+    public function gerencia_produtos()
+    {
 
         $db = new AdminModel();
 
@@ -857,7 +865,14 @@ class Admin
         // die('AQIUO');
     }
 
-    public function cadastro_produtos(){
+    public function cadastro_produtos()
+    {
+
+        $db = new AdminModel();
+
+        $categoria = $db->listarCategorias();
+        $cor = $db->listarCores();
+        $tamanho = $db->listarTamanhos();
 
         Store::Layout_admin([
             'admin/layout/html_header',
@@ -865,14 +880,88 @@ class Admin
             'admin/cadastro_produtos',
             'admin/layout/footer',
             'admin/layout/html_footer',
+        ], [
+            'categoria' => $categoria,
+            'cor' => $cor,
+            'tamanho' => $tamanho
         ]);
         // die('AQIUO');
     }
 
+    public function processa_cadastro_produto()
+    {
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
 
+        function converterPrecoParaDecimal($preco)
+        {
+            $preco = trim(str_replace('R$', '', $preco));
+            $preco = str_replace('.', '', $preco);
+            $preco = str_replace(',', '.', $preco);
+            return (float) $preco;
+        }
 
+        if (!isset($_POST['nome_produto'], $_POST['descricao'], $_POST['preco'], $_POST['categoria'], $_POST['tamanho'], $_POST['cor'], $_FILES['imagem'])) {
+            echo json_encode(["status" => "error", "mensagem" => "Preencha todos os campos obrigatórios."]);
+            exit;
+        }
 
+        $db = new AdminModel();
 
+        $nome = $_POST['nome_produto'];
+        $descricao = $_POST['descricao'];
+        $preco = converterPrecoParaDecimal($_POST['preco']);
+        $categoria = $_POST['categoria'];
+        $tamanho = $_POST['tamanho'];
+        $cor = $_POST['cor'];
+        $imagem = $_FILES['imagem']['name'];
+        $visivel = $_POST['visivel'];
 
-    
+        $diretorio = "../../public/assets/images/produtos/";
+
+        // Valida imagem
+        if (!isset($_FILES['imagem']) || $_FILES['imagem']['name'] == "") {
+            echo json_encode(["status" => "error", "mensagem" => "É obrigatório enviar uma imagem."]);
+            exit;
+        }
+
+        $imagem = $_FILES['imagem'];
+        $nomeArquivo = basename($imagem['name']);
+        $caminhoFinal = $diretorio . $nomeArquivo;
+        $tipoArquivo = strtolower(pathinfo($caminhoFinal, PATHINFO_EXTENSION));
+
+        $formatosPermitidos = ['jpg', 'jpeg', 'png', 'tiff', 'jfif', 'webp'];
+
+        if (!in_array($tipoArquivo, $formatosPermitidos)) {
+            echo json_encode(["status" => "error", "mensagem" => "Formato de imagem não permitido. Use JPG, JPEG, PNG, TIFF, JFIF ou WEBP."]);
+            exit;
+        }
+
+        if ($imagem['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(["status" => "error", "mensagem" => "Erro no upload: " . $imagem['error']]);
+            exit;
+        }
+
+        // Garante que o diretório existe
+        if (!is_dir($diretorio)) {
+            mkdir($diretorio, 0777, true);
+        }
+
+        if (!move_uploaded_file($imagem['tmp_name'], $caminhoFinal)) {
+            echo json_encode(["status" => "error", "mensagem" => "Erro ao salvar a imagem no servidor."]);
+            exit;
+        }
+
+        // Insere no banco de dados
+        $cadastra = $db->cadastrarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $nomeArquivo, $visivel);
+
+        if ($cadastra) {
+            echo json_encode(["status" => "success", "mensagem" => "Produto cadastrado com sucesso!"]);
+        } else {
+            echo json_encode(["status" => "error", "mensagem" => "Erro ao cadastrar produto no banco de dados."]);
+        }
+    }
 }

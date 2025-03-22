@@ -594,4 +594,23 @@ class AdminModel
             return false;
         }
     }
+
+    public function cadastrarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $imagem, $visivel){
+        $sql = new Database();
+
+        $param = [
+            ':nome' => $nome,
+            ':descricao' => $descricao,
+            ':preco' => $preco,
+            ':categoria' => $categoria,
+            ':tamanho' => $tamanho,
+            ':cor' => $cor,
+            ':imagem' => $imagem,
+            ':visivel' => $visivel,
+        ];
+
+        $sql->insert("INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) VALUES (:nome, :descricao, :preco, :categoria, :tamanho, :cor, :imagem, :visivel)", $param);
+
+        return true;
+    }
 }

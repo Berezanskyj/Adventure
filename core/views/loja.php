@@ -75,7 +75,7 @@ if (isset($_SESSION['carrinho'])) {
                         <img src="assets/images/produtos/<?= $produto->imagem_produto ?>" alt="<?= htmlspecialchars($produto->nome_produto) ?>">
                         <h5><?= htmlspecialchars($produto->nome_produto) ?></h5>
                         <p><?= htmlspecialchars($produto->descricao) ?></p>
-                        <h4>R$ <?= preg_replace("/\./", ",", $produto->preco) ?></h4>
+                        <h4>R$ <?= number_format($produto->preco, 2, ',', '.') ?></h4>
                         <?php
                         $quantidade_disponivel = isset($estoques[$produto->id]) && !empty($estoques[$produto->id])
                             ? $estoques[$produto->id][0]->quantidade_disponivel

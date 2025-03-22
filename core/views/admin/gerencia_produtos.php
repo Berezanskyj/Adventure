@@ -73,7 +73,7 @@
     </aside>
 
     <main>
-        <h1>Dashboard</h1>
+        <h1>Gerenciamento de Produtos</h1>
 
         <div class="date">
             <input type="date" id="date-input" disabled>

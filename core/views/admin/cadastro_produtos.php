@@ -77,15 +77,16 @@
     <style>
 
     </style>
-</head>
-<body>
-    
-<main>
+    </head>
+
+    <body>
+
+        <main>
             <div class="titulo-cadastro">
 
                 <h1>Cadastro de Produto</h1>
             </div>
-            <form id="product-form" class="product-form">
+            <form id="product-form" class="product-form" method="POST" action="?a=processa_cadastro_produto" enctype="multipart/form-data">
                 <div class="full-width">
                     <label for="nome_produto">Nome do Produto</label>
                     <input type="text" id="nome_produto" name="nome_produto" required>
@@ -98,31 +99,31 @@
                     <label for="categoria">Categoria</label>
                     <select id="categoria" name="categoria" required>
                         <option value="">Selecione</option>
-                        <option value="roupas">Roupas</option>
-                        <option value="eletronicos">Eletrônicos</option>
-                        <option value="acessorios">Acessórios</option>
+                        <?php foreach ($categoria as $categoria): ?>
+                            <option value="<?= $categoria->id ?>"><?= $categoria->nome_categoria ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
                     <label for="tamanho">Tamanho</label>
                     <select id="tamanho" name="tamanho" required>
                         <option value="">Selecione</option>
-                        <option value="roupas">P</option>
-                        <option value="eletronicos">M</option>
-                        <option value="acessorios">G</option>
+                        <?php foreach ($tamanho as $tamanho): ?>
+                            <option value="<?= $tamanho->id ?>"><?= $tamanho->tamanho ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
                     <label for="cor">Cor</label>
                     <select id="cor" name="cor" required>
                         <option value="">Selecione</option>
-                        <option value="roupas">Vermelho</option>
-                        <option value="eletronicos">Azul</option>
-                        <option value="acessorios">Verde</option>
+                        <?php foreach ($cor as $cor): ?>
+                            <option value="<?= $cor->id ?>"><?= $cor->cor ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="full-width">
-                    <label for="imagem">Imagem do Produto</label>
+                    <label for="imagem">Imagem do Produto <span>(*jpg, jpeg, png, tiff, jfif, webp)</span> </label>
                     <input type="file" id="imagem" name="imagem" accept="image/*">
                     <div class="image-preview" id="imagePreview">
                         <span>Pré-visualização da imagem</span>
@@ -139,32 +140,48 @@
                         <option value="0">Não</option>
                     </select>
                 </div>
-                <button class="full-width" type="submit">Cadastrar Produto</button>
+                <button class="full-width" type="submit" name="submit">Cadastrar Produto</button>
             </form>
+            <?php if (isset($_SESSION['erro'])): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: '<?= $_SESSION['erro'] ?>',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+                <?php unset($_SESSION['erro']); // Remove a sessão para não exibir o alerta novamente 
+                ?>
+            <?php endif; ?>
         </main>
 
 
-    <div class="right">
-        <div class="top">
-            <button id="menu-btn">
-                <span class="material-icons-sharp">menu</span>
-            </button>
-            <div class="theme-toggler">
-                <span class="material-icons-sharp active">light_mode</span>
-                <span class="material-icons-sharp">dark_mode</span>
-            </div>
-            <div class="profile">
-                <div class="info">
-                    <p>Olá, <b><?= $_SESSION['nome_admin'] ?></b></p>
-                    <small class="text-muted">Admin</small>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
                 </div>
-                <!-- <div class="profile-photo">
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b><?= $_SESSION['nome_admin'] ?></b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <!-- <div class="profile-photo">
                         <img src="images/logo-adventure-preto.png" alt="">
                     </div> -->
+                </div>
             </div>
         </div>
-    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.7/dist/inputmask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/gh/plentz/jquery-maskmoney@master/dist/jquery.maskMoney.min.js"></script>
 <script src="assets/js/cadastro-produto.js"></script>
