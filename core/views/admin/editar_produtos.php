@@ -87,37 +87,41 @@
             </div>
             <form id="product-form" class="product-form" method="POST" action="?a=processa_cadastro_produto" enctype="multipart/form-data">
                 <div class="full-width">
+                    <input type="hidden" name="imagem_atual" value="<?= $produto->imagem_produto ?>">
                     <label for="nome_produto">Nome do Produto</label>
-                    <input type="text" id="nome_produto" name="nome_produto" required>
+                    <input type="text" id="nome_produto" name="nome_produto" required value="<?= $produto->nome_produto ?>">
                 </div>
                 <div>
                     <label for="preco">Preço</label>
-                    <input type="text" id="preco" name="preco" required>
+                    <input type="text" id="preco" name="preco" required value="R$ <?= $produto->preco ?>">
                 </div>
                 <div>
                     <label for="categoria">Categoria</label>
                     <select id="categoria" name="categoria" required>
-                        <option value="">Selecione</option>
-                        <?php foreach ($categoria as $categoria): ?>
-                            <option value="<?= $categoria->id ?>"><?= $categoria->nome_categoria ?></option>
+                        <?php foreach ($categoria as $cat): ?>
+                            <option value="<?= $cat->id ?>" <?= ($produto->nome_categoria == $cat->nome_categoria) ? 'selected' : '' ?>>
+                                <?= $cat->nome_categoria ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
                     <label for="tamanho">Tamanho</label>
                     <select id="tamanho" name="tamanho" required>
-                        <option value="">Selecione</option>
                         <?php foreach ($tamanho as $tamanho): ?>
-                            <option value="<?= $tamanho->id ?>"><?= $tamanho->tamanho ?></option>
+                            <option value="<?= $tamanho->id ?>" <?= ($produto->tamanho == $tamanho->tamanho) ? 'selected' : '' ?>>
+                                <?= $tamanho->tamanho ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
                     <label for="cor">Cor</label>
                     <select id="cor" name="cor" required>
-                        <option value="">Selecione</option>
                         <?php foreach ($cor as $cor): ?>
-                            <option value="<?= $cor->id ?>"><?= $cor->cor ?></option>
+                            <option value="<?= $cor->id ?>" <?= ($produto->cor == $cor->cor) ? 'selected' : '' ?>>
+                                <?= $cor->cor ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -125,18 +129,22 @@
                     <label for="imagem">Imagem do Produto <span>(*jpg, jpeg, png, tiff, jfif, webp)</span> </label>
                     <input type="file" id="imagem" name="imagem" accept="image/*">
                     <div class="image-preview" id="imagePreview">
-                        <span>Pré-visualização da imagem</span>
+                        <?php if (!empty($produto->imagem_produto)): ?>
+                            <img src="../assets/images/produtos/<?= $produto->imagem_produto ?>" alt="Imagem do Produto" id="previewImage">
+                        <?php else: ?>
+                            <span>Pré-visualização da imagem</span>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="full-width">
                     <label for="descricao">Descrição</label>
-                    <textarea id="descricao" name="descricao" required></textarea>
+                    <textarea id="descricao" name="descricao" required"><?= $produto->descricao ?></textarea>
                 </div>
                 <div class="full-width">
                     <label for="visivel">Visivel no site</label>
                     <select name="visivel" id="visivel">
-                        <option value="1">Sim</option>
-                        <option value="0">Não</option>
+                        <option value="1" <?= ($produto->visivel == 1) ? 'selected' : '' ?>>Sim</option>
+                        <option value="0" <?= ($produto->visivel == 0) ? 'selected' : '' ?>>Não</option>
                     </select>
                 </div>
                 <button class="full-width" type="submit" name="submit">Cadastrar Produto</button>
@@ -183,4 +191,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/gh/plentz/jquery-maskmoney@master/dist/jquery.maskMoney.min.js"></script>
-<script src="assets/js/cadastro-produto.js"></script>
+<script src="assets/js/editar-produto.js"></script>

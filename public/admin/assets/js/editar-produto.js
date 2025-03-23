@@ -59,13 +59,17 @@ document.getElementById("product-form").addEventListener("submit", function (eve
 
 
 $(document).ready(function () {
+    // Captura o ID do produto da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const produtoId = urlParams.get('id'); // Exemplo: 123
+
     $("#product-form").on("submit", function (event) {
         event.preventDefault(); // Impede o envio normal do formulário
 
-        let formData = new FormData(this); // Captura os dados do formulário, incluindo arquivos
+        let formData = new FormData(this); // Captura os dados do formulário
 
         $.ajax({
-            url: "?a=processa_cadastro_produto", // URL do processamento PHP
+            url: "?a=edita_cadastro_produto&id=" + produtoId, // Adiciona o ID como parâmetro GET
             type: "POST",
             data: formData,
             processData: false,
@@ -112,6 +116,3 @@ $(document).ready(function () {
         });
     });
 });
-
-
-

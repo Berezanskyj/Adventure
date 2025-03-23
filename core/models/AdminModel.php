@@ -613,4 +613,62 @@ class AdminModel
 
         return true;
     }
+
+    public function editarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $imagem, $visivel, $id){
+        $sql = new Database();
+    
+        $param = [
+            ':nome' => $nome,
+            ':descricao' => $descricao,
+            ':preco' => $preco,
+            ':categoria' => $categoria,
+            ':tamanho' => $tamanho,
+            ':cor' => $cor,
+            ':imagem' => $imagem,
+            ':visivel' => $visivel,
+            ':id' => $id
+        ];
+    
+        $sql->update("UPDATE produtos SET nome_produto = :nome, descricao = :descricao, preco = :preco, categoria_id = :categoria, tamanho_id = :tamanho, cor_id = :cor, imagem_produto = :imagem, visivel = :visivel WHERE id = :id", $param);
+    
+        return true;
+    }
+
+    public function inativarProduto($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id,
+        ];
+
+        $sql->update("UPDATE produtos SET visivel = 0 WHERE id = :id;", $param);
+
+        return true;
+    }
+
+    public function ativarProduto($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id,
+        ];
+
+        $sql->update("UPDATE produtos SET visivel = 1 WHERE id = :id;", $param);
+
+        return true;
+    }
+
+    public function listarProdutoEspecifico($id){
+
+        $db = new Database();
+
+        $param = [
+            ':id' => $id,
+        ];
+
+        $sql = $db->select("SELECT p.id, p.nome_produto, p.descricao, p.preco, c.nome_categoria, t.tamanho, co.cor, p.imagem_produto, p.visivel, p.data_criacao, p.data_atualizacao FROM produtos p JOIN produto_categoria c ON p.categoria_id = c.id JOIN produto_tamanho t ON p.tamanho_id = t.id JOIN produto_cores co ON p.cor_id = co.id WHERE p.id = :id;", $param);
+
+        return $sql;
+
+    }
 }

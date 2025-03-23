@@ -45,7 +45,6 @@
                 </a>
                 <div class="dropdown-content" style="display: none;">
                     <a href="?a=pedidos">Listar Pedidos</a>
-                    <a href="#">Listar Clientes</a>
                 </div>
             </div>
             <a href="?a=pagamentos">
@@ -83,6 +82,7 @@
             <!-- CRUD Section -->
             <div class="crud-header">
                 <h2>Lista de Produtos</h2>
+                <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
                 <button class="btn btn-primary" id="create-payment-method" onclick="cadastrarProduto()">Cadastrar Produto</button>
             </div>
             <table>
@@ -95,6 +95,7 @@
                         <th>Categoria</th>
                         <th>Tamanho</th>
                         <th>Cor</th>
+                        <th>Ativo</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
@@ -102,16 +103,23 @@
 
                     <?php foreach ($produto as $produto): ?>
                         <tr>
-                            <td><?=$produto->id ?></td>
-                            <td><img src="../assets\images\produtos\<?=$produto->imagem_produto ?>" alt="ERRO"></td>
-                            <td><?=$produto->nome_produto ?></td>
-                            <td>R$ <?=str_replace('.', ',', $produto->preco) ?></td>
-                            <td><?=$produto->nome_categoria ?></td>
-                            <td><?=$produto->tamanho ?></td>
-                            <td><?=$produto->cor ?></td>
+                            <td><?= $produto->id ?></td>
+                            <td><img src="../assets\images\produtos\<?= $produto->imagem_produto ?>" alt="ERRO"></td>
+                            <td><?= $produto->nome_produto ?></td>
+                            <td>R$ <?= str_replace('.', ',', $produto->preco) ?></td>
+                            <td><?= $produto->nome_categoria ?></td>
+                            <td><?= $produto->tamanho ?></td>
+                            <td><?= $produto->cor ?></td>
+                            <td class="td-visivel"><?= $produto->visivel ?></td>
                             <td>
-                                <button id="botao-editar" class="btn btn-success add-user">Editar</button>
-                                <button id="botao-editar" class="btn btn-warning add-user">Estoque</button>
+                                <button id="botao-editar" class="btn btn-success add-user" data-id="<?= $produto->id ?>" onclick="editarProduto()">Editar</button>
+                                <?php if ($produto->visivel == 1): ?>
+                                    <!-- Produto está ativo, exibe o botão de inativar -->
+                                    <button class="btn btn-warning botao-inativar" data-id="<?= $produto->id ?>">Inativar</button>
+                                <?php else: ?>
+                                    <!-- Produto está inativo, exibe o botão de ativar -->
+                                    <button class="btn btn-primary botao-ativar" data-id="<?= $produto->id ?>">Ativar</button>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -45,7 +45,6 @@
                 </a>
                 <div class="dropdown-content" style="display: none;">
                     <a href="#">Listar Pedidos</a>
-                    <a href="#">Listar Clientes</a>
                 </div>
             </div>
             <a href="">

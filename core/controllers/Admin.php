@@ -964,4 +964,190 @@ class Admin
             echo json_encode(["status" => "error", "mensagem" => "Erro ao cadastrar produto no banco de dados."]);
         }
     }
+
+    public function edita_cadastro_produto()
+    {
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8');
+
+        function converterPrecoParaDecimall($preco)
+        {
+            $preco = trim(str_replace('R$', '', $preco));
+            $preco = str_replace('.', '', $preco);
+            $preco = str_replace(',', '.', $preco);
+            return (float) $preco;
+        }
+
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            echo json_encode(["status" => "error", "mensagem" => "ID do produto não encontrado."]);
+            exit;
+        }
+        $id = (int) $_GET['id'];
+
+        if (!isset($_POST['nome_produto'], $_POST['descricao'], $_POST['preco'], $_POST['categoria'], $_POST['tamanho'], $_POST['cor'], $_POST['visivel'])) {
+            echo json_encode(["status" => "error", "mensagem" => "Preencha todos os campos obrigatórios."]);
+            exit;
+        }
+
+        $db = new AdminModel();
+
+        $nome = $_POST['nome_produto'];
+        $descricao = $_POST['descricao'];
+        $preco = converterPrecoParaDecimall($_POST['preco']);
+        $categoria = $_POST['categoria'];
+        $tamanho = $_POST['tamanho'];
+        $cor = $_POST['cor'];
+        $visivel = $_POST['visivel'];
+
+        $diretorio = "../../public/assets/images/produtos/";
+
+        // Verifica se o usuário enviou uma nova imagem
+        if (!empty($_FILES['imagem']['name'])) {
+            $imagem = $_FILES['imagem'];
+            $nomeArquivo = time() . "_" . basename($imagem['name']); // Evita nomes duplicados
+            $caminhoFinal = $diretorio . $nomeArquivo;
+            $tipoArquivo = strtolower(pathinfo($caminhoFinal, PATHINFO_EXTENSION));
+
+            $formatosPermitidos = ['jpg', 'jpeg', 'png', 'tiff', 'jfif', 'webp'];
+            if (!in_array($tipoArquivo, $formatosPermitidos)) {
+                echo json_encode(["status" => "error", "mensagem" => "Formato de imagem não permitido. Use JPG, JPEG, PNG, TIFF, JFIF ou WEBP."]);
+                exit;
+            }
+
+            if (!move_uploaded_file($imagem['tmp_name'], $caminhoFinal)) {
+                echo json_encode(["status" => "error", "mensagem" => "Erro ao salvar a imagem no servidor."]);
+                exit;
+            }
+
+            // Remove a imagem antiga, se existir
+            if (!empty($_POST['imagem_atual']) && file_exists($diretorio . $_POST['imagem_atual'])) {
+                unlink($diretorio . $_POST['imagem_atual']);
+            }
+        } else {
+            // Se nenhuma nova imagem for enviada, mantém a anterior
+            $nomeArquivo = $_POST['imagem_atual'];
+        }
+
+        // Atualiza o produto no banco de dados
+        $edita = $db->editarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $nomeArquivo, $visivel, $id);
+
+        if ($edita) {
+            echo json_encode(["status" => "success", "mensagem" => "Produto atualizado com sucesso!"]);
+        } else {
+            echo json_encode(["status" => "error", "mensagem" => "Erro ao atualizar produto no banco de dados."]);
+        }
+    }
+
+    public function inativar_produto()
+    {
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
+        // Verifica se o ID foi enviado
+        if (!isset($_POST['id']) || empty($_POST['id'])) {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "ID do produto não informado."
+            ]);
+            exit;
+        }
+
+        $id = intval($_POST['id']); // Garante que o ID seja um número inteiro válido
+        $db = new AdminModel();
+
+        // Chama a função do modelo para inativar o produto
+        $inativado = $db->inativarProduto($id);
+
+        if ($inativado) {
+            echo json_encode([
+                "status" => "success",
+                "mensagem" => "Produto inativado com sucesso!"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Erro ao inativar o produto. Tente novamente."
+            ]);
+        }
+
+        exit;
+    }
+
+    public function ativar_produto()
+    {
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
+        // Verifica se o ID foi enviado
+        if (!isset($_POST['id']) || empty($_POST['id'])) {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "ID do produto não informado."
+            ]);
+            exit;
+        }
+
+        $id = intval($_POST['id']); // Garante que o ID seja um número inteiro válido
+        $db = new AdminModel();
+
+        // Chama a função do modelo para inativar o produto
+        $ativado = $db->ativarProduto($id);
+
+        if ($ativado) {
+            echo json_encode([
+                "status" => "success",
+                "mensagem" => "Produto ativado com sucesso!"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Erro ao ativar o produto. Tente novamente."
+            ]);
+        }
+
+        exit;
+    }
+
+    public function editar_produtos()
+    {
+
+        $id = $_GET['id'];
+
+        $db = new AdminModel();
+
+        $categoria = $db->listarCategorias();
+        $cor = $db->listarCores();
+        $tamanho = $db->listarTamanhos();
+        $produto = $db->listarProdutoEspecifico($id);
+
+        // echo "<br> Categoria <br>";
+        //     Store::printData($categoria);
+        //     echo "<br> COR <br>";
+        //     Store::printData($cor);
+        //     echo "<br> tamanho <br>";
+        //     Store::printData($tamanho); 
+        //     echo "<br> produto <br>";
+        //     Store::printData($produto);
+        //     die();
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/editar_produtos',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'categoria' => $categoria,
+            'cor' => $cor,
+            'tamanho' => $tamanho,
+            'produto' => $produto[0]
+        ]);
+    }
 }
