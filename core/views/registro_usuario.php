@@ -42,6 +42,7 @@
                 </div>
                 <button type="submit" class="btnUserInformation"><i class='bx bx-right-arrow-alt'></i></button>
                 <?php if(isset($_SESSION['erro'])):?>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                     <script>
                         Swal.fire({
                         title: "<?= $_SESSION['erro']?>",

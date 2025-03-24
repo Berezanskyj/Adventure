@@ -301,3 +301,8 @@ function ativarPedido(id) {
             }
         }
     }
+
+
+    function pedidosCancelados() {
+        window.location.href = "?a=pedidos_cancelados";
+    };

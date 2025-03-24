@@ -101,7 +101,7 @@
         <div class="recent-orders">
             <div class="crud-header">
                 <h2>Lista de Pedidos</h2>
-                <button href="?a=pedidos_cancelados" class="btn">Pedidos Cancelados</button>
+                <button class="btn" onclick="pedidosCancelados()">Pedidos Cancelados</button>
             </div>
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
@@ -165,6 +165,7 @@
                 <option value="pendente">Pendente</option>
                 <option value="enviado">Enviado</option>
                 <option value="entregue">Entregue</option>
+                <option value="cancelado">Cancelado</option>
             </select>
 
             <label for="total_pedido">Total do Pedido (R$)</label>
@@ -193,9 +194,9 @@
             <input type="text" id="metodo_pagamento" name="metodo_pagamento" readonly>
 
             <label for="status_pagamento">Status do Pagamento</label>
-            <select id="status_pagamento" name="status_pagamento" disabled>
+            <select id="status_pagamento" name="status_pagamento">
                 <option value="1">Pendente</option>
-                <option value="pendente">Em Processamento</option>
+                <option value="2">Em Processamento</option>
                 <option value="3">Pago</option>
                 <option value="4">Recusado</option>
                 <option value="6">Cancelado</option>

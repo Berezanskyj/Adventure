@@ -268,6 +268,7 @@ class Admin
 
     public function pedidos()
     {
+        
 
         $vendas = new AdminModel();
 
@@ -298,7 +299,8 @@ class Admin
     }
 
     public function alterar_pedidos()
-    {
+{
+    try {
         if (isset($_FILES['anexos']) && $_FILES['anexos']['error'] === UPLOAD_ERR_OK) {
             $arquivo = $_FILES['anexos'];
         } else {
@@ -318,17 +320,26 @@ class Admin
         $metodoPagamento = $_POST['metodo_pagamento'];
         $statusPagamento = $_POST['status_pagamento'];
         $mensagem = $_POST['mensagem'];
+
+        // Verificando se os dados necessários estão presentes
+        if (empty($id_pedido) || empty($usuario) || empty($statusPedido) || empty($totalPedido)) {
+            throw new Exception('Dados obrigatórios não fornecidos.');
+        }
+
         $itens = $model->itens_pedidos($id_pedido);
         $Pegaremail = $model->emailUsuario($usuario);
+        if (empty($Pegaremail)) {
+            throw new Exception('Usuário não encontrado.');
+        }
         $emailCliente = $Pegaremail[0]->email;
 
-
-
-
-
-
+        // Atualizando status do pedido e pagamento
         $atualizaStatusPedido = $model->atualizaStatusPedido($id_pedido, $statusPedido);
         $atualizaStatusPagamento = $model->atualizaStatusPagamento($id_pedido, $statusPagamento);
+
+        if (empty($atualizaStatusPedido) || empty($atualizaStatusPagamento)) {
+            throw new Exception('Falha ao atualizar status do pedido ou pagamento.');
+        }
 
         $statusPedidoAtualizado = $atualizaStatusPedido[0]->status_pedido;
         $statusPagamentoAtualizado = $atualizaStatusPagamento[0]->status_pagamento_id;
@@ -342,8 +353,6 @@ class Admin
             "6" => "Cancelado",
             default => "Reembolsado",
         };
-
-
 
         // Chamar a função de envio de e-mail com anexo
         $envia = $email->enviarEmailProdutos(
@@ -360,6 +369,13 @@ class Admin
             $arquivo // Passando o anexo aqui
         );
 
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
+
+        // Se tudo foi bem-sucedido, retorna um sucesso
         echo json_encode([
             'success' => true,
             'message' => 'Pedido atualizado com sucesso!',
@@ -369,8 +385,16 @@ class Admin
                 'mensagem' => $mensagem,
             ],
         ]);
-        exit;
+    } catch (Exception $e) {
+        // Caso ocorra qualquer erro, captura e retorna a mensagem de erro
+        echo json_encode([
+            'success' => false,
+            'message' => 'Erro ao atualizar pedido.',
+            'error' => $e->getMessage(), // Retorna a mensagem de erro específica
+        ]);
     }
+    exit;
+}
 
     public function obterItensPedido()
     {

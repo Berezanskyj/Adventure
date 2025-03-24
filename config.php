@@ -4,7 +4,7 @@ define('APP_NAME',          'Adventure');
 define('APP_VERSION',          '1.0.0');
 
 // define('BASE_URL',           'http://localhost:8080/adventure/public/');
-define('BASE_URL',           'http://localhost:8080/adventure/public/');
+define('BASE_URL',           'http://localhost/adventure/public/');
 
 //MYSQL
 define('MYSQL_SERVER',          'localhost');

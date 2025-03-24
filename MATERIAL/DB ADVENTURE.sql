@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
   data_pedido DATE,
-  status_pedido ENUM('pedido_recebido','em_processamento','em_transito','entregue', 'cancelado') NOT NULL,
+  status_pedido ENUM('pendente','enviado','entregue', 'cancelado') NOT NULL,
   total_pedido DECIMAL(10,2) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -325,27 +325,6 @@ INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, 
 VALUES 
 ('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 49.99, 1, 1, 1, 'camiseta-jean-2.png', 1);
 
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
-VALUES 
-('Camiseta Azul', 'Camiseta de algodão azul.', 49.99, 1, 2, 2, 'camiseta-jeans-1.png', 1);
-
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
-VALUES 
-('Camiseta Preta', 'Camiseta de algodão preta.', 54.99, 1, 1, 3, 'moletom-1.png', 1);
-
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
-VALUES 
-('Camiseta Branca', 'Camiseta de algodão branca.', 44.99, 1, 3, 4, 'moletom-2.png', 1);
-
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
-VALUES 
-('Camiseta Cinza', 'Camiseta de algodão cinza.', 49.99, 1, 2, 5, 'camiseta-1.png', 1);
-
-INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
-VALUES 
-('Camiseta Rosa', 'Camiseta de algodão rosa.', 49.99, 1, 1, 6, 'camiseta-2.png', 1);
-
-
 -- Inserir personalização
 INSERT INTO personalizacao (tipo_personalizacao, valor_adicional) VALUES 
 ('Nome Bordado', 10.00);
@@ -354,24 +333,31 @@ INSERT INTO personalizacao (tipo_personalizacao, valor_adicional) VALUES
 INSERT INTO pedidos (id_usuario, data_pedido, status_pedido, total_pedido) VALUES 
 (1, NOW(), 'pendente', 29.99);
 
+-- Inserir movimentação de estoque
+INSERT INTO movimentacoes_estoque (produto_id, cor_id, tamanho_id, tipo_movimentacao, quantidade) VALUES 
+(1, 1, 1, 'entrada', 50) ;
+
 -- Inserir item de pedido
 INSERT INTO itens_pedidos (pedido_id, produto_id, cor_id, tamanho_id, quantidade, preco_unitario) 
 VALUES (1, 1, 1, 1, 1, 29.99);
 
 -- Inserir método de pagamento
 INSERT INTO metodo_pagamento (metodo) VALUES 
-('Cartão de Crédito'), 
-('Boleto');
+('cartao_credito'), 
+('transferencia'),
+('pix');
 
 -- Inserir status de pagamento
 INSERT INTO status_pagamento (nome_status) VALUES 
-('Aguardando Pagamento'), 
-('Pago');
+('Pendente'), 
+('Em Processamento'),
+('Pago'),
+('Recusado'),
+('Cancelado'),
+('Reembolsado');
 
 -- Inserir pagamento
 INSERT INTO pagamento (pedido_id, metodo_pagamento_id, status_pagamento_id, data_pagamento) VALUES 
 (1, 1, 2, NOW());
 
--- Inserir movimentação de estoque
-INSERT INTO movimentacoes_estoque (produto_id, cor_id, tamanho_id, tipo_movimentacao, quantidade) VALUES 
-(1, 1, 1, 'entrada', 50) ;
+
