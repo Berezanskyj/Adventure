@@ -277,6 +277,7 @@ class Admin
         $totalEstoque = $vendas->totalEstoque();
         $totalClientes = $vendas->totalClientes();
         $pedidos = $vendas->listarPedidos();
+        $statusPagamento = $vendas->listarStatusPagamento();
 
 
         // Store::printData($itens);
@@ -295,6 +296,7 @@ class Admin
             'totalEstoque' => $totalEstoque,
             'totalClientes' => $totalClientes,
             'pedidos' => $pedidos,
+            'statusPagamento' =>$statusPagamento,
         ]);
     }
 

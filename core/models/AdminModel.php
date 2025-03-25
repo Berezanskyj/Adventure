@@ -671,4 +671,19 @@ class AdminModel
         return $sql;
 
     }
+
+
+    public function listarStatusPagamentoPedido($id){
+        $sql = new Database();
+
+
+        $param = [
+            ":id" => $id,
+        ];
+
+        $sql->select("SELECT p.id AS id_pedido, sp.nome_status AS status_pagamento  FROM pagamento p JOIN status_pagamento sp ON p.status_pagamento_id = sp.id WHERE p.pedido_id = :id", $param);
+
+
+        return $sql;
+    }
 }

@@ -195,12 +195,9 @@
 
             <label for="status_pagamento">Status do Pagamento</label>
             <select id="status_pagamento" name="status_pagamento">
-                <option value="1">Pendente</option>
-                <option value="2">Em Processamento</option>
-                <option value="3">Pago</option>
-                <option value="4">Recusado</option>
-                <option value="6">Cancelado</option>
-                <option value="7">Reembolsado</option>
+                <?php  foreach ($statusPagamento as $stp):   ?>
+                <option value="<?= $stp->id ?>"><?= $stp->nome_status ?></option>
+                <?php  endforeach;   ?>
             </select>
 
             <label for="mensagem">Mensagem</label>
