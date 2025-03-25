@@ -82,7 +82,7 @@
             <!-- CRUD Section -->
             <div class="crud-header">
                 <h2>Lista de Produtos</h2>
-                <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
+                <input type="text" id="search-input" placeholder="Pesquisar por Produto, Cor, Classe..." onkeyup="searchOrders()">
                 <button class="btn btn-primary" id="create-payment-method" onclick="cadastrarProduto()">Cadastrar Produto</button>
             </div>
             <table>
