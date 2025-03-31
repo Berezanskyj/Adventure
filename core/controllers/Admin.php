@@ -268,7 +268,7 @@ class Admin
 
     public function pedidos()
     {
-        
+
 
         $vendas = new AdminModel();
 
@@ -280,7 +280,7 @@ class Admin
         $statusPagamento = $vendas->listarStatusPagamento();
 
 
-        // Store::printData($itens);
+        // Store::printData($pedidos);
 
         // die();
 
@@ -296,107 +296,107 @@ class Admin
             'totalEstoque' => $totalEstoque,
             'totalClientes' => $totalClientes,
             'pedidos' => $pedidos,
-            'statusPagamento' =>$statusPagamento,
+            'statusPagamento' => $statusPagamento,
         ]);
     }
 
     public function alterar_pedidos()
-{
-    try {
-        if (isset($_FILES['anexos']) && $_FILES['anexos']['error'] === UPLOAD_ERR_OK) {
-            $arquivo = $_FILES['anexos'];
-        } else {
-            $arquivo = null; // Caso não tenha anexo
+    {
+        try {
+            if (isset($_FILES['anexos']) && $_FILES['anexos']['error'] === UPLOAD_ERR_OK) {
+                $arquivo = $_FILES['anexos'];
+            } else {
+                $arquivo = null; // Caso não tenha anexo
+            }
+
+            $email = new EnviarEmail();
+            $model = new AdminModel();
+
+            // Dados do pedido
+            $id_pedido = $_POST['id'];
+            $usuario = $_POST['idUsuario'];
+            $nomeCompletoUsuario = $_POST['nome_usuario'];
+            $statusPedido = ucwords($_POST['status_pedido']);
+            $totalPedido = $_POST['total_pedido'];
+            $dataPedido = $_POST['data_pedido'];
+            $metodoPagamento = $_POST['metodo_pagamento'];
+            $statusPagamento = $_POST['status_pagamento'];
+            $mensagem = $_POST['mensagem'];
+
+            // Verificando se os dados necessários estão presentes
+            if (empty($id_pedido) || empty($usuario) || empty($statusPedido) || empty($totalPedido)) {
+                throw new Exception('Dados obrigatórios não fornecidos.');
+            }
+
+            $itens = $model->itens_pedidos($id_pedido);
+            $Pegaremail = $model->emailUsuario($usuario);
+            if (empty($Pegaremail)) {
+                throw new Exception('Usuário não encontrado.');
+            }
+            $emailCliente = $Pegaremail[0]->email;
+
+            // Atualizando status do pedido e pagamento
+            $atualizaStatusPedido = $model->atualizaStatusPedido($id_pedido, $statusPedido);
+            $atualizaStatusPagamento = $model->atualizaStatusPagamento($id_pedido, $statusPagamento);
+
+            if (empty($atualizaStatusPedido) || empty($atualizaStatusPagamento)) {
+                throw new Exception('Falha ao atualizar status do pedido ou pagamento.');
+            }
+
+            $statusPedidoAtualizado = $atualizaStatusPedido[0]->status_pedido;
+            $statusPagamentoAtualizado = $atualizaStatusPagamento[0]->status_pagamento_id;
+
+            // Corrigir status do pagamento
+            $statusPagamentoCorrigido = match ($statusPagamentoAtualizado) {
+                "1" => "Pendente",
+                "2" => "Em Processamento",
+                "3" => "Pago",
+                "4" => "Recusado",
+                "6" => "Cancelado",
+                default => "Reembolsado",
+            };
+
+            // Chamar a função de envio de e-mail com anexo
+            $envia = $email->enviarEmailProdutos(
+                $nomeCompletoUsuario,
+                ucwords($statusPedidoAtualizado),
+                $statusPagamentoCorrigido,
+                $mensagem,
+                $emailCliente,
+                $itens,
+                $id_pedido,
+                $metodoPagamento,
+                $dataPedido,
+                $totalPedido,
+                $arquivo // Passando o anexo aqui
+            );
+
+            ob_clean();
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+            header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
+
+            // Se tudo foi bem-sucedido, retorna um sucesso
+            echo json_encode([
+                'success' => true,
+                'message' => 'Pedido atualizado com sucesso!',
+                'data' => [
+                    'id_pedido' => $id_pedido,
+                    'status_pedido' => $statusPedido,
+                    'mensagem' => $mensagem,
+                ],
+            ]);
+        } catch (Exception $e) {
+            // Caso ocorra qualquer erro, captura e retorna a mensagem de erro
+            echo json_encode([
+                'success' => false,
+                'message' => 'Erro ao atualizar pedido.',
+                'error' => $e->getMessage(), // Retorna a mensagem de erro específica
+            ]);
         }
-
-        $email = new EnviarEmail();
-        $model = new AdminModel();
-
-        // Dados do pedido
-        $id_pedido = $_POST['id'];
-        $usuario = $_POST['idUsuario'];
-        $nomeCompletoUsuario = $_POST['nome_usuario'];
-        $statusPedido = ucwords($_POST['status_pedido']);
-        $totalPedido = $_POST['total_pedido'];
-        $dataPedido = $_POST['data_pedido'];
-        $metodoPagamento = $_POST['metodo_pagamento'];
-        $statusPagamento = $_POST['status_pagamento'];
-        $mensagem = $_POST['mensagem'];
-
-        // Verificando se os dados necessários estão presentes
-        if (empty($id_pedido) || empty($usuario) || empty($statusPedido) || empty($totalPedido)) {
-            throw new Exception('Dados obrigatórios não fornecidos.');
-        }
-
-        $itens = $model->itens_pedidos($id_pedido);
-        $Pegaremail = $model->emailUsuario($usuario);
-        if (empty($Pegaremail)) {
-            throw new Exception('Usuário não encontrado.');
-        }
-        $emailCliente = $Pegaremail[0]->email;
-
-        // Atualizando status do pedido e pagamento
-        $atualizaStatusPedido = $model->atualizaStatusPedido($id_pedido, $statusPedido);
-        $atualizaStatusPagamento = $model->atualizaStatusPagamento($id_pedido, $statusPagamento);
-
-        if (empty($atualizaStatusPedido) || empty($atualizaStatusPagamento)) {
-            throw new Exception('Falha ao atualizar status do pedido ou pagamento.');
-        }
-
-        $statusPedidoAtualizado = $atualizaStatusPedido[0]->status_pedido;
-        $statusPagamentoAtualizado = $atualizaStatusPagamento[0]->status_pagamento_id;
-
-        // Corrigir status do pagamento
-        $statusPagamentoCorrigido = match ($statusPagamentoAtualizado) {
-            "1" => "Pendente",
-            "2" => "Em Processamento",
-            "3" => "Pago",
-            "4" => "Recusado",
-            "6" => "Cancelado",
-            default => "Reembolsado",
-        };
-
-        // Chamar a função de envio de e-mail com anexo
-        $envia = $email->enviarEmailProdutos(
-            $nomeCompletoUsuario,
-            ucwords($statusPedidoAtualizado),
-            $statusPagamentoCorrigido,
-            $mensagem,
-            $emailCliente,
-            $itens,
-            $id_pedido,
-            $metodoPagamento,
-            $dataPedido,
-            $totalPedido,
-            $arquivo // Passando o anexo aqui
-        );
-
-        ob_clean();
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
-
-        // Se tudo foi bem-sucedido, retorna um sucesso
-        echo json_encode([
-            'success' => true,
-            'message' => 'Pedido atualizado com sucesso!',
-            'data' => [
-                'id_pedido' => $id_pedido,
-                'status_pedido' => $statusPedido,
-                'mensagem' => $mensagem,
-            ],
-        ]);
-    } catch (Exception $e) {
-        // Caso ocorra qualquer erro, captura e retorna a mensagem de erro
-        echo json_encode([
-            'success' => false,
-            'message' => 'Erro ao atualizar pedido.',
-            'error' => $e->getMessage(), // Retorna a mensagem de erro específica
-        ]);
+        exit;
     }
-    exit;
-}
 
     public function obterItensPedido()
     {
@@ -1174,6 +1174,26 @@ class Admin
             'cor' => $cor,
             'tamanho' => $tamanho,
             'produto' => $produto[0]
+        ]);
+    }
+
+    public function estoque(){
+
+
+        
+        $db = new AdminModel();
+        
+        $produtos = $db->listarEstoque();
+
+
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/estoque',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            'produtos' => $produtos,
         ]);
     }
 }

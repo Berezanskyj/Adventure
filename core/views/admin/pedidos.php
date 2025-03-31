@@ -52,7 +52,7 @@
                 <span class="material-icons-sharp">credit_card</span>
                 <h3>Pagamentos</h3>
             </a>
-            <a href="">
+            <a href="?a=estoque">
                 <span class="material-icons-sharp">store</span>
                 <h3>Estoque</h3>
             </a>
@@ -194,11 +194,7 @@
             <input type="text" id="metodo_pagamento" name="metodo_pagamento" readonly>
 
             <label for="status_pagamento">Status do Pagamento</label>
-            <select id="status_pagamento" name="status_pagamento">
-                <?php  foreach ($statusPagamento as $stp):   ?>
-                <option value="<?= $stp->id ?>"><?= $stp->nome_status ?></option>
-                <?php  endforeach;   ?>
-            </select>
+            <input type="text" name="status_pagamento" id="status_pagamento" readonly>
 
             <label for="mensagem">Mensagem</label>
             <textarea id="mensagem" name="mensagem" rows="4" placeholder="Digite uma mensagem..."></textarea>

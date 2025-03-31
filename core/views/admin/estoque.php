@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="assets/css/home.css">
-<link rel="stylesheet" href="assets/css/crud-usuario.css">
+<link rel="stylesheet" href="assets/css/gerencia_produtos.css">
 
 <div class="container">
     <aside>
@@ -73,7 +72,7 @@
     </aside>
 
     <main>
-        <h1>Dashboard</h1>
+        <h1>Gerenciamento de Produtos</h1>
 
         <div class="date">
             <input type="date" id="date-input" disabled>
@@ -82,73 +81,37 @@
         <div class="recent-orders">
             <!-- CRUD Section -->
             <div class="crud-header">
-                <h2>Lista de Pagamentos</h2>
-                <button class="btn btn-primary" id="create-payment-method" onclick="abrirModal()">Criar Status de Pagamento</button>
+                <h2>Lista de Produtos</h2>
+                <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
+                <button class="btn btn-primary" id="create-payment-method" onclick="cadastrarProduto()">Cadastrar Produto</button>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Pedido</th>
-                        <th>Método de Pagamento</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        <th>ID Produto</th>
+                        <th>Produto</th>
+                        <th>Cor</th>
+                        <th>Tamanho</th>
+                        <th>Quantidade</th>
+                        <th>Registrar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pagamento as $pagamentos):?>
-                        
-
                     <tr>
-                        <td><?= $pagamentos->pedido_id ?></td>
-                        <td><?= $pagamentos->metodo_pagamento ?></td>
-                        <td id="statusPagamento"><?= ucwords(str_replace('_', ' ', $pagamentos->status_pagamento)); ?></td>
-                        <td>
-                            <button id="botao-editar" class="btn btn-success add-user" onclick="abrirChangeModal('<?=$pagamentos->pedido_id?>', '<?=$pagamentos->metodo_pagamento?>')">Editar</button>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
+                        <?php foreach ($produtos as $p): ?>
+                            <td><?= $p->id_produto  ?></td>
+                            <td><?= $p->nome_produto ?></td>
+                            <td><?= $p->nome_cor ?></td>
+                            <td><?= $p->nome_tamanho ?></td>
+                            <td><?= $p->quantidade_disponivel ?></td>
+                            <td>
+                                <button id="botao-editar" class="btn btn-success add-user" data-id="" onclick="editarProduto()">Entrada</button>
+                                <button id="botao-editar" class="btn btn-warning add-user" data-id="" onclick="editarProduto()">Saida</button>
+                            </td>
                 </tbody>
+            <?php endforeach; ?>
             </table>
         </div>
-        <!-- Add/Edit User Modal -->
-        <div class="modal" id="register-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal" onclick="fecharModal()">&times;</span>
-                <h2 id="modal-title">Criar Status</h2>
-                <form id="register-form" method="post" action="?a=criar_status_pagamento">
-                    <label for="name">Nome</label>
-                    <input type="text" name="nameStatusRegister" id="nomeStatusModal">
-                    <button type="button" class="btn btn-primary" onclick="registerStatus()">Salvar</button>
-                </form>
-            </div>
-        </div>
-
-
-        <!-- Change order status modal -->
-        <div class="modal" id="change-order-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal" onclick="fecharChangeModal()">&times;</span>
-                <h2 id="modal-title">Criar Status</h2>
-                <form id="register-form" method="post" action="?a=editar_pagamento">
-                    <label for="pedido">Pedido</label>
-                    <input type="text" name="pedido" id="pedido" disabled>
-                    <label for="metodo">Método de Pagamento</label>
-                    <input type="text" name="metodo" id="metodo" disabled>
-                    <label for="status_pagamento">Status do Pagamento</label>
-                    <select id="status_pagamento" name="status_pagamento">
-                    <?php foreach ($status as $statusPagamento):?>
-                        <option value="<?=$statusPagamento->id?>"><?=ucfirst(str_replace('_', ' ',$statusPagamento->nome_status))?></option>
-                    <?php endforeach;?>
-                    </select>
-                    <button type="button" class="btn btn-primary" onclick="changePaymentStatus()">Salvar</button>
-                </form>
-            </div>
-        </div>
-        </tbody>
-        </table>
-        </section>
-
-
 
 
 
@@ -179,4 +142,4 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/modal-pagamentos.js"></script>
+<script src="assets/js/gerenciarProdutos.js"></script>
