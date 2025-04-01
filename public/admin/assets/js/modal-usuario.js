@@ -111,47 +111,7 @@ document.getElementById('user-form').addEventListener('submit', async function (
 });
 
 
-// document.getElementById('register-user-form').addEventListener('submit', async function (event) {
-//     // event.preventDefault(); // Previne o comportamento padrão do formulário (recarregar a pagia)
 
-//     const formData = new FormData(this);
-
-//     try {
-//         const response = await fetch('?a=registrar_usuario', {
-//             method: 'POST',
-//             body: formData,
-//         });
-
-//         const result = await response.json();
-
-//         if (result.success) {
-//             localStorage.setItem('RegisteruserUpdateSuccess', 'true');
-
-//             // Recarrega a página
-//             location.reload();
-
-//             console.log(result.data);
-//             console.log(response.json);
-//         } else {
-//             Swal.fire({
-//                 title: 'Erro!',
-//                 text: result.message || 'erro.',
-//                 icon: 'error',
-//                 confirmButtonText: 'OK',
-//             });
-//             console.log(result.data);
-//             console.log(response.json);
-//         }
-//     } catch (error) {
-//         Swal.fire({
-//             title: 'Erro!',
-//             text: 'Ocorreu um erro ao cadastrar o usuário.' + error.message,
-//             icon: 'error',
-//             confirmButtonText: 'OK',
-//         });
-//         console.log("Erro na solicitacao", error.message);
-//     }
-// });
 
 
 function registrarUsuario() {

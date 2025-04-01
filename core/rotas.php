@@ -48,6 +48,10 @@ $rotas = [
     'recuperar_senha' => 'main@recuperar_senha',
     'verificar_email' => 'main@verificar_email',
     'recuperar_senha_submit' => 'main@recuperar_senha_submit',
+    'atualizar_configuracoes' => 'usuario@atualizar_configuracoes',
+    'atualizar_configuracoes' => 'usuario@atualizar_configuracoes',
+    'atualizar_seguranca' => 'usuario@atualizar_seguranca',
+    'atualizar_endereco' => 'usuario@atualizar_endereco',
 ];
 
 //* Define a ação padrão como 'inicio'

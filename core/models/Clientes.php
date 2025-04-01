@@ -284,6 +284,35 @@ class Clientes{
         
     }
 
+    public function listarEnderecoCliente($id){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id,
+        ];
+
+        $res = $sql->select("SELECT * FROM enderecos WHERE id_usuario = :id", $param);
+
+        return $res;
+    }
+
+    public function alteraDadosInfoPessoal($id, $nome, $sobrenome, $email, $cpf, $telefone){
+        $sql = new Database();
+
+        $param = [
+            ':id' => $id,
+            ':nome' => $nome,
+            ':sobrenome' => $sobrenome,
+            ':email' => $email,
+            ':cpf' => $cpf,
+            ':telefone' => $telefone,
+        ];
+
+        $sql->update("UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, email = :email, cpf = :cpf, telefone = :telefone WHERE id = :id", $param);
+
+        return $sql;
+    }
+
     
 
 }
