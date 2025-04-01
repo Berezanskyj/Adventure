@@ -41,6 +41,7 @@ $rotas = [
     'inativar_produto' => 'admin@inativar_produto',
     'ativar_produto' => 'admin@ativar_produto',
     'estoque' => 'admin@estoque',
+    'entrada_estoque' => 'admin@entrada_estoque',
 
 
 ];

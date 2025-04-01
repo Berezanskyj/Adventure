@@ -134,6 +134,7 @@
                 <form id="entrada-form" method="post" action="?a=adicionar_entrada">
                     <label for="produto">Produto</label>
                     <input type="text" name="produto" id="nome_produto" readonly>
+                    <input type="hidden" name="id_produto" id="id_produto" readonly>
 
                     <label for="cor">Cor</label>
                     <input type="text" name="cor" id="produto_cor" readonly>
@@ -143,7 +144,7 @@
 
                     <label for="name">Quantidade da entrada</label>
                     <input type="text" name="qtdEntrada" id="qtdEntrada">
-                    <button type="button" class="btn btn-primary" onclick="cadastrarEntrada()">Salvar</button>
+                    <button type="submit" class="btn btn-primary" onclick="cadastrarEntrada()">Salvar</button>
                 </form>
             </div>
         </div>
@@ -155,6 +156,7 @@
                 <form id="saida-form" method="post" action="?a=adicionar_saida">
                     <label for="produto">Produto</label>
                     <input type="text" name="produto" id="nome_produto_saida" readonly>
+                    <input type="hidden" name="id_produto" id="id_produto_saida" readonly>
 
                     <label for="cor">Cor</label>
                     <input type="text" name="cor" id="produto_cor_saida" readonly>

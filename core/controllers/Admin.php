@@ -1196,4 +1196,23 @@ class Admin
             'produtos' => $produtos,
         ]);
     }
+
+    public function entrada_estoque(){
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
+
+        $dados = $_POST;
+
+        $id_produto = $_POST['id_produto'];
+        $qtdEntrada = $_POST['qtdEntrada'];
+
+        echo json_encode([
+            "status" => "success",
+            "mensagem" => "Produto ativado com sucesso!",
+            "dados" => $dados
+        ]);
+    }
 }
