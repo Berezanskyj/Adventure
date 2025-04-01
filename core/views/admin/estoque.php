@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/gerencia_produtos.css">
+<link rel="stylesheet" href="assets/css/estoque.css">
 
 <div class="container">
     <aside>
@@ -82,8 +82,9 @@
             <!-- CRUD Section -->
             <div class="crud-header">
                 <h2>Lista de Produtos</h2>
-                <input type="text" id="search-input" placeholder="Pesquisar por Pedido, Cliente, Status..." onkeyup="searchOrders()">
-                <button class="btn btn-primary" id="create-payment-method" onclick="cadastrarProduto()">Cadastrar Produto</button>
+                <input type="text" id="search-input" placeholder="Pesquisar por Produto, Cor, Tamanho..." onkeyup="searchOrders()">
+                <span></span>
+                <!-- <button class="btn btn-primary" id="create-payment-method" ></button> -->
             </div>
             <table>
                 <thead>
@@ -105,12 +106,67 @@
                             <td><?= $p->nome_tamanho ?></td>
                             <td><?= $p->quantidade_disponivel ?></td>
                             <td>
-                                <button id="botao-editar" class="btn btn-success add-user" data-id="" onclick="editarProduto()">Entrada</button>
-                                <button id="botao-editar" class="btn btn-warning add-user" data-id="" onclick="editarProduto()">Saida</button>
+                                <button id="botao-entrada" class="btn btn-success add-user"
+                                data-id="<?= $p->id_produto ?>"
+                                data-nome_produto="<?= $p->nome_produto ?>"
+                                data-nome_cor="<?= $p->nome_cor ?>"
+                                data-nome_tamanho="<?= $p->nome_tamanho ?>"
+                                data-quantidade_disponivel="<?= $p->quantidade_disponivel ?>" 
+                                onclick="modalEntrada(this)">Entrada</button>
+
+                                <button id="botao-saida" class="btn btn-warning add-user" 
+                                data-id="<?= $p->id_produto ?>"
+                                data-nome_produto="<?= $p->nome_produto ?>"
+                                data-nome_cor="<?= $p->nome_cor ?>"
+                                data-nome_tamanho="<?= $p->nome_tamanho ?>"
+                                data-quantidade_disponivel="<?= $p->quantidade_disponivel ?>" 
+                                onclick="modalSaida(this)">Saida</button>
                             </td>
                 </tbody>
             <?php endforeach; ?>
             </table>
+        </div>
+
+        <div class="modal" id="entrada-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal" onclick="fecharModalEntrada()">&times;</span>
+                <h2 id="modal-title">Cadastrar entrada do Estoque</h2>
+                <form id="entrada-form" method="post" action="?a=adicionar_entrada">
+                    <label for="produto">Produto</label>
+                    <input type="text" name="produto" id="nome_produto" readonly>
+
+                    <label for="cor">Cor</label>
+                    <input type="text" name="cor" id="produto_cor" readonly>
+
+                    <label for="tamanho">Tamanho</label>
+                    <input type="text" name="tamanho" id="produto_tamanho" readonly>
+
+                    <label for="name">Quantidade da entrada</label>
+                    <input type="text" name="qtdEntrada" id="qtdEntrada">
+                    <button type="button" class="btn btn-primary" onclick="cadastrarEntrada()">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal" id="saida-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal" onclick="fecharModalSaida()">&times;</span>
+                <h2 id="modal-title">Cadastrar saida do Estoque</h2>
+                <form id="saida-form" method="post" action="?a=adicionar_saida">
+                    <label for="produto">Produto</label>
+                    <input type="text" name="produto" id="nome_produto" readonly>
+
+                    <label for="cor">Cor</label>
+                    <input type="text" name="cor" id="produto_cor" readonly>
+
+                    <label for="tamanho">Tamanho</label>
+                    <input type="text" name="tamanho" id="produto_tamanho" readonly>
+
+                    <label for="name">Quantidade da Saida</label>
+                    <input type="text" name="qtdSaida" id="qtdSaida">
+                    <button type="button" class="btn btn-primary" onclick="cadastrarSaida()">Salvar</button>
+                </form>
+            </div>
         </div>
 
 
@@ -142,4 +198,4 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/gerenciarProdutos.js"></script>
+<script src="assets/js/gerenciarEstoque.js"></script>
