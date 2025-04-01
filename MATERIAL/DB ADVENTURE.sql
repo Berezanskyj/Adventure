@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   ativo TINYINT DEFAULT 0,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (nivel_usuario) REFERENCES nivel_usuario (id)
+  FOREIGN KEY (nivel_usuario) REFERENCES nivel_usuario (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela enderecos com chave estrangeira para usuario
@@ -44,8 +44,7 @@ CREATE TABLE IF NOT EXISTS enderecos (
   id_usuario INT NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_usuario) REFERENCES usuario (id)
-  ON DELETE CASCADE
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela categorias
@@ -85,9 +84,9 @@ CREATE TABLE IF NOT EXISTS produtos (
   visivel TINYINT,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (categoria_id) REFERENCES produto_categoria (id),
-  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id),
-  FOREIGN KEY (cor_id) REFERENCES produto_cores (id)
+  FOREIGN KEY (categoria_id) REFERENCES produto_categoria (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela estoque com chaves estrangeiras para produtos, cores e tamanhos
@@ -99,9 +98,9 @@ CREATE TABLE IF NOT EXISTS estoque (
   quantidade_disponivel INT NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (produto_id) REFERENCES produtos (id),
-  FOREIGN KEY (cor_id) REFERENCES produto_cores (id),
-  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id)
+  FOREIGN KEY (produto_id) REFERENCES produtos (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela personalizacao com chave estrangeira para produtos
@@ -122,8 +121,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   total_pedido DECIMAL(10,2) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_usuario) REFERENCES usuario (id)
-  ON DELETE CASCADE
+  FOREIGN KEY (id_usuario) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela itens_pedidos com chaves estrangeiras para pedidos e produtos
@@ -137,15 +135,15 @@ CREATE TABLE IF NOT EXISTS itens_pedidos (
   preco_unitario DECIMAL(10,2) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (pedido_id) REFERENCES pedidos (id),
-  FOREIGN KEY (produto_id) REFERENCES produtos (id),
-  FOREIGN KEY (cor_id) REFERENCES produto_cores (id),
-  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho(id)
+  FOREIGN KEY (pedido_id) REFERENCES pedidos (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (produto_id) REFERENCES produtos (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela metodo_pagamento
 CREATE TABLE IF NOT EXISTS metodo_pagamento (
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   metodo VARCHAR(20) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -153,7 +151,7 @@ CREATE TABLE IF NOT EXISTS metodo_pagamento (
 
 -- Criação da tabela status_pagamento
 CREATE TABLE IF NOT EXISTS status_pagamento (
-  id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   nome_status VARCHAR(20) NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -168,9 +166,9 @@ CREATE TABLE IF NOT EXISTS pagamento (
   data_pagamento DATETIME NOT NULL,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (pedido_id) REFERENCES pedidos (id),
-  FOREIGN KEY (metodo_pagamento_id) REFERENCES metodo_pagamento (id),
-  FOREIGN KEY (status_pagamento_id) REFERENCES status_pagamento (id)
+  FOREIGN KEY (pedido_id) REFERENCES pedidos (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (metodo_pagamento_id) REFERENCES metodo_pagamento (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (status_pagamento_id) REFERENCES status_pagamento (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criação da tabela movimentacoes_estoque
@@ -184,10 +182,11 @@ CREATE TABLE IF NOT EXISTS movimentacoes_estoque (
   data_movimentacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_atualizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (produto_id) REFERENCES produtos (id) ON DELETE CASCADE,
-  FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE,
-  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE
+  FOREIGN KEY (produto_id) REFERENCES produtos (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (cor_id) REFERENCES produto_cores (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tamanho_id) REFERENCES produto_tamanho (id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- Trigger para atualização de estoque após inserção de movimentação
 DELIMITER //
@@ -284,6 +283,133 @@ END;//
 
 DELIMITER ;
 
+-- Trigger para atualizar a cor no estoque
+DELIMITER //
+
+CREATE TRIGGER after_produto_update_cor
+AFTER UPDATE ON produtos
+FOR EACH ROW
+BEGIN
+  -- Verifica se houve mudança na cor do produto
+  IF NEW.cor_id != OLD.cor_id THEN
+    UPDATE estoque
+    SET cor_id = NEW.cor_id
+    WHERE produto_id = NEW.id;
+    
+    -- Atualiza a cor em itens_pedidos, caso a cor seja alterada
+    UPDATE itens_pedidos
+    SET cor_id = NEW.cor_id
+    WHERE produto_id = NEW.id;
+  END IF;
+END//
+
+DELIMITER ;
+
+-- Trigger para atualizar o tamanho no estoque
+DELIMITER //
+
+CREATE TRIGGER after_produto_update_tamanho
+AFTER UPDATE ON produtos
+FOR EACH ROW
+BEGIN
+  -- Verifica se houve mudança no tamanho do produto
+  IF NEW.tamanho_id != OLD.tamanho_id THEN
+    UPDATE estoque
+    SET tamanho_id = NEW.tamanho_id
+    WHERE produto_id = NEW.id;
+    
+    -- Atualiza o tamanho em itens_pedidos, caso o tamanho seja alterado
+    UPDATE itens_pedidos
+    SET tamanho_id = NEW.tamanho_id
+    WHERE produto_id = NEW.id;
+  END IF;
+END//
+
+DELIMITER ;
+
+-- Atualização de produto_cores
+DELIMITER //
+
+CREATE TRIGGER after_produto_cores_update
+AFTER UPDATE ON produto_cores
+FOR EACH ROW
+BEGIN
+  IF NEW.cor != OLD.cor THEN
+    UPDATE produtos
+    SET cor_id = NEW.id
+    WHERE cor_id = OLD.id;
+
+    UPDATE estoque
+    SET cor_id = NEW.id
+    WHERE cor_id = OLD.id;
+
+    UPDATE itens_pedidos
+    SET cor_id = NEW.id
+    WHERE cor_id = OLD.id;
+  END IF;
+END//
+
+DELIMITER ;
+
+-- Atualização de produto_tamanho
+DELIMITER //
+
+CREATE TRIGGER after_produto_tamanho_update
+AFTER UPDATE ON produto_tamanho
+FOR EACH ROW
+BEGIN
+  IF NEW.tamanho != OLD.tamanho THEN
+    UPDATE produtos
+    SET tamanho_id = NEW.id
+    WHERE tamanho_id = OLD.id;
+
+    UPDATE estoque
+    SET tamanho_id = NEW.id
+    WHERE tamanho_id = OLD.id;
+
+    UPDATE itens_pedidos
+    SET tamanho_id = NEW.id
+    WHERE tamanho_id = OLD.id;
+  END IF;
+END//
+
+DELIMITER ;
+
+-- Atualização de produto_categoria
+DELIMITER //
+
+CREATE TRIGGER after_produto_categoria_update
+AFTER UPDATE ON produto_categoria
+FOR EACH ROW
+BEGIN
+  IF NEW.nome_categoria != OLD.nome_categoria THEN
+    UPDATE produtos
+    SET categoria_id = NEW.id
+    WHERE categoria_id = OLD.id;
+  END IF;
+END//
+
+DELIMITER ;
+
+-- Atualização de nivel_usuario
+DELIMITER //
+
+CREATE TRIGGER after_nivel_usuario_update
+AFTER UPDATE ON nivel_usuario
+FOR EACH ROW
+BEGIN
+  IF NEW.nivel_usuario != OLD.nivel_usuario THEN
+    UPDATE usuario
+    SET nivel_usuario = NEW.id
+    WHERE nivel_usuario = OLD.id;
+  END IF;
+END//
+
+DELIMITER ;
+
+
+
+
 
 -- ----------------------------------
 -- Inserções nas tabelas
@@ -323,7 +449,7 @@ INSERT INTO produto_cores (cor) VALUES
 -- Inserir produto
 INSERT INTO produtos (nome_produto, descricao, preco, categoria_id, tamanho_id, cor_id, imagem_produto, visivel) 
 VALUES 
-('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 49.99, 1, 1, 1, 'camiseta-jean-2.png', 1);
+('Camiseta Vermelha', 'Camiseta de algodão vermelha.', 49.99, 1, 1, 1, 'camiseta-1-vermelha.png', 1);
 
 -- Inserir personalização
 INSERT INTO personalizacao (tipo_personalizacao, valor_adicional) VALUES 
@@ -359,5 +485,3 @@ INSERT INTO status_pagamento (nome_status) VALUES
 -- Inserir pagamento
 INSERT INTO pagamento (pedido_id, metodo_pagamento_id, status_pagamento_id, data_pagamento) VALUES 
 (1, 1, 2, NOW());
-
-

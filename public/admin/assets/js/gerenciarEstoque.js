@@ -1,17 +1,19 @@
 function modalSaida(botao) {
     const modalSaida = document.getElementById("saida-modal");
-    const modalNomeProduto = document.getElementById('nome_produto');
-    const modalCorProduto = document.getElementById('produto_cor');
-    const modalTamanhoProduto = document.getElementById('produto_tamanho');
-    const modalQuantidadeProduto = document.getElementById('qtdSaida');
+    const modalNomeProduto = document.getElementById('nome_produto_saida');
+    const modalCorProduto = document.getElementById('produto_cor_saida');
+    const modalTamanhoProduto = document.getElementById('produto_tamanho_saida');
+    const modalQuantidadeProduto = document.getElementById('qtdSaida_saida');
 
     modalQuantidadeProduto.style.backgroundColor = "#fff"
     // Pegando os atributos do botão clicado
     const produtoId = botao.getAttribute('data-id');
-    const produtoNome = botao.getAttribute('data-nome_produto');
-    const produtoCor = botao.getAttribute('data-nome_cor');
-    const produtoTamanho = botao.getAttribute('data-nome_tamanho');
-    const produtoQuantidade = botao.getAttribute('data-quantidade_disponivel');
+    const produtoNome = botao.getAttribute('data-nome_produto_saida');
+    const produtoCor = botao.getAttribute('data-nome_cor_saida');
+    const produtoTamanho = botao.getAttribute('data-nome_tamanho_saida');
+    const produtoQuantidade = botao.getAttribute('data-quantidade_disponivel_saida');
+
+    console.log(modalNomeProduto.value);
 
     modalNomeProduto.value = produtoNome;
     modalCorProduto.value = produtoCor;
@@ -40,6 +42,7 @@ function modalEntrada(botao) {
     const modalQuantidadeProduto = document.getElementById('qtdEntrada');
 
     modalQuantidadeProduto.style.backgroundColor = "#fff"
+    
     // Pegando os atributos do botão clicado
     const produtoId = botao.getAttribute('data-id');
     const produtoNome = botao.getAttribute('data-nome_produto');

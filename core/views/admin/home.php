@@ -51,7 +51,7 @@
                     <span class="material-icons-sharp">credit_card</span>
                     <h3>Pagamentos</h3>
                 </a>
-                <a href="">
+                <a href="?a=estoque">
                     <span class="material-icons-sharp">store</span>
                     <h3>Estoque</h3>
                 </a>
