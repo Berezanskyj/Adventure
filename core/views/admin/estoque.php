@@ -109,16 +109,20 @@
                                 <button id="botao-entrada" class="btn btn-success add-user"
                                 data-id="<?= $p->id_produto ?>"
                                 data-nome_produto="<?= $p->nome_produto ?>"
+                                data-id_cor="<?= $p->id_cor ?>"
                                 data-nome_cor="<?= $p->nome_cor ?>"
+                                data-id_tamanho="<?= $p->id_tamanho ?>"
                                 data-nome_tamanho="<?= $p->nome_tamanho ?>"
                                 data-quantidade_disponivel="<?= $p->quantidade_disponivel ?>" 
                                 onclick="modalEntrada(this)">Entrada</button>
 
                                 <button id="botao-saida" class="btn btn-warning add-user" 
-                                data-id="<?= $p->id_produto ?>"
+                                data-id_saida="<?= $p->id_produto ?>"
                                 data-nome_produto_saida="<?= $p->nome_produto ?>"
                                 data-nome_cor_saida="<?= $p->nome_cor ?>"
+                                data-id_cor_saida="<?= $p->id_cor ?>"
                                 data-nome_tamanho_saida="<?= $p->nome_tamanho ?>"
+                                data-id_tamanho_saida="<?= $p->id_tamanho ?>"
                                 data-quantidade_disponivel_saida="<?= $p->quantidade_disponivel ?>" 
                                 onclick="modalSaida(this)">Saida</button>
                             </td>
@@ -138,9 +142,12 @@
 
                     <label for="cor">Cor</label>
                     <input type="text" name="cor" id="produto_cor" readonly>
+                    <input type="hidden" name="id_cor" id="id_cor" readonly>
+
 
                     <label for="tamanho">Tamanho</label>
                     <input type="text" name="tamanho" id="produto_tamanho" readonly>
+                    <input type="hidden" name="id_tamanho" id="id_tamanho" readonly>
 
                     <label for="name">Quantidade da entrada</label>
                     <input type="text" name="qtdEntrada" id="qtdEntrada">
@@ -156,17 +163,19 @@
                 <form id="saida-form" method="post" action="?a=adicionar_saida">
                     <label for="produto">Produto</label>
                     <input type="text" name="produto" id="nome_produto_saida" readonly>
-                    <input type="hidden" name="id_produto" id="id_produto_saida" readonly>
+                    <input type="hidden" name="id_produto_saida" id="id_produto_saida" readonly>
 
                     <label for="cor">Cor</label>
                     <input type="text" name="cor" id="produto_cor_saida" readonly>
-
+                    <input type="hidden" name="id_cor_saida" id="id_cor_saida" readonly>
+                    
                     <label for="tamanho">Tamanho</label>
                     <input type="text" name="tamanho" id="produto_tamanho_saida" readonly>
+                    <input type="hidden" name="id_tamanho_saida" id="id_tamanho_saida" readonly>
 
                     <label for="name">Quantidade da Saida</label>
                     <input type="text" name="qtdSaida" id="qtdSaida_saida">
-                    <button type="button" class="btn btn-primary" onclick="cadastrarSaida()">Salvar</button>
+                    <button type="submit" class="btn btn-primary" onclick="cadastrarSaida()">Salvar</button>
                 </form>
             </div>
         </div>

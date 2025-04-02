@@ -1177,15 +1177,19 @@ class Admin
         ]);
     }
 
-    public function estoque(){
+    public function estoque()
+    {
 
 
-        
+
         $db = new AdminModel();
-        
+
         $produtos = $db->listarEstoque();
 
+        // Store::printData($produtos);
 
+
+        // die();
         Store::Layout_admin([
             'admin/layout/html_header',
             'admin/layout/header',
@@ -1197,22 +1201,102 @@ class Admin
         ]);
     }
 
-    public function entrada_estoque(){
+    public function entrada_estoque()
+    {
         ob_clean();
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-        header('Content-Type: application/json; charset=UTF-8'); // Define o cabeçalho para JSON
+        header('Content-Type: application/json; charset=UTF-8'); // Define JSON no cabeçalho
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Método não permitido."
+            ]);
+            exit;
+        }
+
+        if (!isset($_POST['id_produto'], $_POST['id_cor'], $_POST['id_tamanho'], $_POST['qtdEntrada'])) {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Parâmetros inválidos!"
+            ]);
+            exit;
+        }
+
+        $db = new AdminModel();
+        $dados = $_POST;
+        $id_produto = $_POST['id_produto'];
+        $id_cor = $_POST['id_cor'];
+        $id_tamanho = $_POST['id_tamanho'];
+        $qtdEntrada = $_POST['qtdEntrada'];
+
+        $entrada = $db->entrada_estoque($id_produto, $id_cor, $id_tamanho, $qtdEntrada);
+
+        if ($entrada) {
+            echo json_encode([
+                "status" => "success",
+                "mensagem" => "Entrada realizada com sucesso!"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Erro ao dar entrada no produto. Tente novamente.",
+                "dados" => $dados,
+                "response" => $entrada
+            ]);
+        }
+    }
+
+    public function saida_estoque()
+    {
+        ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define JSON no cabeçalho
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Método não permitido."
+            ]);
+            exit;
+        }
 
         $dados = $_POST;
 
-        $id_produto = $_POST['id_produto'];
-        $qtdEntrada = $_POST['qtdEntrada'];
+        if (!isset($_POST['id_produto_saida'], $_POST['id_cor_saida'], $_POST['id_tamanho_saida'], $_POST['qtdSaida'])) {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Parâmetros inválidos!",
+                "parametros" => $dados
+            ]);
+            exit;
+        }
 
-        echo json_encode([
-            "status" => "success",
-            "mensagem" => "Produto ativado com sucesso!",
-            "dados" => $dados
-        ]);
+        $db = new AdminModel();
+        
+        $id_produto = $_POST['id_produto_saida'];
+        $id_cor = $_POST['id_cor_saida'];
+        $id_tamanho = $_POST['id_tamanho_saida'];
+        $qtdEntrada = $_POST['qtdSaida'];
+
+        $entrada = $db->saida_estoque($id_produto, $id_cor, $id_tamanho, $qtdEntrada);
+
+        if ($entrada) {
+            echo json_encode([
+                "status" => "success",
+                "mensagem" => "Saida realizada com sucesso!"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "mensagem" => "Erro ao dar saida no produto. Tente novamente.",
+                "dados" => $dados,
+                "response" => $entrada
+            ]);
+        }
     }
 }

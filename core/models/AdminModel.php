@@ -527,7 +527,8 @@ class AdminModel
         }
     }
 
-    public function listarCores(){
+    public function listarCores()
+    {
         $sql = new Database();
         $cores = $sql->select("SELECT * FROM produto_cores");
 
@@ -584,7 +585,8 @@ class AdminModel
         }
     }
 
-    public function buscarProdutos(){
+    public function buscarProdutos()
+    {
         $sql = new Database();
 
         $produtos = $sql->select("SELECT p.id, p.nome_produto, p.descricao, p.preco, c.nome_categoria, t.tamanho, co.cor, p.imagem_produto, p.visivel, p.data_criacao, p.data_atualizacao FROM produtos p JOIN produto_categoria c ON p.categoria_id = c.id JOIN produto_tamanho t ON p.tamanho_id = t.id JOIN produto_cores co ON p.cor_id = co.id;");
@@ -596,7 +598,8 @@ class AdminModel
         }
     }
 
-    public function cadastrarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $imagem, $visivel){
+    public function cadastrarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $imagem, $visivel)
+    {
         $sql = new Database();
 
         $param = [
@@ -615,9 +618,10 @@ class AdminModel
         return true;
     }
 
-    public function editarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $imagem, $visivel, $id){
+    public function editarProduto($nome, $descricao, $preco, $categoria, $tamanho, $cor, $imagem, $visivel, $id)
+    {
         $sql = new Database();
-    
+
         $param = [
             ':nome' => $nome,
             ':descricao' => $descricao,
@@ -629,13 +633,14 @@ class AdminModel
             ':visivel' => $visivel,
             ':id' => $id
         ];
-    
+
         $sql->update("UPDATE produtos SET nome_produto = :nome, descricao = :descricao, preco = :preco, categoria_id = :categoria, tamanho_id = :tamanho, cor_id = :cor, imagem_produto = :imagem, visivel = :visivel WHERE id = :id", $param);
-    
+
         return true;
     }
 
-    public function inativarProduto($id){
+    public function inativarProduto($id)
+    {
         $sql = new Database();
 
         $param = [
@@ -647,7 +652,8 @@ class AdminModel
         return true;
     }
 
-    public function ativarProduto($id){
+    public function ativarProduto($id)
+    {
         $sql = new Database();
 
         $param = [
@@ -659,7 +665,8 @@ class AdminModel
         return true;
     }
 
-    public function listarProdutoEspecifico($id){
+    public function listarProdutoEspecifico($id)
+    {
 
         $db = new Database();
 
@@ -670,11 +677,11 @@ class AdminModel
         $sql = $db->select("SELECT p.id, p.nome_produto, p.descricao, p.preco, c.nome_categoria, t.tamanho, co.cor, p.imagem_produto, p.visivel, p.data_criacao, p.data_atualizacao FROM produtos p JOIN produto_categoria c ON p.categoria_id = c.id JOIN produto_tamanho t ON p.tamanho_id = t.id JOIN produto_cores co ON p.cor_id = co.id WHERE p.id = :id;", $param);
 
         return $sql;
-
     }
 
 
-    public function listarStatusPagamentoPedido($id){
+    public function listarStatusPagamentoPedido($id)
+    {
         $sql = new Database();
 
 
@@ -688,11 +695,54 @@ class AdminModel
         return $sql;
     }
 
-    public function listarEstoque(){
+    public function listarEstoque()
+    {
         $sql = new Database();
 
-        $prod = $sql->select("SELECT estoque.produto_id AS id_produto, produtos.nome_produto, produto_cores.cor AS nome_cor, produto_tamanho.tamanho AS nome_tamanho, estoque.quantidade_disponivel FROM estoque JOIN produtos ON estoque.produto_id = produtos.id JOIN produto_cores ON estoque.cor_id = produto_cores.id JOIN produto_tamanho ON estoque.tamanho_id = produto_tamanho.id ORDER BY produtos.nome_produto");
+        $prod = $sql->select("SELECT estoque.produto_id AS id_produto, produtos.nome_produto, produto_cores.id AS id_cor, produto_cores.cor AS nome_cor, produto_tamanho.id AS id_tamanho, produto_tamanho.tamanho AS nome_tamanho, estoque.quantidade_disponivel FROM estoque JOIN produtos ON estoque.produto_id = produtos.id JOIN produto_cores ON estoque.cor_id = produto_cores.id JOIN produto_tamanho ON estoque.tamanho_id = produto_tamanho.id ORDER BY produtos.nome_produto");
 
         return $prod;
+    }
+
+    public function entrada_estoque($id_produto, $id_cor, $id_tamanho, $qtd)
+    {
+        $sql = new Database();
+
+        $param = [
+            ':id_produto' => $id_produto,
+            ':idCor' => $id_cor,
+            ':idTamanho' => $id_tamanho,
+            ':tipo' => 'entrada',
+            ':qtd' => $qtd
+        ];
+
+        $sql->insert(
+            "INSERT INTO movimentacoes_estoque (produto_id, cor_id, tamanho_id, tipo_movimentacao, quantidade, data_movimentacao, data_criacao, data_atualizacao) 
+            VALUES (:id_produto, :idCor, :idTamanho, :tipo, :qtd, NOW(), NOW(), NOW())",
+            $param
+        );
+
+        return true;
+    }
+
+    public function saida_estoque($id_produto, $id_cor, $id_tamanho, $qtd)
+    {
+        $sql = new Database();
+
+        $param = [
+            ':id_produto' => $id_produto,
+            ':idCor' => $id_cor,
+            ':idTamanho' => $id_tamanho,
+            ':tipo' => 'saida',
+            ':qtd' => $qtd
+        ];
+
+        $sql->insert(
+            "INSERT INTO movimentacoes_estoque (produto_id, cor_id, tamanho_id, tipo_movimentacao, quantidade, data_movimentacao, data_criacao, data_atualizacao) 
+            VALUES (:id_produto, :idCor, :idTamanho, :tipo, :qtd, NOW(), NOW(), NOW())",
+            $param
+        );
+
+        return true;
     }
 }
