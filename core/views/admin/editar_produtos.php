@@ -147,7 +147,7 @@
                         <option value="0" <?= ($produto->visivel == 0) ? 'selected' : '' ?>>Não</option>
                     </select>
                 </div>
-                <button class="full-width" type="submit" name="submit">Cadastrar Produto</button>
+                <button class="full-width" type="submit" name="submit">Editar Produto</button>
             </form>
             <?php if (isset($_SESSION['erro'])): ?>
                 <script>
