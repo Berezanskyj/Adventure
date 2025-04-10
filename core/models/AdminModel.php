@@ -745,4 +745,79 @@ class AdminModel
 
         return true;
     }
+
+
+
+
+
+
+    public function rel_vendas_cat(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT pc.nome_categoria, COUNT(ip.id) AS total_itens_vendidos, SUM(ip.quantidade) AS quantidade_total, SUM(ip.quantidade * ip.preco_unitario) AS total_vendido FROM itens_pedidos ip JOIN produtos p ON ip.produto_id = p.id JOIN produto_categoria pc ON p.categoria_id = pc.id GROUP BY pc.nome_categoria ORDER BY total_vendido DESC;");
+
+        return $resp;
+
+    }
+
+    public function rel_resumo_ped_status(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT status_pedido, COUNT(*) AS total_pedidos, SUM(total_pedido) AS total_valor FROM pedidos GROUP BY status_pedido ORDER BY total_valor DESC;");
+
+        return $resp;
+
+    }
+
+    public function rel_top_produtos(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT p.nome_produto, SUM(ip.quantidade) AS total_vendido, SUM(ip.quantidade * ip.preco_unitario) AS receita_total FROM itens_pedidos ip JOIN produtos p ON ip.produto_id = p.id GROUP BY p.id ORDER BY total_vendido DESC LIMIT 5;");
+
+        return $resp;
+
+    }
+
+    public function rel_pag_met_status(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT mp.metodo, sp.nome_status, COUNT(pag.id) AS total_transacoes, SUM(pe.total_pedido) AS valor_total FROM pagamento pag JOIN metodo_pagamento mp ON pag.metodo_pagamento_id = mp.id JOIN status_pagamento sp ON pag.status_pagamento_id = sp.id JOIN pedidos pe ON pag.pedido_id = pe.id GROUP BY mp.metodo, sp.nome_status ORDER BY valor_total DESC;");
+
+        return $resp;
+
+    }
+
+    public function rel_cli_mais_compram(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT u.nome, u.sobrenome, u.email, COUNT(pe.id) AS total_pedidos, SUM(pe.total_pedido) AS valor_total_gasto FROM usuario u JOIN pedidos pe ON u.id = pe.id_usuario GROUP BY u.id ORDER BY valor_total_gasto DESC LIMIT 10;");
+
+        return $resp;
+
+    }
+
+    public function rel_estoque_atual(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT p.nome_produto, pc.cor, pt.tamanho, e.quantidade_disponivel FROM estoque e JOIN produtos p ON e.produto_id = p.id JOIN produto_cores pc ON e.cor_id = pc.id JOIN produto_tamanho pt ON e.tamanho_id = pt.id ORDER BY p.nome_produto;");
+
+        return $resp;
+
+    }
+
+    public function rel_vendas_mes(){
+
+        $db = new Database();
+
+        $resp = $db->select("SELECT DATE_FORMAT(p.data_pedido, '%Y-%m') AS mes, COUNT(p.id) AS total_pedidos, SUM(p.total_pedido) AS valor_total FROM pedidos p GROUP BY mes ORDER BY mes DESC;");
+
+        return $resp;
+
+    }
 }

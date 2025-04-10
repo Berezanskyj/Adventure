@@ -284,18 +284,6 @@ class Clientes{
         
     }
 
-    public function listarEnderecoCliente($id){
-        $sql = new Database();
-
-        $param = [
-            ':id' => $id,
-        ];
-
-        $res = $sql->select("SELECT * FROM enderecos WHERE id_usuario = :id", $param);
-
-        return $res;
-    }
-
     public function alteraDadosInfoPessoal($id, $nome, $sobrenome, $email, $cpf, $telefone){
         $sql = new Database();
 
@@ -309,6 +297,25 @@ class Clientes{
         ];
 
         $sql->update("UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, email = :email, cpf = :cpf, telefone = :telefone WHERE id = :id", $param);
+
+        return $sql;
+    }
+
+    public function alteraDadosEndereco($cep, $cidade, $bairro, $rua, $numero, $complemento, $apelido, $id_usuario){
+        $sql = new Database();
+
+        $param = [
+            ':cep' => $cep,
+            ':cidade' => $cidade,
+            ':bairro' => $bairro,
+            ':rua' => $rua,
+            ':numero' => $numero,
+            ':complemento' => $complemento,
+            ':apelido' => $apelido,
+            ':id_usuario' => $id_usuario,
+        ];
+
+        $sql->update("UPDATE enderecos SET cep = :cep, cidade = :cidade, bairro = :bairro, rua = :rua, numero = :numero, complemento = :complemento, apelido = :apelido WHERE id_usuario = :id_usuario", $param);
 
         return $sql;
     }

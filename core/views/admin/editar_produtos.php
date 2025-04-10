@@ -45,10 +45,10 @@
                     <span class="material-icons-sharp arrow">arrow_drop_down</span>
                 </a>
                 <div class="dropdown-content" style="display: none;">
-                    <a href="#">Listar Pedidos</a>
+                    <a href="?a=pedidos">Listar Pedidos</a>
                 </div>
             </div>
-            <a href="">
+            <a href="?a=pagamentos">
                 <span class="material-icons-sharp">credit_card</span>
                 <h3>Pagamentos</h3>
             </a>
@@ -60,7 +60,7 @@
                 <span class="material-icons-sharp">tune</span>
                 <h3>Personalizações</h3>
             </a>
-            <a href="">
+            <a href="?a=relatorios">
                 <span class="material-icons-sharp">poll</span>
                 <h3>Relatórios</h3>
             </a>
@@ -147,7 +147,7 @@
                         <option value="0" <?= ($produto->visivel == 0) ? 'selected' : '' ?>>Não</option>
                     </select>
                 </div>
-                <button class="full-width" type="submit" name="submit">Editar Produto</button>
+                <button class="full-width" type="submit" name="submit">Atualizar Produto</button>
             </form>
             <?php if (isset($_SESSION['erro'])): ?>
                 <script>

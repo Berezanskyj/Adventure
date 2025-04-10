@@ -46,39 +46,50 @@
                     </div>
                 </form>
 
-                <form method="post" action="?a=atualizar_endereco">
+
+                <form method="post" action="?a=atualizar_endereco" id="atualizar_endereco_form">
                     <div class="info-group">
                         <h3><i class='bx bx-user-circle'></i> Endereço</h3>
                         <p><strong>Endereço atual:</strong> <?= $endereco[0]->cep?>, <?= $endereco[0]->cidade?>, <?= $endereco[0]->bairro?>, <?= $endereco[0]->rua?>, <?= $endereco[0]->numero ?>, <?= $endereco[0]->complemento ?> - <?= $endereco[0]->apelido?> </p>
                         <p><strong>CEP atual:</strong> <?=$endereco[0]->cep ?></p>
-                        <label for="endereco">Novo CEP</label>
-                        <input type="text" id="endereco" name="cep">
+                        
+                        <label for="cep">Novo CEP</label>
+                        <div class="cep-input-container">
+                            <input type="text" id="cep" name="cep" class="cep-input">
+                            <button type="button" class="btn-buscar-cep" onclick="consultaEndereco()">Buscar</button>
+                        </div>
+
                         <p><strong>Cidade atual:</strong> <?= $endereco[0]->cidade ?></p>
-                        <label for="endereco">Novo Cidade</label>
-                        <input type="text" id="endereco" name="cidade">
+                        <label for="cidade">Novo Cidade</label>
+                        <input type="text" id="cidade" name="cidade">
+
                         <p><strong>Bairro atual:</strong> <?= $endereco[0]->bairro ?></p>
-                        <label for="endereco">Novo Bairro</label>
-                        <input type="text" id="endereco" name="bairro">
+                        <label for="bairro">Novo Bairro</label>
+                        <input type="text" id="bairro" name="bairro">
+
                         <p><strong>Rua atual:</strong> <?= $endereco[0]->rua ?></p>
-                        <label for="endereco">Novo Rua</label>
-                        <input type="text" id="endereco" name="rua">
+                        <label for="rua">Novo Rua</label>
+                        <input type="text" id="rua" name="rua">
+
                         <p><strong>Numero atual:</strong> <?= $endereco[0]->numero ?></p>
-                        <label for="endereco">Novo Numero</label>
-                        <input type="text" id="endereco" name="numero">
+                        <label for="numero">Novo Numero</label>
+                        <input type="text" id="numero" name="numero">
+
                         <p><strong>Complemento atual:</strong> <?= $endereco[0]->complemento ?></p>
-                        <label for="endereco">Novo Complemento</label>
-                        <input type="text" id="endereco" name="complemento">
+                        <label for="complemento">Novo Complemento</label>
+                        <input type="text" id="complemento" name="complemento">
+
                         <p><strong>Apelido atual:</strong> <?= $endereco[0]->apelido ?></p>
-                        <label for="endereco">Novo Apelido</label>
-                        <input type="text" id="endereco" name="apelido">
-    
+                        <label for="apelido">Novo Apelido</label>
+                        <input type="text" id="apelido" name="apelido">
                         
                         <button type="submit" class="btn-atualizar-config"><i class='bx bx-save'></i> Salvar Informações</button>
                     </div>
                 </form>
+
     
                     <!-- Segurança -->
-                <form method="post" action="?a=atualizar_seguranca">
+                <form method="post" action="?a=atualizar_seguranca" id="atualizar_senha_form">
                     <div class="info-group">
                         <h3><i class='bx bx-shield'></i> Segurança</h3>
     
@@ -100,3 +111,4 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/user_config.js"></script>
+    <script src="assets/js/registro_endereco.js"></script>

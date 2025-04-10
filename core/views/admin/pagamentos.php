@@ -60,7 +60,7 @@
                 <span class="material-icons-sharp">tune</span>
                 <h3>Personalizações</h3>
             </a>
-            <a href="">
+            <a href="?a=relatorios">
                 <span class="material-icons-sharp">poll</span>
                 <h3>Relatórios</h3>
             </a>

@@ -4,6 +4,8 @@ namespace core\controllers;
 
 use core\classes\Database;
 use core\classes\EnviarEmail;
+use core\classes\Graficos;
+use core\classes\Relatorios;
 use core\classes\Store;
 use core\models\Clientes;
 use core\models\Produtos;
@@ -11,6 +13,7 @@ use core\models\AdminModel;
 use Exception;
 use PDOException;
 use PDO;
+
 
 class Admin
 {
@@ -1299,4 +1302,127 @@ class Admin
             ]);
         }
     }
+
+
+
+
+    public function relatorios()
+    {
+
+
+
+        // die();
+        Store::Layout_admin([
+            'admin/layout/html_header',
+            'admin/layout/header',
+            'admin/relatorios',
+            'admin/layout/footer',
+            'admin/layout/html_footer',
+        ], [
+            
+        ]);
+    }
+
+
+
+
+    //* RELATORIOS
+
+    public function relatorio_vendas_categoria(){
+
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_vendas_cat();
+
+        $relatorio = $rel->gerarRelatorioVendasCategoriaComImagem($itens);
+
+    }
+
+    public function relatorio_pedidos_status(){
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_resumo_ped_status();
+
+
+        $relatorio = $rel->gerarRelatorioPedidosPorStatusComImagem($itens);
+
+        // Store::printData($itens);
+
+
+        // die("relatorio_pedidos_status");
+    }
+
+    public function top_cinco(){
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_top_produtos();
+
+        // Store::printData($itens);
+
+        // die();
+
+
+        $relatorio = $rel->gerarRelatorioTopProdutosMaisVendidos($itens);
+    }
+
+    public function pagamento_met_status(){
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_pag_met_status();
+
+        // Store::printData($itens);
+
+        // die();
+
+
+        $relatorio = $rel->gerarRelatorioPagamentosPorMetodoStatus($itens);
+    }
+
+    public function cliente_mais_compra(){
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_cli_mais_compram();
+
+        // Store::printData($itens);
+
+        // die();
+
+
+        $relatorio = $rel->gerarRelatorioClientesQueMaisGastaram($itens);
+    }
+
+    public function estoque_atual(){
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_estoque_atual();
+
+        // Store::printData($itens);
+
+        // die();
+
+
+        $relatorio = $rel->gerarRelatorioEstoqueDetalhado($itens);
+    }
+
+    public function vendas_mes(){
+        $rel = new Relatorios();
+        $db = new AdminModel();
+
+        $itens = $db->rel_vendas_mes();
+
+        // Store::printData($itens);
+
+        // die();
+
+
+        $relatorio = $rel->gerarRelatorioPedidosPorMes($itens);
+    }
+
+
 }
