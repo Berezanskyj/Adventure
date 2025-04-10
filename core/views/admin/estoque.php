@@ -90,10 +90,12 @@
                 <thead>
                     <tr>
                         <th>ID Produto</th>
+                        <th>Imagem</th>
                         <th>Produto</th>
                         <th>Cor</th>
                         <th>Tamanho</th>
                         <th>Quantidade</th>
+                        <th>Status</th>
                         <th>Registrar</th>
                     </tr>
                 </thead>
@@ -101,10 +103,18 @@
                     <tr>
                         <?php foreach ($produtos as $p): ?>
                             <td><?= $p->id_produto  ?></td>
+                            <td><img src="../assets\images\produtos\<?= $p->imagem_produto ?>" alt="ERRO"></td>
                             <td><?= $p->nome_produto ?></td>
                             <td><?= $p->nome_cor ?></td>
                             <td><?= $p->nome_tamanho ?></td>
                             <td><?= $p->quantidade_disponivel ?></td>
+                            
+                            <?php if($p->status_produto == 0):    ?>
+                                <td class="danger">Inativo</td>
+                            <?php else: ?>
+                                <td class="success">Ativo</td>
+                            
+                                <?php endif;?>
                             <td>
                                 <button id="botao-entrada" class="btn btn-success add-user"
                                 data-id="<?= $p->id_produto ?>"

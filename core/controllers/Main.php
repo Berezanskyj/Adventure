@@ -204,6 +204,26 @@ class Main{
         $categoria = $_POST['id_categoria'] ?? "TODOS";  // Default to "TODOS" if not set
         $tamanho = $_POST['id_tamanho'] ?? "TODOS";      // Default to "TODOS" if not set
         $cor = $_POST['id_cor'] ?? "TODOS";              // Default to "TODOS" if not set
+
+        // Listar produtos e verificar se é um array
+        $listarProdutos = $produtos->listarProdutos();
+    
+        // Listar categorias, tamanhos e cores
+        $listarCategoria = $produtos->listarCategoria();
+        $listarTamanho = $produtos->listarTamanho();
+        $listarCor = $produtos->listarCor();
+    
+        // Preparar um array para armazenar os estoques
+        $estoques = [];
+    
+        // Se listarProdutos for um array e tiver elementos
+        if (is_array($listarProdutos) && count($listarProdutos) > 0) {
+            foreach ($listarProdutos as $produto) {
+                // Obter estoque para cada produto
+                $estoque = $produtos->listarEstoque($produto->id, $produto->cor_id, $produto->tamanho_id);
+                $estoques[$produto->id] = $estoque; // Armazenar o estoque no array usando o id do produto
+            }
+        }
     
         // Fetch filtered products
         $filtro = $produtos->filtrarProduto($categoria, $tamanho, $cor);
@@ -238,6 +258,7 @@ class Main{
             'tamanhos' => $tamanho,
             'cores' => $cor,
             'filtros' => $filtro,
+            'estoques' => $estoques
         ]);
     }
 

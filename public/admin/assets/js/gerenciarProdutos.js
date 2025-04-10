@@ -7,13 +7,6 @@ function editarProduto() {
     window.location.href = "?a=editar_produtos&id=" + produtoId;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    let tdVisivelElements = document.getElementsByClassName("td-visivel");
-
-    Array.from(tdVisivelElements).forEach(td => {
-        td.textContent = td.textContent.trim() === "1" ? "Ativo" : "Inativo";
-    });
-});
 
 $(document).ready(function () {
     inativarProduto(); // Ativa os eventos corretamente ao carregar a página

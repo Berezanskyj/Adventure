@@ -110,7 +110,12 @@
                             <td><?= $produto->nome_categoria ?></td>
                             <td><?= $produto->tamanho ?></td>
                             <td><?= $produto->cor ?></td>
-                            <td class="td-visivel"><?= $produto->visivel ?></td>
+                            <?php if($produto->visivel == 0):    ?>
+                                <td class="danger">Inativo</td>
+                            <?php else: ?>
+                                <td class="success">Ativo</td>
+                            
+                                <?php endif;?>
                             <td>
                                 <button id="botao-editar" class="btn btn-success add-user" data-id="<?= $produto->id ?>" onclick="editarProduto()">Editar</button>
                                 <?php if ($produto->visivel == 1): ?>

@@ -699,7 +699,7 @@ class AdminModel
     {
         $sql = new Database();
 
-        $prod = $sql->select("SELECT estoque.produto_id AS id_produto, produtos.nome_produto, produto_cores.id AS id_cor, produto_cores.cor AS nome_cor, produto_tamanho.id AS id_tamanho, produto_tamanho.tamanho AS nome_tamanho, estoque.quantidade_disponivel FROM estoque JOIN produtos ON estoque.produto_id = produtos.id JOIN produto_cores ON estoque.cor_id = produto_cores.id JOIN produto_tamanho ON estoque.tamanho_id = produto_tamanho.id ORDER BY produtos.nome_produto");
+        $prod = $sql->select("SELECT estoque.produto_id AS id_produto, produtos.nome_produto, produto_cores.id AS id_cor, produto_cores.cor AS nome_cor, produto_tamanho.id AS id_tamanho, produto_tamanho.tamanho AS nome_tamanho, estoque.quantidade_disponivel, produtos.imagem_produto, produtos.visivel AS status_produto FROM estoque JOIN produtos ON estoque.produto_id = produtos.id JOIN produto_cores ON estoque.cor_id = produto_cores.id JOIN produto_tamanho ON estoque.tamanho_id = produto_tamanho.id ORDER BY estoque.produto_id ASC");
 
         return $prod;
     }

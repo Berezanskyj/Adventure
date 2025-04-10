@@ -66,7 +66,16 @@ if (isset($_SESSION['carrinho'])) {
                         <h5><?= htmlspecialchars($produto->nome_produto) ?></h5>
                         <p><?= htmlspecialchars($produto->descricao) ?></p>
                         <h4>R$ <?= preg_replace("/\./", ",", $produto->preco) ?></h4>
-                        <button class="btn" onclick="adicionar_carrinho(<?= $produto->id ?>)">Adicionar ao carrinho</button>
+                        <?php
+                        $quantidade_disponivel = isset($estoques[$produto->id]) && !empty($estoques[$produto->id])
+                            ? $estoques[$produto->id][0]->quantidade_disponivel
+                            : 0;
+                        ?>
+                        <?php if ($quantidade_disponivel <= 0): ?>
+                            <button class="btn-sem-estoque" onclick="alerta_estoque(); return false;">Sem estoque</button>
+                        <?php else: ?>
+                            <button class="btn" onclick="adicionar_carrinho(<?= $produto->id ?>); return false;">Adicionar ao carrinho</button>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
