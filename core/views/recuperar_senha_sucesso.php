@@ -11,7 +11,7 @@
     window.onload = function(){
         Swal.fire({
         title: "Parabéns!",
-        text: "Você confirmou seu e-mail, já pode realizar seu login!",
+        text: "Você redefiniu sua senha!, já pode realizar seu login!",
         icon: "success",
         confirmButtonText: "OK",
         customClass: {

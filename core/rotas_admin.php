@@ -43,6 +43,14 @@ $rotas = [
     'estoque' => 'admin@estoque',
     'entrada_estoque' => 'admin@entrada_estoque',
     'saida_estoque' => 'admin@saida_estoque',
+    'relatorios' => 'admin@relatorios',
+    'relatorio_vendas_categoria' => 'admin@relatorio_vendas_categoria',
+    'relatorio_pedidos_status' => 'admin@relatorio_pedidos_status',
+    'top_cinco' => 'admin@top_cinco',
+    'pagamento_met_status' => 'admin@pagamento_met_status',
+    'cliente_mais_compra' => 'admin@cliente_mais_compra',
+    'estoque_atual' => 'admin@estoque_atual',
+    'vendas_mes' => 'admin@vendas_mes',
 
 
 ];

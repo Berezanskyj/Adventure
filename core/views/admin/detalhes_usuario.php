@@ -44,10 +44,10 @@
                     <span class="material-icons-sharp arrow">arrow_drop_down</span>
                 </a>
                 <div class="dropdown-content" style="display: none;">
-                    <a href="#">Listar Pedidos</a>
+                    <a href="?a=pedidos">Listar Pedidos</a>
                 </div>
             </div>
-            <a href="">
+            <a href="?a=pagamentos">
                 <span class="material-icons-sharp">credit_card</span>
                 <h3>Pagamentos</h3>
             </a>
@@ -59,7 +59,7 @@
                 <span class="material-icons-sharp">tune</span>
                 <h3>Personalizações</h3>
             </a>
-            <a href="">
+            <a href="?a=relatorios">
                 <span class="material-icons-sharp">poll</span>
                 <h3>Relatórios</h3>
             </a>
