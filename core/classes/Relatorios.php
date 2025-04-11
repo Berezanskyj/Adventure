@@ -106,7 +106,7 @@ class Relatorios
 
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_vendas_categoria.pdf", ["Attachment" => false]);
     }
@@ -191,7 +191,7 @@ class Relatorios
     
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_pedidos_status.pdf", ["Attachment" => false]);
     }
@@ -275,7 +275,7 @@ class Relatorios
     
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_top_produtos.pdf", ["Attachment" => false]);
     }
@@ -358,7 +358,7 @@ class Relatorios
     
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_pagamentos_metodo_status.pdf", ["Attachment" => false]);
     }
@@ -442,7 +442,7 @@ class Relatorios
     
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_clientes_gastos.pdf", ["Attachment" => false]);
     }
@@ -525,7 +525,7 @@ class Relatorios
     
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_estoque.pdf", ["Attachment" => false]);
     }
@@ -619,7 +619,7 @@ class Relatorios
     
         $dompdf = new \Dompdf\Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream("relatorio_pedidos_mes.pdf", ["Attachment" => false]);
     }
