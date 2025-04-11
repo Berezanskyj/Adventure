@@ -43,5 +43,5 @@ define('MYSQL_CHARSET',         'utf8mb4');
 //email
 define('EMAIL_HOST',        'smtp.gmail.com');
 define('EMAIL_FROM',        'adventurecollecture@gmail.com');
-define('EMAIL_PASS',        'wasrwvrsoimcbers');
+define('EMAIL_PASS',        'wpfzcspsmnicwcmp');
 define('EMAIL_PORT',        '587');

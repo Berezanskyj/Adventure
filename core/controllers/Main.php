@@ -28,6 +28,13 @@ class Main{
             $this->index();
             return;
         } else{
+
+            ob_clean();
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        header('Content-Type: application/json; charset=UTF-8'); // Define JSON no cabeçalho
+        
             $email = new EnviarEmail();
 
             $tipo_produto = $_POST['tipo-produto'];
@@ -38,10 +45,10 @@ class Main{
             $email->EmailFormularioDuvidas($tipo_produto, $nome_cliente, $email_cliente, $duvida);
             $email->EmailResposta($tipo_produto, $nome_cliente, $email_cliente);
 
-            echo('<script>
-            window.location.href = "?a=inicio";
-            alert("E-mail enviado com sucesso!");
-        </script>');
+            echo json_encode([
+                "status" => "success",
+                "mensagem" => "Produto ativado com sucesso!"
+            ]);
         }
 
 
