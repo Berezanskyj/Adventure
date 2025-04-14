@@ -84,7 +84,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total de Vendas</h3>
-                            <h1>R$<?= $totalVenda[0]->total_vendas?>,00</h1>
+                            <h1>R$<?=number_format($totalVenda[0]->total_vendas, 2, ',', '.') ?></h1>
                         </div>
                         <div class="progress">
                             <svg>

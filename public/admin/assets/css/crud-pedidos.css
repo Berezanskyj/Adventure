@@ -201,7 +201,7 @@ body.modal-open {
     color: var(--color-white);    /* Cor do texto do botão */
     text-decoration: none;       /* Remove o sublinhado do link */
     transition: background 0.3s ease; /* Animação de transição de cor */
-    margin-left: 70rem;
+    margin-left: 70%;
 }
 
 .recent-orders-header .btn:hover {
